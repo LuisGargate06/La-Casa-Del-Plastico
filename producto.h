@@ -15,11 +15,23 @@ struct Producto{
     T3 imagen;
 
     //nombramos funciones
-    void leer_catalogo();
+    void leer_catalogo(ifstream &is);
 };
 
 //definimos a las funciones
 void Producto::leer_catalogo(){
+    ifstream archivo("catalogo.txt");
+    
+    if(!archivo.is_open()){
+        std::cerr << "Error no se pudo leer el archivo."<<std::endl;
+        return 1; //Termina el programa
+    }
+
+    T1 cantidad_total;
+    archivo >> cantidad_total;
+    archivo.ignore();
+
+
 
 }
 
