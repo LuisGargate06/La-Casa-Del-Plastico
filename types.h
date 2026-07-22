@@ -3,7 +3,7 @@
 
 using T1 = int;
 using T2 = double;
-using T3 = char;
+using T3 = char[1000];
 
 using ST1 = unsigned int;
 

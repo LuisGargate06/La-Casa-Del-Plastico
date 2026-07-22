@@ -6,6 +6,7 @@
 #include <cstddef>
 #include "types.h"
 #include <fstream>
+#include <vector>
 
 //Struct para los productos
 struct Producto{
@@ -13,26 +14,28 @@ struct Producto{
     T3 nombre;
     T2 precio;
     T3 imagen;
-
-    //nombramos funciones
-    void leer_catalogo(ifstream &is);
 };
 
-//definimos a las funciones
-void Producto::leer_catalogo(){
-    ifstream archivo("catalogo.txt");
+inline std::vector<Producto> leer_catalogo() {
+    std::ifstream archivo("catalogo.txt");
+    std::vector<Producto> lista_productos;
     
-    if(!archivo.is_open()){
-        std::cerr << "Error no se pudo leer el archivo."<<std::endl;
-        return 1; //Termina el programa
+    if (!archivo.is_open()) {
+        std::cerr << "Error: no se pudo leer el archivo catalogo.txt." << std::endl;
+        return lista_productos;
     }
 
-    T1 cantidad_total;
+    T1 cantidad_total = 0;
     archivo >> cantidad_total;
-    archivo.ignore();
+    
+    for (size_t i = 0; i < cantidad_total; i++) {
+        Producto p;
+        archivo >> p.codigo >> p.nombre >> p.precio >> p.imagen;
+        lista_productos.push_back(p);
+    }
 
-
-
+    archivo.close();
+    return lista_productos;
 }
 
 #endif

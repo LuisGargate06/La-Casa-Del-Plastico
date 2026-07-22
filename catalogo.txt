@@ -1,0 +1,6 @@
+5
+1 Laptop_Gaming_Asus 1200.50 laptop.jpg
+2 Mouse_Inalambrico_Logitech 25.00 mouse.jpg
+3 Teclado_Mecanico_Redragon 75.80 teclado.jpg
+4 Monitor_Gamer_24_pulgadas 210.00 monitor.jpg
+5 Audifonos_HyperX_Cloud 85.00 audifonos.jpg

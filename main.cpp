@@ -1,15 +1,19 @@
+#include "crow/app.h"
+#include "route.h"
+#include "pedido.h"
 #include <iostream>
-#include <cstddef>
-#include "types.h"
-#include <fstream>
 
-//Struct para los productos
-struct Producto{
-    T1 codigo;
-    T3 nombre;
-    T2 precio;
-    T3 imagen;
+using namespace std;
 
-    void leer_catalogo()
-};
+int main() {
+    crow::SimpleApp app;
 
+    // Registramos los dos endpoints
+    registrar_ruta_productos(app);
+    registrar_ruta_pedido(app);
+
+    cout << "Servidor backend de C++ corriendo en http://localhost:18080" << endl;
+    
+    // Inicia el servidor
+    app.port(18080).multithreaded().run();
+}
