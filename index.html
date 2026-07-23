@@ -3,48 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Tienda Tech</title>
+    <title>La Casa del Plástico</title>
+    
+    <!-- IMPORTAMOS LA FUENTE ELEGANTE (Great Vibes) DESDE GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f8f9fa; color: #333; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        body { 
+            background-color: #f8f9fa; 
+            color: #333; 
+        }
 
         /* HEADER / NAVBAR */
         header {
-            background-color: #0b4f2c; /* Verde oscuro estilo Papa Johns */
+            background-color: #0d47a1; 
             color: white;
-            padding: 12px 5%;
+            padding: 10px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            height: 130px; 
+            overflow: hidden; 
         }
-        .logo { font-size: 1.6rem; font-weight: bold; color: #72bf44; text-decoration: none; }
-        .nav-links { display: flex; gap: 20px; list-style: none; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+
+        /* LOGO PROPORCIONAL Y ENCUADRADO */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            height: 100%; 
+            width: 380px; 
+        }
+
+        .logo-img {
+            height: 80%; 
+            width: auto;
+            object-fit: contain;
+            transform: scale(1.5); 
+            transform-origin: left center;
+            margin-left: 25px;
+            margin-top: 0;
+            mix-blend-mode: screen; 
+            filter: contrast(170%) brightness(110%);
+        }
+
+        /* NAVEGACIÓN Y CARRITO */
+        .nav-right-group {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .nav-links { 
+            display: flex; 
+            gap: 25px; 
+            list-style: none; 
+        }
+
+        .nav-links a { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 0.95rem; 
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #90caf9;
+        }
+
         .cart-btn {
-            background-color: #72bf44; /* Verde brillante */
-            color: #0b4f2c;
+            background-color: rgba(255, 255, 255, 0.25);
+            color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 22px;
+            border-radius: 30px;
             font-weight: bold;
+            font-size: 0.95rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
+            transition: background-color 0.2s;
         }
 
-        /* BANNER HERO */
+        .cart-btn:hover {
+            background-color: rgba(255, 255, 255, 0.35);
+        }
+
+        /* BANNER HERO CON NUEVA TIPOGRAFÍA ELEGANTE */
         .hero {
-            background: linear-gradient(135deg, #0b4f2c 0%, #157347 100%);
+            background: linear-gradient(135deg, #0b224f 0%, #1b1573 100%);
             color: white;
-            padding: 40px 5%;
+            padding: 50px 5%;
             text-align: center;
         }
-        .hero h1 { font-size: 2.2rem; color: #72bf44; margin-bottom: 10px; }
-        .hero p { font-size: 1.1rem; opacity: 0.9; }
+
+        .hero h1 { 
+            font-family: 'Great Vibes', cursive; /* Aplica la fuente estilizada */
+            font-size: 4rem; /* Se aumenta el tamaño ya que las fuentes cursivas son más delgadas */
+            color: #44a2bf; 
+            margin-bottom: 5px; 
+            font-weight: 400; /* Peso normal para resaltar las curvas */
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .hero p { 
+            font-size: 1.1rem; 
+            opacity: 0.9; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
         /* SUBCATÁLOGOS / CATEGORÍAS */
         .categories-container {
@@ -54,24 +136,34 @@
             padding: 25px 5%;
             overflow-x: auto;
         }
+
         .category-chip {
             background: white;
             border: 1px solid #ddd;
-            padding: 10px 20px;
+            padding: 10px 24px;
             border-radius: 25px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.2s;
             white-space: nowrap;
+            color: #333;
         }
+
         .category-chip:hover, .category-chip.active {
-            background-color: #0b4f2c;
+            background-color: #0b3e4f;
             color: white;
-            border-color: #0b4f2c;
+            border-color: #0b3e4f;
         }
 
         /* GRILLA DE PRODUCTOS */
-        .catalog-title { text-align: center; margin: 20px 0; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .catalog-title { 
+            text-align: center; 
+            margin: 20px 0; 
+            font-size: 1.5rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+        }
+
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -80,6 +172,7 @@
             max-width: 1200px;
             margin: 0 auto;
         }
+
         .product-card {
             background: white;
             border-radius: 12px;
@@ -90,7 +183,11 @@
             justify-content: space-between;
             transition: transform 0.2s;
         }
-        .product-card:hover { transform: translateY(-4px); }
+
+        .product-card:hover { 
+            transform: translateY(-4px); 
+        }
+
         .product-card img {
             width: 100%;
             height: 140px;
@@ -98,11 +195,22 @@
             border-radius: 8px;
             background: #f0f0f0;
         }
-        .product-title { font-size: 1rem; margin: 12px 0 6px 0; }
-        .product-price { font-size: 1.2rem; font-weight: bold; color: #0b4f2c; margin-bottom: 12px; }
+
+        .product-title { 
+            font-size: 1rem; 
+            margin: 12px 0 6px 0; 
+        }
+
+        .product-price { 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            color: #0b174f; 
+            margin-bottom: 12px; 
+        }
+
         .add-btn {
-            background-color: #72bf44;
-            color: #000;
+            background-color: #4488bf;
+            color: #ffffff;
             border: none;
             padding: 10px;
             border-radius: 6px;
@@ -111,28 +219,37 @@
             width: 100%;
             transition: background 0.2s;
         }
-        .add-btn:hover { background-color: #5da037; }
+
+        .add-btn:hover { 
+            background-color: #3f81bf; 
+        }
     </style>
 </head>
 <body>
 
     <!-- NAVBAR -->
     <header>
-        <a href="#" class="logo">TECH STORE</a>
-        <ul class="nav-links">
-            <li><a href="#">MENÚ</a></li>
-            <li><a href="#">OFERTAS</a></li>
-            <li><a href="#">LOCALES</a></li>
-        </ul>
-        <button class="cart-btn" onclick="alert('Abriendo carrito...')">
-            🛒 <span id="cart-total">S/ 0.00</span> (<span id="cart-count">0</span>)
-        </button>
+        <a href="#" class="logo-container">
+            <img src="logo.png" alt="La Casa del Plástico" class="logo-img">
+        </a>
+
+        <div class="nav-right-group">
+            <ul class="nav-links">
+                <li><a href="#">MENÚ</a></li>
+                <li><a href="#">OFERTAS</a></li>
+                <li><a href="#">LOCALES</a></li>
+            </ul>
+
+            <button class="cart-btn" onclick="alert('Abriendo carrito...')">
+                🛒 <span id="cart-total">S/ 0.00</span> (<span id="cart-count">0</span>)
+            </button>
+        </div>
     </header>
 
-    <!-- BANNER PROMOCIONAL -->
+    <!-- BANNER PROMOCIONAL CON TEXTO ELEGANTE -->
     <section class="hero">
-        <h1>¡LO ÚLTIMO EN TECNOLOGÍA!</h1>
-        <p>Encuentra tus componentes y accesorios al mejor precio</p>
+        <h1>¡Bienvenidos a La Casa del Plástico!</h1>
+        <p>Encuentra los mejores productos, al mejor precio</p>
     </section>
 
     <!-- SUBCATÁLOGOS / CATEGORÍAS -->
@@ -146,9 +263,28 @@
 
     <h2 class="catalog-title">Nuestros Productos</h2>
 
-    <!-- PRODUCTOS DESDE C++ -->
-    <main class="products-grid" id="productos-container">
-        <!-- Generado dinámicamente -->
+    <!-- GRILLA DE PRODUCTOS -->
+    <main class="products-grid">
+        <div class="product-card">
+            <div>
+                <img src="https://via.placeholder.com/150" alt="Mueble">
+                <h3 class="product-title">Cómoda de 4 Cajones</h3>
+            </div>
+            <div>
+                <div class="product-price">S/ 120.00</div>
+                <button class="add-btn" onclick="agregarAlCarrito(120)">AGREGAR</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <div>
+                <img src="https://via.placeholder.com/150" alt="Mueble">
+                <h3 class="product-title">Silla Ergonómica Plástica</h3>
+            </div>
+            <div>
+                <div class="product-price">S/ 45.00</div>
+                <button class="add-btn" onclick="agregarAlCarrito(45)">AGREGAR</button>
+            </div>
+        </div>
     </main>
 
     <script>
@@ -161,32 +297,6 @@
             document.getElementById('cart-total').innerText = `S/ ${totalCarrito.toFixed(2)}`;
             document.getElementById('cart-count').innerText = cantidadCarrito;
         }
-
-        // Carga de datos desde Crow (C++)
-        fetch('http://localhost:18080/api/productos')
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById('productos-container');
-                container.innerHTML = '';
-
-                data.forEach(p => {
-                    const nombreLimpio = p.nombre.replace(/_/g, ' ');
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-                    card.innerHTML = `
-                        <div>
-                            <img src="${p.img}" alt="${nombreLimpio}" onerror="this.src='https://via.placeholder.com/150?text=Producto'">
-                            <h3 class="product-title">${nombreLimpio}</h3>
-                        </div>
-                        <div>
-                            <div class="product-price">S/ ${Number(p.precio).toFixed(2)}</div>
-                            <button class="add-btn" onclick="agregarAlCarrito(${p.precio})">AGREGAR</button>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-            })
-            .catch(error => console.error('Error conectando con C++:', error));
     </script>
 </body>
 </html>
