@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
+    <!-- IMPORTAMOS ICONOS DE FONTAWESOME PARA WHATSAPP Y TELÉFONO -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         * { 
             box-sizing: border-box; 
@@ -59,32 +62,73 @@
             filter: contrast(170%) brightness(110%);
         }
 
-        /* NAVEGACIÓN Y CARRITO */
+        /* DERECHA DEL NAV: BOTONES DE CONTACTO Y CARRITO */
         .nav-right-group {
             display: flex;
             align-items: center;
-            gap: 35px;
+            gap: 25px;
         }
 
-        .nav-links { 
-            display: flex; 
-            gap: 25px; 
-            list-style: none; 
+        /* SECCIÓN DE CONTACTO (WHATSAPP Y LLÁMANOS) */
+        .contact-group {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
-        .nav-links a { 
-            color: white; 
-            text-decoration: none; 
-            font-weight: 700; 
-            font-size: 0.95rem; 
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.2s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ÍCONOS */
+        .icon-whatsapp {
+            font-size: 2rem;
+            color: #25D366;
+        }
+
+        .icon-phone {
+            font-size: 1.6rem;
+            color: white;
+        }
+
+        /* TEXTO DE CONTACTO */
+        .contact-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .contact-text .label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .contact-text .value-wa {
+            font-size: 1rem;
+            font-weight: 900;
+            color: #25D366;
             letter-spacing: 0.5px;
-            transition: color 0.2s;
         }
 
-        .nav-links a:hover {
-            color: #90caf9;
+        .contact-text .value-phone {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: #81d4fa;
+            letter-spacing: 0.5px;
         }
 
+        /* BOTÓN DE CARRITO ESTILO CÁPSULA */
         .cart-btn {
             background-color: rgba(255, 255, 255, 0.25);
             color: white;
@@ -98,6 +142,7 @@
             align-items: center;
             gap: 8px;
             transition: background-color 0.2s;
+            margin-left: 10px;
         }
 
         .cart-btn:hover {
@@ -113,11 +158,11 @@
         }
 
         .hero h1 { 
-            font-family: 'Great Vibes', cursive; /* Aplica la fuente estilizada */
-            font-size: 4rem; /* Se aumenta el tamaño ya que las fuentes cursivas son más delgadas */
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem; 
             color: #44a2bf; 
             margin-bottom: 5px; 
-            font-weight: 400; /* Peso normal para resaltar las curvas */
+            font-weight: 400; 
             letter-spacing: 1px;
             line-height: 1.2;
         }
@@ -155,7 +200,43 @@
             border-color: #0b3e4f;
         }
 
-        /* GRILLA DE PRODUCTOS */
+        /* BARRA DE SUBCATEGORÍAS */
+        .subcategories-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 5% 20px 5%;
+            background-color: #f0f4f8;
+            border-radius: 8px;
+            margin: -10px auto 20px auto;
+            max-width: fit-content;
+        }
+
+        .sub-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .sub-chip {
+            background: #ffffff;
+            border: 1px solid #0b3e4f;
+            color: #0b3e4f;
+            padding: 6px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+        }
+
+        .sub-chip:hover, .sub-chip.active {
+            background-color: #0b3e4f;
+            color: white;
+        }
+
+        /* GRILLA DE PRODUCTOS (AJUSTADA PARA MOSTRAR IMÁGENES MÁS GRANDES) */
         .catalog-title { 
             text-align: center; 
             margin: 20px 0; 
@@ -166,9 +247,9 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-            padding: 0 5% 40px 5%;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            padding: 0 5% 20px 5%;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -176,7 +257,7 @@
         .product-card {
             background: white;
             border-radius: 12px;
-            padding: 15px;
+            padding: 18px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
@@ -190,19 +271,19 @@
 
         .product-card img {
             width: 100%;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 8px;
-            background: #f0f0f0;
+            height: 250px;
+            object-fit: contain;
+            display: block;
+            margin-bottom: 10px;
         }
 
         .product-title { 
-            font-size: 1rem; 
-            margin: 12px 0 6px 0; 
+            font-size: 1.1rem; 
+            margin: 8px 0 6px 0; 
         }
 
         .product-price { 
-            font-size: 1.2rem; 
+            font-size: 1.25rem; 
             font-weight: bold; 
             color: #0b174f; 
             margin-bottom: 12px; 
@@ -212,7 +293,7 @@
             background-color: #4488bf;
             color: #ffffff;
             border: none;
-            padding: 10px;
+            padding: 12px;
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
@@ -222,6 +303,45 @@
 
         .add-btn:hover { 
             background-color: #3f81bf; 
+        }
+
+        /* BARRA DE PAGINACIÓN */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 20px auto 40px auto;
+        }
+
+        .page-btn {
+            border: none;
+            background-color: transparent;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            background-color: #e0e0e0;
+        }
+
+        .page-btn.active {
+            background-color: #d90429; /* Rojo llamativo como tu imagen */
+            color: white;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -234,19 +354,32 @@
         </a>
 
         <div class="nav-right-group">
-            <ul class="nav-links">
-                <li><a href="#">MENÚ</a></li>
-                <li><a href="#">OFERTAS</a></li>
-                <li><a href="#">LOCALES</a></li>
-            </ul>
+            <div class="contact-group">
+                <a href="https://wa.me/51994299351" target="_blank" class="contact-item">
+                    <i class="fa-brands fa-whatsapp icon-whatsapp"></i>
+                    <div class="contact-text">
+                        <span class="label">Pide por</span>
+                        <span class="value-wa">WHATSAPP</span>
+                    </div>
+                </a>
 
+                <a href="tel:+51994299351" class="contact-item">
+                    <i class="fa-solid fa-phone icon-phone"></i>
+                    <div class="contact-text">
+                        <span class="label">Llámanos</span>
+                        <span class="value-phone">+51 994 299 351</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- CARRITO DE COMPRAS -->
             <button class="cart-btn" onclick="alert('Abriendo carrito...')">
                 🛒 <span id="cart-total">S/ 0.00</span> (<span id="cart-count">0</span>)
             </button>
         </div>
     </header>
 
-    <!-- BANNER PROMOCIONAL CON TEXTO ELEGANTE -->
+    <!-- BANNER PROMOCIONAL -->
     <section class="hero">
         <h1>¡Bienvenidos a La Casa del Plástico!</h1>
         <p>Encuentra los mejores productos, al mejor precio</p>
@@ -254,42 +387,40 @@
 
     <!-- SUBCATÁLOGOS / CATEGORÍAS -->
     <div class="categories-container">
-        <button class="category-chip active">Todo el Catálogo</button>
-        <button class="category-chip">Laptops</button>
-        <button class="category-chip">Accesorios</button>
-        <button class="category-chip">Monitores</button>
-        <button class="category-chip">Audio</button>
+        <button class="category-chip" data-category="sillas">Sillas</button>
+        <button class="category-chip active" data-category="comodas" id="btn-comodas">Cómodas</button>
+        <button class="category-chip" data-category="mesas">Mesas</button>
+        <button class="category-chip" data-category="jarras">Jarras</button>
+        <button class="category-chip" data-category="baldes">Baldes</button>
+        <button class="category-chip" data-category="portacubiertos">Portacubiertos</button>
+        <button class="category-chip" data-category="bañera">Bañera</button>
+        <button class="category-chip" data-category="envase">Envase y Escurridor</button>
+        <button class="category-chip" data-category="embudos">Embudos y Coladores Rey</button>
     </div>
 
-    <h2 class="catalog-title">Nuestros Productos</h2>
+    <!-- SUBCATEGORÍAS (CÓMODAS REY / MAGICPLAST) -->
+    <div class="subcategories-container" id="subcategories-comodas" style="display: flex;">
+        <span class="sub-label">Marca:</span>
+        <button class="sub-chip active" data-subcategory="comodas-rey">Rey</button>
+        <button class="sub-chip" data-subcategory="comodas-magicplast">Magicplast</button>
+    </div>
 
     <!-- GRILLA DE PRODUCTOS -->
-    <main class="products-grid">
-        <div class="product-card">
-            <div>
-                <img src="https://via.placeholder.com/150" alt="Mueble">
-                <h3 class="product-title">Cómoda de 4 Cajones</h3>
-            </div>
-            <div>
-                <div class="product-price">S/ 120.00</div>
-                <button class="add-btn" onclick="agregarAlCarrito(120)">AGREGAR</button>
-            </div>
-        </div>
-        <div class="product-card">
-            <div>
-                <img src="https://via.placeholder.com/150" alt="Mueble">
-                <h3 class="product-title">Silla Ergonómica Plástica</h3>
-            </div>
-            <div>
-                <div class="product-price">S/ 45.00</div>
-                <button class="add-btn" onclick="agregarAlCarrito(45)">AGREGAR</button>
-            </div>
-        </div>
+    <main class="products-grid" id="products-container">
+        <!-- El JS cargará los productos aquí -->
     </main>
+
+    <!-- CONTENEDOR DE PAGINACIÓN -->
+    <div id="paginacion" class="pagination-container"></div>
 
     <script>
         let totalCarrito = 0;
         let cantidadCarrito = 0;
+
+        // VARIABLES GLOBALES DE PAGINACIÓN
+        let paginaActual = 1;
+        const productosPorPagina = 6;
+        let productosFiltradosGlobales = [];
 
         function agregarAlCarrito(precio) {
             totalCarrito += precio;
@@ -297,6 +428,143 @@
             document.getElementById('cart-total').innerText = `S/ ${totalCarrito.toFixed(2)}`;
             document.getElementById('cart-count').innerText = cantidadCarrito;
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const productsContainer = document.getElementById('products-container');
+            const mainCategoryButtons = document.querySelectorAll('.category-chip');
+            const subCategoryContainer = document.getElementById('subcategories-comodas');
+            const subCategoryButtons = document.querySelectorAll('.sub-chip');
+
+            function cargarProductosCategoria(archivoJson, subcategoriaFiltro = null) {
+                productsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Cargando productos...</p>';
+
+                fetch(`datos/${archivoJson}.json`)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Archivo no encontrado');
+                        return response.json();
+                    })
+                    .then(productos => {
+                        if (subcategoriaFiltro) {
+                            productosFiltradosGlobales = productos.filter(p => p.subcategoria === subcategoriaFiltro);
+                        } else {
+                            productosFiltradosGlobales = productos;
+                        }
+
+                        paginaActual = 1; // Reiniciar a la primera página
+                        mostrarPagina(paginaActual);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        productsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No hay productos disponibles en esta sección.</p>';
+                        document.getElementById('paginacion').innerHTML = '';
+                    });
+            }
+
+            function mostrarPagina(pagina) {
+                paginaActual = pagina;
+                const inicio = (pagina - 1) * productosPorPagina;
+                const fin = inicio + productosPorPagina;
+                const productosPagina = productosFiltradosGlobales.slice(inicio, fin);
+
+                renderGrilla(productosPagina);
+                renderPaginacion();
+            }
+
+            function renderGrilla(listaProductos) {
+                productsContainer.innerHTML = '';
+
+                if (listaProductos.length === 0) {
+                    productsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No hay productos disponibles.</p>';
+                    return;
+                }
+
+                listaProductos.forEach(prod => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        <div>
+                            <img src="${prod.imagen}" alt="${prod.nombre}">
+                            <h3 class="product-title">${prod.nombre}</h3>
+                        </div>
+                        <div>
+                            <div class="product-price">S/ ${prod.precio.toFixed(2)}</div>
+                            <button class="add-btn" onclick="agregarAlCarrito(${prod.precio})">AGREGAR</button>
+                        </div>
+                    `;
+                    productsContainer.appendChild(card);
+                });
+            }
+
+            function renderPaginacion() {
+                const containerPaginacion = document.getElementById('paginacion');
+                containerPaginacion.innerHTML = '';
+
+                const totalPaginas = Math.ceil(productosFiltradosGlobales.length / productosPorPagina);
+
+                if (totalPaginas <= 1) return;
+
+                // Botón Anterior (<)
+                const btnAnt = document.createElement('button');
+                btnAnt.className = 'page-btn';
+                btnAnt.innerText = '‹';
+                btnAnt.disabled = paginaActual === 1;
+                btnAnt.onclick = () => mostrarPagina(paginaActual - 1);
+                containerPaginacion.appendChild(btnAnt);
+
+                // Botones Numéricos
+                for (let i = 1; i <= totalPaginas; i++) {
+                    const btnNum = document.createElement('button');
+                    btnNum.className = `page-btn ${i === paginaActual ? 'active' : ''}`;
+                    btnNum.innerText = i;
+                    btnNum.onclick = () => mostrarPagina(i);
+                    containerPaginacion.appendChild(btnNum);
+                }
+
+                // Botón Siguiente (>)
+                const btnSig = document.createElement('button');
+                btnSig.className = 'page-btn';
+                btnSig.innerText = '›';
+                btnSig.disabled = paginaActual === totalPaginas;
+                btnSig.onclick = () => mostrarPagina(paginaActual + 1);
+                containerPaginacion.appendChild(btnSig);
+            }
+
+            // Carga por defecto directo a Cómodas (Rey)
+            cargarProductosCategoria('comodas', 'comodas-rey');
+
+            // Clics en Categorías Principales
+            mainCategoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    mainCategoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const category = button.getAttribute('data-category');
+
+                    if (category === 'comodas') {
+                        subCategoryContainer.style.display = 'flex';
+                        subCategoryButtons.forEach(btn => btn.classList.remove('active'));
+                        subCategoryButtons[0].classList.add('active');
+
+                        const subcategoryInicial = subCategoryButtons[0].getAttribute('data-subcategory');
+                        cargarProductosCategoria('comodas', subcategoryInicial);
+                    } else {
+                        subCategoryContainer.style.display = 'none';
+                        cargarProductosCategoria(category);
+                    }
+                });
+            });
+
+            // Clics en Subcategorías (Rey / Magicplast)
+            subCategoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    subCategoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const subcategory = button.getAttribute('data-subcategory');
+                    cargarProductosCategoria('comodas', subcategory);
+                });
+            });
+        });
     </script>
 </body>
 </html>

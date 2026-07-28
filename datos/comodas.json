@@ -1,0 +1,86 @@
+[
+    {
+        "id": "com-01",
+        "nombre": "Mickey",
+        "precio": 289.90,
+        "subcategoria": "comodas-rey",
+        "imagen": "img/com-01.jpg"
+    },
+    {
+        "id": "com-02",
+        "nombre": "Toy Story",
+        "precio": 289.90,
+        "subcategoria": "comodas-rey",
+        "imagen": "img/com-02.jpg"
+    },
+    {
+        "id": "com-03",
+        "nombre": "Minnie",
+        "precio": 289.90,
+        "subcategoria": "comodas-rey",
+        "imagen": "img/com-03.jpg"
+    },
+    {
+        "id": "com-04",
+        "nombre": "Frozen",
+        "precio": 289.90,
+        "subcategoria": "comodas-rey",
+        "imagen": "img/com-04.jpg"
+    },
+    {
+        "id": "com-05",
+        "nombre": "Stitch",
+        "precio": 289.90,
+        "subcategoria": "comodas-rey",
+        "imagen": "img/com-05.jpg"
+    },
+    {
+        "id": "com-06",
+        "nombre": "Cómoda Gigante 6 pisos",
+        "precio": 253.90,
+        "subcategoria": "comodas-rey",
+        "imagen": "img/com-06.jpg"
+    },
+    {
+        "id": "com-07",
+        "nombre": "Cómoda Gigante 6 pisos-tocador c/espejo + ste smart box 08",
+        "precio": 307.90,
+        "subcategoria": "comodas-rey",
+        "imagen": "img/com-07.jpg"
+    },
+    {
+        "id": "com-08",
+        "nombre": "Cómoda Kusi Ratan",
+        "precio": 143.90,
+        "subcategoria": "comodas-rey",
+        "imagen": "img/com-08.jpg"
+    },
+    {
+        "id": "com-09",
+        "nombre": "Cómoda Kusi Roble",
+        "precio": 177.90,
+        "subcategoria": "comodas-rey",
+        "imagen": "img/com-09.jpg"
+    },
+    {
+        "id": "com-10",
+        "nombre": "Cómoda Raymi",
+        "precio": 143.90,
+        "subcategoria": "comodas-rey",
+        "imagen": "img/com-10.jpg"
+    },
+    {
+        "id": "com-11",
+        "nombre": "Cómoda Super Gigante con Tapa Reforzada",
+        "precio": 327.90,
+        "subcategoria": "comodas-rey",
+        "imagen": "img/com-11.jpg"
+    },
+    {
+        "id": "com-12",
+        "nombre": "Cómoda Super Gigante Ratan con Tapa Reforzada",
+        "precio": 289.90,
+        "subcategoria": "comodas-rey",
+        "imagen": "img/com-12.jpg"
+    }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "id": "sil-01",
+    "nombre": "Silla Ergonómica Plástica Rey",
+    "precio": 45.00,
+    "subcategoria": "sillas",
+    "imagen": "img/silla-rey.jpg"
+  }
+]
