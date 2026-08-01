@@ -1,0 +1,58 @@
+[
+    {
+        "id": "banco-01",
+        "nombre": "Banco Bambino",
+        "imagen": [
+            "img/banco-01.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 16.00},
+            { "label": "Docena", "precio": 156.00}
+        ]
+    },
+    {
+        "id": "banco-02",
+        "nombre": "Banco Ratan Yofupsa",
+        "imagen": [
+            "img/banco-02.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 7.50},
+            {"label": "Docena", "precio": 78.00},
+            {"label": "40 Unidades", "precio": 232.00}
+        ]
+    },
+    {
+        "id": "banco-03",
+        "nombre": "Banco Bali Ratan",
+        "imagen": [
+            "img/banco-03.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 14.00},
+            {"label": "Docena", "precio": 144.00}
+        ]
+    },
+    {
+        "id": "banco-04",
+        "nombre": "Banco Publix",
+        "imagen": [
+            "img/banco-04.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 10.00},
+            {"label": "Docena", "precio": 72.00}
+        ]
+    },
+    {
+      "id": "banco-05",
+        "nombre": "Banco Tavarua Ratan",
+        "imagen": [
+            "img/banco-04.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 18.00},
+            {"label": "Docena", "precio": 186.00}
+        ]  
+    }
+]

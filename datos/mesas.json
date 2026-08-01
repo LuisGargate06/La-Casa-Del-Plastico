@@ -1,0 +1,42 @@
+[
+    {
+        "id": "mesa-01",
+        "nombre": "Mesa Redonda Caral",
+        "subcategoria": "mesas",
+        "imagen": "img/mesa-01.jpg",
+        "opciones": [
+            {"label": "Unidad", "precio": 73.00},
+            {"label": "6 Unidades", "precio": 405.00}
+        ]
+    },
+    {
+        "id": "mesa-02",
+        "nombre": "Mesa Cuadrada Kina",
+        "subcategoria": "mesas",
+        "imagen": "img/mesa-02.jpg",
+        "opciones": [
+            {"label": "Unidad", "precio": 70.00},
+            {"label": "6 Unidades", "precio": 399.00}
+        ]
+    },
+    {
+        "id": "mesa-03",
+        "nombre": "Mesa Roble C/ Ratán 150 X 80",
+        "subcategoria": "mesas",
+        "imagen": "img/mesa-03.jpg",
+        "opciones": [
+            {"label": "Unidad", "precio": 220.00},
+            {"label": "6 Unidades", "precio": 1236.00}
+        ]
+    },
+    {
+        "id": "mesa-04",
+        "nombre": "Mesa Roble C/ Ratán 80 X 80",
+        "subcategoria": "mesas",
+        "imagen": "img/mesa-04.jpg",
+        "opciones": [
+            {"label": "Unidad", "precio": 130.00},
+            {"label": "6 Unidades", "precio": 726.00}
+        ]
+    }
+]

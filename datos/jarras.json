@@ -1,0 +1,20 @@
+[
+    {
+        "id": "jarra-01",
+        "nombre": "Jarra Reyware Práctica 1.5L c/Tapa",
+        "precio": 5.00,
+        "imagen": "img/jarra-01.jpg"
+    },
+    {
+        "id": "jarra-02",
+        "nombre": "Jarra Bonita 4L c/Tapa",
+        "precio": 10.00,
+        "imagen": "img/jarra-02.jpg"
+    },
+    {
+        "id": "jarra-03",
+        "nombre": "Jarra Cristalux 2.5L",
+        "precio": 7.00,
+        "imagen": "img/jarra-03.jpg"
+    }
+]

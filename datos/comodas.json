@@ -18,69 +18,166 @@
         "nombre": "Minnie",
         "precio": 289.90,
         "subcategoria": "comodas-rey",
-        "imagen": "img/com-03.jpg"
+        "imagenes": [
+            "img/com-03.1.jpg",
+            "img/com-03.2.jpg"
+        ]
     },
     {
         "id": "com-04",
         "nombre": "Frozen",
         "precio": 289.90,
         "subcategoria": "comodas-rey",
-        "imagen": "img/com-04.jpg"
+        "imagenes": [
+            "img/com-04.1.jpg",
+            "img/com-04.2.jpg"
+        ]
     },
     {
         "id": "com-05",
         "nombre": "Stitch",
         "precio": 289.90,
         "subcategoria": "comodas-rey",
-        "imagen": "img/com-05.jpg"
+        "imagenes": [
+            "img/com-05.1.jpg",
+            "img/com-05.2.jpg"
+        ]
     },
     {
         "id": "com-06",
         "nombre": "Cómoda Gigante 6 pisos",
         "precio": 253.90,
         "subcategoria": "comodas-rey",
-        "imagen": "img/com-06.jpg"
+        "imagenes": [
+            "img/com-06.1.jpg",
+            "img/com-06.2.jpg",
+            "img/com-06.3.jpg",
+            "img/com-06.4.jpg",
+            "img/com-06.5.jpg",
+            "img/com-06.6.jpg",
+            "img/com-06.7.jpg",
+            "img/com-06.8.jpg",
+            "img/com-06.9.jpg",
+            "img/com-06.10.jpg",
+            "img/com-06.11.jpg",
+            "img/com-06.12.jpg",
+            "img/com-06.13.jpg",
+            "img/com-06.14.jpg"
+        ]
     },
     {
         "id": "com-07",
-        "nombre": "Cómoda Gigante 6 pisos-tocador c/espejo + ste smart box 08",
+        "nombre": "Cómoda Gigante 6 pisos + tocador c/espejo + set smart box 08",
         "precio": 307.90,
         "subcategoria": "comodas-rey",
-        "imagen": "img/com-07.jpg"
+        "imagenes": [
+            "img/com-07.1.jpg",
+            "img/com-07.2.jpg",
+            "img/com-07.3.jpg",
+            "img/com-07.4.jpg",
+            "img/com-07.5.jpg",
+            "img/com-07.6.jpg",
+            "img/com-07.7.jpg",
+            "img/com-07.8.jpg",
+            "img/com-07.9.jpg"
+        ]
     },
     {
         "id": "com-08",
         "nombre": "Cómoda Kusi Ratan",
-        "precio": 143.90,
         "subcategoria": "comodas-rey",
-        "imagen": "img/com-08.jpg"
+        "imagenes": [
+            "img/com-08.1.jpg",
+            "img/com-08.2.jpg",
+            "img/com-08.3.jpg",
+            "img/com-08.4.jpg",
+            "img/com-08.5.jpg",
+            "img/com-08.6.jpg",
+            "img/com-08.7.jpg",
+            "img/com-08.8.jpg"
+        ],
+        "opciones": [
+            {"piso": "4 pisos", "precio": 143.90},
+            { "piso": "5 pisos", "precio": 177.90},
+            {"piso": "6 pisos", "precio": 205.90},
+            {"piso": "7 pisos", "precio": 225.90}
+        ]
     },
     {
         "id": "com-09",
         "nombre": "Cómoda Kusi Roble",
-        "precio": 177.90,
         "subcategoria": "comodas-rey",
-        "imagen": "img/com-09.jpg"
+        "imagenes": [
+            "img/com-09.1.jpg",
+            "img/com-09.2.jpg",
+            "img/com-09.3.jpg",
+            "img/com-09.4.jpg"
+        ],
+        "opciones":[
+            {"piso":"5 pisos", "precio": 177.90},
+            {"piso": "6 pisos", "precio":205.90},
+            {"piso":"7 pisos", "precio":225.90}
+        ]
     },
     {
         "id": "com-10",
         "nombre": "Cómoda Raymi",
-        "precio": 143.90,
         "subcategoria": "comodas-rey",
-        "imagen": "img/com-10.jpg"
+        "imagenes": [
+            "img/com-10.1.jpg",
+            "img/com-10.2.jpg",
+            "img/com-10.3.jpg",
+            "img/com-10.4.jpg",
+            "img/com-10.5.jpg",
+            "img/com-10.6.jpg",
+            "img/com-10.7.jpg",
+            "img/com-10.8.jpg",
+            "img/com-10.9.jpg",
+            "img/com-10.10.jpg"
+        ],
+        "opciones":[
+            {"piso":"4 pisos", "precio": 143.90},
+            {"piso":"5 pisos", "precio": 169.90},
+            {"piso": "6 pisos", "precio": 192.90},
+            {"piso":"7 pisos", "precio": 210.90}
+        ]
     },
     {
         "id": "com-11",
         "nombre": "Cómoda Super Gigante con Tapa Reforzada",
-        "precio": 327.90,
         "subcategoria": "comodas-rey",
-        "imagen": "img/com-11.jpg"
+        "imagenes": [
+            "img/com-11.1.jpg",
+            "img/com-11.2.jpg",
+            "img/com-11.3.jpg",
+            "img/com-11.4.jpg",
+            "img/com-11.5.jpg",
+            "img/com-11.6.jpg",
+            "img/com-11.7.jpg",
+            "img/com-11.8.jpg",
+            "img/com-11.9.jpg",
+            "img/com-11.10.jpg"
+        ],
+        "opciones":[
+            {"piso":"4 pisos", "precio": 327.90},
+            {"piso":"5 pisos", "precio": 379.90},
+            {"piso":"6 pisos", "precio": 433.90}
+        ]
     },
     {
         "id": "com-12",
         "nombre": "Cómoda Super Gigante Ratan con Tapa Reforzada",
-        "precio": 289.90,
         "subcategoria": "comodas-rey",
-        "imagen": "img/com-12.jpg"
+        "imagenes": [
+            "img/com-12.1.jpg",
+            "img/com-12.2.jpg",
+            "img/com-12.3.jpg",
+            "img/com-12.4.jpg"
+        ],
+        "opciones":[
+            {"piso":"4 pisos", "precio": 327.90},
+            {"piso":"5 pisos", "precio":379.90},
+            {"piso":"6 pisos", "precio": 433.90}
+        ]
     }
 ]

@@ -1,0 +1,34 @@
+[
+    {
+        "id": "porta-01",
+        "nombre": "Utilitario Super Premium",
+        "imagen": [
+            "img/porta-01.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 9.00}
+        ]
+    },
+    {
+        "id": "porta-02",
+        "nombre": "Utilitario Salsa",
+        "imagen": [
+            "img/porta-02.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 7.00},
+            {"label": "Decena", "precio": 57.60}
+        ]
+    },
+    {
+         "id": "porta-03",
+        "nombre": "Portauti Gigante 3 pzas Margarito",
+        "imagen": [
+            "img/porta-03.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 14.00},
+            {"label": "Decena", "precio": 132.00}
+        ]
+    }
+]

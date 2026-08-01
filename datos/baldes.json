@@ -1,0 +1,35 @@
+[
+  {
+        "id": "balde-01",
+        "nombre": "Balde 13L",
+        "imagen": [
+            "img/balde-01.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 12.00},
+            { "label": "Docena", "precio": 103.20}
+        ]
+    },
+    {
+        "id": "balde-02",
+        "nombre": "Balde 15L",
+        "imagen": [
+            "img/balde-02.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 14.00},
+            { "label": "Docena", "precio": 123.60}
+        ]
+    },
+    {
+        "id": "balde-03",
+        "nombre": "Balde Rey Forte 11L",
+        "imagen": [
+            "img/balde-03.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 11.00},
+            { "label": "Docena", "precio": 92.40}
+        ]
+    }
+]

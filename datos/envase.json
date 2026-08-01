@@ -1,0 +1,34 @@
+[
+    {
+        "id": "envase-01",
+        "nombre": "Envase Hermético 1.5L con Tapa Rosca",
+        "imagen": [
+            "img/envase-01.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 4.50},
+            {"label": "Decena", "precio": 27.60}
+        ]
+    },
+    {
+        "id": "envase-02",
+        "nombre": "Envase Hermético 2L con Tapa Rosca",
+        "imagen": [
+            "img/envase-02.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 5.50},
+            {"label": "Decena", "precio": 27.60}
+        ]
+    },
+    {
+        "id": "envase-03",
+        "nombre": "Envase Hermético 1L con Tapa Rosca",
+        "imagen": [
+            "img/envase-03.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 4.00}
+        ]
+    }
+]

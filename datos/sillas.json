@@ -1,9 +1,87 @@
 [
   {
     "id": "sil-01",
-    "nombre": "Silla Ergonómica Plástica Rey",
-    "precio": 45.00,
+    "nombre": "Silla Comercial Barcelona",
     "subcategoria": "sillas",
-    "imagen": "img/silla-rey.jpg"
+    "imagen": "img/silla-01.jpg",
+    "opciones": [
+      {"label": "Unidad", "precio": 34.00},
+      {"label": "Docena", "precio": 372.00},
+      {"label": "Paquete de 30", "precio": 915.00}
+    ]
+  },
+  {
+    "id": "sil-02",
+    "nombre": "Silla Fiesta",
+    "subcategoria": "sillas",
+    "imagen": "img/silla-02.jpg",
+    "opciones": [
+      {"label": "Unidad", "precio": 36.00},
+      {"label": "Docena", "precio": 402.00},
+      {"label": "Paquete de 25", "precio": 825.00}
+    ]
+  },
+  {
+    "id": "sil-03",
+    "nombre": "Silla Tavarúa Modelo Ratán",
+    "subcategoria": "sillas",
+    "imagen": "img/silla-03.jpg",
+    "opciones": [
+      {"label": "Unidad", "precio": 64.00},
+      {"label": "Docena", "precio": 708.00}
+    ]
+  },
+  {
+    "id": "sil-04",
+    "nombre": "Silla Moderna Caoba",
+    "subcategoria": "sillas",
+    "imagen": "img/silla-04.jpg",
+    "opciones": [
+      {"label": "Unidad", "precio": 28.00},
+      {"label": "Docena", "precio": 336.00}
+    ]
+  },
+  {
+    "id": "sil-05",
+    "nombre": "Silla Forte Olimpia",
+    "subcategoria": "sillas",
+    "imagen": "img/silla-05.jpg",
+    "opciones": [
+      {"label": "Unidad", "precio": 42.00},
+      {"label": "Docena", "precio": 474.00},
+      {"label": "Paquete de 25", "precio": 962.50}
+    ]
+  },
+  {
+    "id": "sil-06",
+    "nombre": "Silla Clásica París",
+    "subcategoria": "sillas",
+    "imagen": "img/silla-06.jpg",
+    "opciones": [
+      {"label": "Unidad", "precio": 45.00},
+      {"label": "Docena", "precio": 492.00},
+      {"label": "Paquete de 25", "precio": 1012.50}
+    ]
+  },
+  {
+    "id": "sil-07",
+    "nombre": "Silla Modelo Tahuari",
+    "subcategoria": "sillas",
+    "imagen": "img/silla-07.jpg",
+    "opciones": [
+      {"label": "Unidad", "precio": 50.00},
+      {"label": "Docena", "precio": 546.00}
+    ]
+  },
+  {
+    "id": "sil-08",
+    "nombre": "Silla Top Elegant",
+    "subcategoria": "sillas",
+    "imagen": "img/silla-08.jpg",
+    "opciones": [
+      {"label": "Unidad", "precio": 34.00},
+      {"label": "Docena", "precio": 372.00},
+      {"label": "24 Unidades", "precio": 732.00}
+    ]
   }
 ]
