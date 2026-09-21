@@ -6,7 +6,8 @@
     <title>Catálogo de Productos - La Casa del Plástico</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <base href="./">
+
     <style>
         :root {
             --azul-oscuro: #0B132B;
@@ -492,7 +493,9 @@ function renderizarProductosPagina() {
         });
         htmlBadgesPromo += '</div>';
 
-        let imgUrl = (producto.imagen && producto.imagen.length > 0) ? producto.imagen[0] : '';
+        let rawImg = (producto.imagen && producto.imagen.length > 0) ? producto.imagen[0] : '';
+// Esto quita cualquier barra inicial o punto inicial para evitar conflictos y construye una ruta limpia relativa al documento actual
+let imgUrl = rawImg.replace(/^\/+/, '').replace(/^\.\/+/, '');
         let subtituloHTML = producto.subtitulo ? '<div style="font-size: 0.8rem; color: #666; text-align: center; margin-bottom: 6px;">' + producto.subtitulo + '</div>' : '';
 
         tarjeta.innerHTML = '<div class="product-img-wrapper">' +
