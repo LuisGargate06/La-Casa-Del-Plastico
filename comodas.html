@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cómodas - La Casa del Plástico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --azul-oscuro: #0B132B;
+            --azul-rey: #1E40AF;
+            --azul-rey-hover: #1D4ED8;
+            --rojo-acento: #DC2626;
+            --rojo-hover: #B91C1C;
+            --verde-wa: #25D366;
+            --bg-body: #fdfbf6;
+            --bg-card: #FFFFFF;
+            --texto-oscuro: #0F172A;
+            --texto-suave: #64748B;
+            --borde: #E2E8F0;
+            --transicion: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--texto-oscuro);
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: var(--azul-rey);
+            padding: 10px 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .logo a { display: flex; align-items: center; text-decoration: none; }
+        .logo-img { height: 75px; width: auto; object-fit: contain; }
+
+        nav ul { display: flex; list-style: none; gap: 24px; }
+        nav a { color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+
+        .header-right { display: flex; align-items: center; gap: 12px; }
+        .social-contact { display: flex; align-items: center; gap: 8px; }
+        .social-icon { color: #ffffff; text-decoration: none; font-size: 1.05rem; display: flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 20px; background: rgba(255, 255, 255, 0.12); transition: var(--transicion); }
+        .social-icon:hover { background: rgba(255, 255, 255, 0.22); }
+        .social-icon span { font-size: 0.85rem; font-weight: 600; }
+
+        .social-btn-circle {
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: var(--transicion);
+        }
+        .social-btn-circle:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+
+        .btn-cart {
+            background-color: var(--rojo-acento);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transicion);
+            box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3);
+        }
+        .btn-cart:hover { background-color: var(--rojo-hover); }
+
+        .catalog-header { text-align: center; padding: 40px 20px 10px 20px; }
+        .catalog-header h1 { font-size: 2.5rem; color: var(--azul-oscuro); font-weight: 800; }
+
+        /* Estilo Detallado Tipo Tarjeta de Presentación / Landing */
+        .products-section { padding: 30px 5% 50px 5%; max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+        
+        .product-detail-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--borde);
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            align-items: center;
+        }
+
+        .product-image-container {
+            background: #F8FAFC;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            border: 1px solid var(--borde);
+        }
+
+        .product-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .product-img:hover { transform: scale(1.03); }
+
+        .product-info h2 {
+            font-size: 2.2rem;
+            color: var(--azul-oscuro);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .product-subtitle {
+            font-size: 1.1rem;
+            color: var(--texto-suave);
+            font-style: italic;
+            font-weight: 600;
+            margin-bottom: 16px;
+            position: relative;
+            display: inline-block;
+        }
+        .product-subtitle::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 40px;
+            height: 3px;
+            background-color: var(--rojo-acento);
+        }
+
+        .product-desc {
+            font-size: 0.95rem;
+            color: var(--texto-suave);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        /* Bloques de Medidas */
+        .medidas-titulo {
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--azul-oscuro);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .medidas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .medida-box {
+            background: #ffffff;
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .medida-box i {
+            color: var(--azul-rey);
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .medida-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--texto-suave);
+            text-transform: uppercase;
+        }
+
+        .medida-valor {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--azul-oscuro);
+        }
+        .medida-valor span { font-size: 0.75rem; font-weight: 600; color: var(--texto-suave); }
+
+        /* Colores Disponibles */
+        .colores-section { margin-bottom: 24px; }
+        .colores-titulo {
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--azul-oscuro);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .colores-list {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .color-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border: 2px solid var(--borde);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transicion);
+            background: #fff;
+        }
+
+        .color-item.active {
+            border-color: var(--azul-rey);
+            background: #EFF6FF;
+        }
+
+        .color-circle {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .color-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--azul-oscuro);
+        }
+
+        .product-footer-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            border-top: 1px solid var(--borde);
+            padding-top: 20px;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            color: var(--rojo-acento);
+            font-weight: 800;
+        }
+
+        .btn-add {
+            background-color: var(--azul-rey);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transicion);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-add:hover { background-color: var(--azul-rey-hover); transform: translateY(-2px); }
+
+        /* Modal del Carrito */
+        #modal-carrito {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            width: 95%;
+            max-width: 520px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid var(--borde); padding-bottom: 8px; gap: 8px; }
+        .qty-controls { display: flex; align-items: center; gap: 6px; background: #F1F5F9; padding: 2px 6px; border-radius: 6px; }
+        .qty-btn { background: none; border: none; font-weight: bold; cursor: pointer; font-size: 0.9rem; color: var(--azul-rey); }
+        .btn-remove { background: none; border: none; color: var(--rojo-acento); cursor: pointer; font-size: 0.9rem; }
+
+        .form-group { margin-bottom: 10px; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 3px; color: var(--azul-oscuro); }
+        .form-control { width: 100%; padding: 8px; border: 1px solid var(--borde); border-radius: 6px; font-size: 0.85rem; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+        #toast-notification {
+            position: fixed; bottom: 30px; right: 30px;
+            background-color: var(--azul-oscuro); color: white;
+            padding: 12px 20px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 3000; display: flex; align-items: center; gap: 10px;
+            font-weight: 600; font-size: 0.9rem; transform: translateY(100px); opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #toast-notification.show { transform: translateY(0); opacity: 1; }
+        #toast-notification i { color: #4ade80; font-size: 1.1rem; }
+
+        footer { background-color: var(--azul-oscuro); color: white; padding: 40px 5% 20px 5%; margin-top: 50px; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 25px auto; }
+        .footer-content h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; color: #ffffff; }
+
+        @media (max-width: 900px) {
+            .product-detail-card { grid-template-columns: 1fr; padding: 20px; }
+            .product-image-container { height: 300px; }
+        }
+</style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="La Casa del Plástico Logo" class="logo-img">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Catálogo</a></li>
+                <li><a href="comodas.html" style="color: #93c5fd;">Cómodas</a></li>
+                <li><a href="sillas.html">Sillas</a></li>
+                <li><a href="preguntas.html">Preguntas Frecuentes</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="social-contact">
+                <a href="https://wa.me/51994299351" target="_blank" class="social-icon wa"><i class="fa-brands fa-whatsapp"></i><span>+51 994 299 351</span></a>
+            </div>
+            <a href="https://www.tiktok.com/@lacasadelplastic0" target="_blank" class="social-btn-circle" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://www.facebook.com" target="_blank" class="social-btn-circle" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            
+            <button class="btn-cart" onclick="toggleModalCarrito()"><i class="fa-solid fa-cart-shopping"></i> S/ <span id="cart-total-header">0.00</span> (<span id="cart-count-header">0</span>)</button>
+        </div>
+    </header>
+
+    <div class="catalog-header">
+        <h1>Sección de Cómodas</h1>
+        <p>Modelos amplios, modernos y reforzados para tu hogar</p>
+    </div>
+
+    <section class="products-section" id="productos-container">
+        <!-- Las cómodas se renderizarán dinámicamente aquí -->
+    </section>
+
+    <!-- MODAL DEL CARRITO Y DATOS DE CLIENTE -->
+    <div id="modal-carrito">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 10px; color: var(--azul-oscuro); font-size: 1.25rem;">Tu Carrito y Datos de Envío</h2>
+            
+            <div id="lista-carrito" style="max-height: 180px; overflow-y: auto; margin-bottom: 12px;">
+                <p style="color: var(--texto-suave); font-size: 0.9rem;">Tu carrito está vacío.</p>
+            </div>
+
+            <div style="margin-bottom: 15px; border-top: 2px solid var(--borde); padding-top: 6px; display: flex; justify-content: space-between; font-size: 1.05rem; font-weight: 800;">
+                <span>Total a Pagar:</span>
+                <span style="color: var(--rojo-acento);">S/ <span id="modal-total">0.00</span></span>
+            </div>
+
+            <div style="border-top: 1px solid var(--borde); padding-top: 12px;">
+                <h3 style="font-size: 0.95rem; color: var(--azul-oscuro); margin-bottom: 8px;"><i class="fa-solid fa-user"></i> Datos del Cliente</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombres</label>
+                        <input type="text" id="input-nombres" class="form-control" placeholder="Tus nombres">
+                    </div>
+                    <div class="form-group">
+                        <label>Apellidos</label>
+                        <input type="text" id="input-apellidos" class="form-control" placeholder="Tus apellidos">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>DNI</label>
+                        <input type="text" id="input-dni" class="form-control" maxlength="8" placeholder="8 dígitos">
+                    </div>
+                    <div class="form-group">
+                        <label>Celular</label>
+                        <input type="tel" id="input-celular" class="form-control" maxlength="9" placeholder="999999999">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Provincia</label>
+                        <input type="text" id="input-provincia" class="form-control" placeholder="Ej. Lima">
+                    </div>
+                    <div class="form-group">
+                        <label>Distrito</label>
+                        <input type="text" id="input-distrito" class="form-control" placeholder="Ej. Comas">
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="enviarPedidoWhatsApp()" style="width: 100%; background-color: var(--verde-wa); color: white; border: none; padding: 10px; border-radius: 6px; font-weight: 700; margin-top: 12px; cursor: pointer; font-size: 0.95rem;"><i class="fa-brands fa-whatsapp"></i> Enviar Pedido por WhatsApp</button>
+            <button onclick="toggleModalCarrito()" style="width: 100%; background-color: #E2E8F0; color: var(--texto-oscuro); border: none; padding: 8px; border-radius: 6px; font-weight: 600; margin-top: 6px; cursor: pointer; font-size: 0.9rem;">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- NOTIFICACIÓN FLOTANTE -->
+    <div id="toast-notification">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toast-message">¡Producto agregado al carrito!</span>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>La Casa del Plástico</h4>
+                <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">Los mejores productos, al mejor precio</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">Telefono: +51 994 299 351 </p>
+                <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">Ubicación: Av. Rosa de America 646, Comas, Lima, Perú</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let carrito = JSON.parse(localStorage.getItem('carrito_plastico')) || [];
+        let productosGlobal = [];
+
+        async function cargarComodas() {
+            const contenedor = document.getElementById('productos-container');
+            contenedor.innerHTML = '<p style="text-align: center; color: var(--texto-suave);">Cargando cómodas...</p>';
+
+            try {
+                const respuesta = await fetch('datos/comodas.json');
+                if (!respuesta.ok) throw new Error('No se encontró el archivo de cómodas');
+
+                productosGlobal = await respuesta.json();
+                renderizarComodas();
+
+            } catch (error) {
+                console.error(error);
+                contenedor.innerHTML = '<p style="text-align: center; color: var(--rojo-acento);">Error al cargar las cómodas. Asegúrate de tener el archivo comodas.json en la carpeta datos/.</p>';
+            }
+        }
+
+function cambiarPiso(id, precio, label, medidas, textosPromoJSON, btn) {
+    const tarjeta = btn.closest('.product-detail-card');
+    
+    // 1. Limpiar botones de pisos
+    tarjeta.querySelectorAll('.color-btn').forEach(b => {
+        b.classList.remove('active');
+        b.style.borderColor = 'var(--borde)';
+        b.style.background = '#fff';
+    });
+
+    // 2. Activar el botón presionado
+    btn.classList.add('active');
+    btn.style.borderColor = 'var(--azul-rey)';
+    btn.style.background = '#f0f4ff';
+
+    // Actualizar precio y medidas
+    document.getElementById(`precio-${id}`).innerText = precio.toFixed(2);
+    if (medidas && Object.keys(medidas).length > 0) {
+        if (medidas.largo) document.getElementById(`largo-${id}`).innerText = medidas.largo;
+        if (medidas.ancho) document.getElementById(`ancho-${id}`).innerText = medidas.ancho;
+        if (medidas.alto) document.getElementById(`alto-${id}`).innerText = medidas.alto;
+    }
+
+    tarjeta.setAttribute('data-opcion-seleccionada', label);
+
+    // 3. Actualizar dinámicamente las etiquetas de promoción de esta tarjeta
+    const contenedorPromo = tarjeta.querySelector(`.contenedor-promo-${id}`);
+    if (contenedorPromo) {
+        contenedorPromo.innerHTML = '';
+        if (textosPromoJSON && Array.isArray(textosPromoJSON) && textosPromoJSON.length > 0) {
+            contenedorPromo.innerHTML = textosPromoJSON.map(texto => `
+                <div style="background: linear-gradient(135deg, #e63946, #d90429); color: #fff; padding: 12px 20px; border-radius: 50px; font-size: 0.98rem; font-weight: 700; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 14px rgba(217, 4, 41, 0.3);">
+                    <i class="fa-solid fa-tags" style="font-size: 1.2rem;"></i> 
+                    <span>${texto}</span>
+                </div>
+            `).join('');
+        }
+    }
+}
+
+function cambiarImagenPrincipal(idProducto, nuevaRuta, elementoMiniatura) {
+    // Cambiar la fuente de la imagen grande principal
+    const imgGrande = document.getElementById(`img-principal-${idProducto}`);
+    if (imgGrande) {
+        imgGrande.src = nuevaRuta;
+    }
+
+    // Actualizar los bordes para resaltar cuál miniatura está seleccionada
+    const contenedorMiniaturas = elementoMiniatura.parentElement;
+    contenedorMiniaturas.querySelectorAll('.miniatura-img').forEach(img => {
+        img.style.borderColor = 'var(--borde)';
+    });
+    elementoMiniatura.style.borderColor = 'var(--azul-rey)';
+}
+
+function seleccionarColor(productoId, nombreColor, elementoBtn) {
+    let tarjeta = elementoBtn.closest('.product-detail-card');
+    if (!tarjeta) return;
+
+    tarjeta.setAttribute('data-color-seleccionado', nombreColor);
+
+    let botonesColores = tarjeta.querySelectorAll('.color-opcion-btn');
+    botonesColores.forEach(btn => {
+        btn.classList.remove('active');
+        btn.style.borderColor = 'var(--borde)';
+        btn.style.background = '#fff';
+    });
+
+    elementoBtn.classList.add('active');
+    elementoBtn.style.borderColor = 'var(--azul-rey)';
+    elementoBtn.style.background = '#f0f4ff';
+
+    let indexColor = Array.from(botonesColores).indexOf(elementoBtn);
+
+    if (indexColor !== -1) {
+        let productoActual = productosGlobal.find(p => String(p.id) === String(productoId));
+
+        if (productoActual && productoActual.imagen && productoActual.imagen.length > indexColor) {
+            let nuevaRuta = productoActual.imagen[indexColor];
+
+            let imgGrande = tarjeta.querySelector('.product-img');
+            if (imgGrande) {
+                imgGrande.src = nuevaRuta;
+            }
+
+            let miniaturas = tarjeta.querySelectorAll('.miniatura-img');
+            miniaturas.forEach((min, mIdx) => {
+                if (mIdx === indexColor) {
+                    min.style.borderColor = 'var(--azul-rey)';
+                    min.classList.add('active');
+                } else {
+                    min.style.borderColor = 'var(--borde)';
+                    min.classList.remove('active');
+                }
+            });
+        }
+    }
+}
+
+function renderizarComodas() {
+    const contenedor = document.getElementById('productos-container');
+    contenedor.innerHTML = '';
+
+    if (productosGlobal.length === 0) {
+        contenedor.innerHTML = '<p style="text-align: center; color: var(--texto-suave);">No hay cómodas disponibles.</p>';
+        return;
+    }
+
+    productosGlobal.forEach((producto) => {
+        const tarjeta = document.createElement('div');
+        tarjeta.classList.add('product-detail-card');
+        
+        let precioBase = 0;
+        let medidasIniciales = { largo: '--', ancho: '--', alto: '--' };
+        let opcionesHTML = '';
+        let textoPromoHTML = '';
+
+        if (producto.opciones && producto.opciones.length > 0) {
+            let opcionesPisos = producto.opciones.filter(opt => {
+                let lbl = opt.label.toLowerCase();
+                return (lbl.includes('piso') || lbl.includes('niveles')) && !lbl.includes('x3');
+            });
+
+            if (opcionesPisos.length > 0) {
+                let opcionInicial = opcionesPisos[0];
+                precioBase = opcionInicial.precio;
+                if (opcionInicial.medidas) medidasIniciales = opcionInicial.medidas;
+
+                if (opcionInicial.textoPromo && Array.isArray(opcionInicial.textoPromo)) {
+                    textoPromoHTML = opcionInicial.textoPromo.map(texto => `
+                        <div style="background: linear-gradient(135deg, #e63946, #d90429); color: #fff; padding: 12px 20px; border-radius: 50px; font-size: 0.98rem; font-weight: 700; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 14px rgba(217, 4, 41, 0.3);">
+                            <i class="fa-solid fa-tags" style="font-size: 1.2rem;"></i> 
+                            <span>${texto}</span>
+                        </div>
+                    `).join('');
+                }
+
+                opcionesHTML = `
+                    <div class="colores-section" style="margin-bottom: 16px;">
+                        <div class="colores-titulo" style="font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">Elige los pisos</div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            ${opcionesPisos.map((opt, oIdx) => `
+                                <button type="button" class="color-btn ${oIdx === 0 ? 'active' : ''}" 
+                                         onclick='cambiarPiso("${producto.id}", ${opt.precio}, "${opt.label}", ${JSON.stringify(opt.medidas || {})}, ${JSON.stringify(opt.textoPromo || [])}, this)'
+                                        style="border-radius: 8px; padding: 8px 14px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: 2px solid ${oIdx === 0 ? 'var(--azul-rey)' : 'var(--borde)'}; background:${oIdx === 0 ? '#f0f4ff' : '#fff'};">
+                                    ${opt.label} - S/ ${opt.precio.toFixed(2)}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else {
+                let opcionUnidad = producto.opciones.find(opt => opt.label.toLowerCase().includes('unidad') && !opt.label.toLowerCase().includes('x3')) || producto.opciones[0];
+                precioBase = opcionUnidad.precio;
+                if (opcionUnidad.medidas) medidasIniciales = opcionUnidad.medidas;
+
+                if (producto.textosPromo && Array.isArray(producto.textosPromo)) {
+                    textoPromoHTML = producto.textosPromo.map(texto => `
+                        <div style="background: linear-gradient(135deg, #e63946, #d90429); color: #fff; padding: 12px 20px; border-radius: 50px; font-size: 0.98rem; font-weight: 700; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 14px rgba(217, 4, 41, 0.3);">
+                            <i class="fa-solid fa-tags" style="font-size: 1.2rem;"></i> 
+                            <span>${texto}</span>
+                        </div>
+                    `).join('');
+                }
+            }
+        } else if (producto.precio) {
+            precioBase = producto.precio;
+            if (producto.medidas) medidasIniciales = producto.medidas;
+        }
+
+        let coloresHTML = '';
+        if (producto.colores && producto.colores.length > 0) {
+            tarjeta.setAttribute('data-color-seleccionado', producto.colores[0].nombre);
+
+            coloresHTML = `
+                <div class="colores-section" style="margin-bottom: 16px;">
+                    <div class="colores-titulo" style="font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">Colores (Borde y Cajón)</div>
+                    <div class="colores-list" style="display: flex; flex-direction: column; gap: 8px; max-height: 180px; overflow-y: auto; padding-right: 4px;">
+                        ${producto.colores.map((col, cIdx) => {
+                            let esPrimero = cIdx === 0;
+                            let colorCajon = col.cajon || col.color || '#fff';
+                            let colorBorde = col.borde || col.cajon || '#ccc';
+
+                            return `
+                                <button type="button" class="color-opcion-btn ${esPrimero ? 'active' : ''}" 
+                                        onclick="seleccionarColor('${producto.id}', '${col.nombre}', this)" 
+                                        style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 6px 10px; border-radius: 8px; border: 2px solid ${esPrimero ? 'var(--azul-rey)' : 'var(--borde)'}; background: ${esPrimero ? '#f0f4ff' : '#fff'}; transition: var(--transicion); width: 100%; text-align: left;">
+                                    <div style="width: 24px; height: 24px; border-radius: 50%; background-color: ${colorCajon}; box-shadow: 0 0 0 4px ${colorBorde}; flex-shrink: 0; margin-left: 2px;" title="${col.nombre}"></div>
+                                    <span class="color-name" style="font-size: 0.8rem; font-weight: 600; color: var(--texto-principal, #333);">${col.nombre}</span>
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        let imagenesArray = producto.imagen || [];
+        let imagenPrincipal = imagenesArray.length > 0 ? imagenesArray[0] : '';
+        let subtituloTexto = producto.subtitulo || 'Cómoda organizadora';
+
+        let galeriaHTML = '';
+        if (imagenesArray.length > 1) {
+            galeriaHTML = `
+                <div style="display: flex; gap: 6px; margin-top: 10px; overflow-x: auto; padding-bottom: 6px; width: 100%; scrollbar-width: thin;">
+                    ${imagenesArray.map((imgSrc, imgIdx) => `
+                        <img src="${imgSrc}" alt="miniatura" 
+                           onclick="cambiarImagenPrincipal('${producto.id}', '${imgSrc}', this)" 
+                           style="width: 42px; height: 42px; object-fit: cover; border-radius: 6px; border: 2px solid ${imgIdx === 0 ? 'var(--azul-rey)' : 'var(--borde)'}; cursor: pointer; flex-shrink: 0;"
+                           class="miniatura-img">
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        tarjeta.innerHTML = `
+            <div style="display: flex; flex-direction: column; width: 100%; max-width: 400px; margin: 0 auto;">
+                <div class="product-image-container" style="width: 100%;">
+                    <img class="product-img" id="img-principal-${producto.id}" src="${imagenPrincipal}" alt="${producto.nombre}" style="width: 100%; height: auto; object-fit: contain;">
+                </div>
+                ${galeriaHTML}
+            </div>
+            <div class="product-info">
+                <h2>${producto.nombre}</h2>
+                <div class="product-subtitle" id="subtitulo-${producto.id}">${subtituloTexto}</div>
+                
+                <div class="contenedor-promo-${producto.id}">
+                    ${textoPromoHTML}
+                </div>
+
+                <p class="product-desc">${producto.descripcion || 'Organización elegante y resistente...'}</p>
+                ${opcionesHTML}
+                ${coloresHTML}
+
+                <div class="medidas-titulo">Medidas Aproximadas</div>
+                <div class="medidas-grid">
+                    <div class="medida-box">
+                        <i class="fa-solid fa-ruler-horizontal"></i>
+                        <div class="medida-label">Largo</div>
+                        <div class="medida-valor"><span id="largo-${producto.id}">${medidasIniciales.largo}</span> <span>cm</span></div>
+                    </div>
+                    <div class="medida-box">
+                        <i class="fa-solid fa-cube"></i>
+                        <div class="medida-label">Ancho</div>
+                        <div class="medida-valor"><span id="ancho-${producto.id}">${medidasIniciales.ancho}</span> <span>cm</span></div>
+                    </div>
+                    <div class="medida-box">
+                        <i class="fa-solid fa-ruler-vertical"></i>
+                        <div class="medida-label">Alto</div>
+                        <div class="medida-valor"><span id="alto-${producto.id}">${medidasIniciales.alto}</span> <span>cm</span></div>
+                    </div>
+                </div>
+
+                <div class="product-footer-action">
+                    <div class="product-price">S/ <span id="precio-${producto.id}">${precioBase.toFixed(2)}</span></div>
+                    <button class="btn-add" onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}')"><i class="fa-solid fa-cart-shopping"></i> Agregar al Carrito</button>
+                </div>
+            </div>
+        `;
+        contenedor.appendChild(tarjeta);
+    });
+}
+
+        function calcularPrecioTotalItem(item) {
+            let productoOriginal = productosGlobal.find(p => String(p.id) === String(item.id));
+            
+            // Si el producto no tiene opciones en el JSON, multiplica normal
+            if (!productoOriginal || !productoOriginal.opciones) {
+                return item.precioUnitario * item.cantidad;
+            }
+
+            // Buscamos si existe una opción de paquete X3 en el JSON que coincida con la variante (ej. "4 Pisos" o "5 Pisos")
+            let opcionX3 = productoOriginal.opciones.find(op => {
+                let label = op.label.toLowerCase();
+                let esX3 = label.includes('x3') || label.includes('3 unidades');
+                
+                // Si el item tiene una etiqueta de piso (ej. "5 Pisos"), buscamos el combo x3 específico de ese piso
+                if (item.opcionLabel) {
+                    let numeroPiso = item.opcionLabel.toLowerCase().replace(/[^0-9]/g, '');
+                    return esX3 && label.includes(numeroPiso);
+                }
+                
+                return esX3;
+            });
+
+            // Si no encuentra un combo x3 específico con número, busca cualquier combo x3 genérico
+            if (!opcionX3) {
+                opcionX3 = productoOriginal.opciones.find(op => {
+                    let label = op.label.toLowerCase();
+                    return label.includes('x3') || label.includes('3 unidades');
+                });
+            }
+
+            // Si existe la opción X3 para ese piso específico, aplicamos el descuento por bloques de 3
+            if (opcionX3) {
+                let precioX3 = parseFloat(opcionX3.precio);
+                let paquetesDe3 = Math.floor(item.cantidad / 3);
+                let unidadesSueltas = item.cantidad % 3;
+
+                return (paquetesDe3 * precioX3) + (unidadesSueltas * item.precioUnitario);
+            }
+
+            return item.precioUnitario * item.cantidad;
+        }
+
+        function agregarAlCarrito(id, nombre) {
+            const precioEl = document.getElementById(`precio-${id}`);
+            const precioUnitario = parseFloat(precioEl.innerText);
+            
+            const tarjeta = precioEl.closest('.product-detail-card');
+            const colorSeleccionado = tarjeta.getAttribute('data-color-seleccionado') || 'Estándar';
+            const opcionSeleccionada = tarjeta.getAttribute('data-opcion-seleccionada') || '';
+            
+            // Armar el nombre completo para el carrito (ej. "CÓMODA RAYMI (5 Pisos - Borde Piel / Cajón Crema)")
+            let detalleExtra = opcionSeleccionada ? `${opcionSeleccionada} - Color: ${colorSeleccionado}` : `Color: ${colorSeleccionado}`;
+            let nombreCompleto = `${nombre} (${detalleExtra})`;
+
+            const existente = carrito.find(item => item.id === id && item.nombre === nombreCompleto);
+            if (existente) {
+                existente.cantidad += 1;
+            } else {
+                carrito.push({ 
+                    id, 
+                    nombre: nombreCompleto, 
+                    precioUnitario, 
+                    opcionLabel: opcionSeleccionada, // Guardamos la etiqueta para calcular el combo exacto
+                    cantidad: 1 
+                });
+            }
+
+            actualizarCarritoUI();
+            mostrarToast("¡Producto agregado al carrito!");
+        }
+
+        function cambiarCantidad(index, delta) {
+            carrito[index].cantidad += delta;
+            if (carrito[index].cantidad <= 0) {
+                carrito.splice(index, 1);
+            }
+            actualizarCarritoUI();
+        }
+
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            actualizarCarritoUI();
+        }
+
+        function mostrarToast(mensaje) {
+            const toast = document.getElementById('toast-notification');
+            document.getElementById('toast-message').innerText = mensaje;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+
+        function actualizarCarritoUI() {
+    // Sincronizar y guardar en el almacenamiento local del navegador
+    localStorage.setItem('carrito_plastico', JSON.stringify(carrito));
+
+    const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+    const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
+    
+    document.getElementById('cart-total-header').innerText = totalPrecio.toFixed(2);
+    document.getElementById('cart-count-header').innerText = totalItems;
+    document.getElementById('modal-total').innerText = totalPrecio.toFixed(2);
+
+    const lista = document.getElementById('lista-carrito');
+    if (carrito.length === 0) {
+        lista.innerHTML = '<p style="color: var(--texto-suave); font-size: 0.9rem;">Tu carrito está vacío.</p>';
+        return;
+    }
+
+    lista.innerHTML = carrito.map((item, index) => `
+        <div class="cart-item">
+            <div style="flex: 1;">
+                <strong style="font-size: 0.85rem;">${item.nombre}</strong><br>
+                <span style="color: var(--rojo-acento); font-weight: 700; font-size: 0.8rem;">S/ ${calcularPrecioTotalItem(item).toFixed(2)}</span>
+            </div>
+            <div class="qty-controls">
+                <button class="qty-btn" onclick="cambiarCantidad(${index}, -1)">-</button>
+                <span style="font-size: 0.85rem; font-weight: 700;">${item.cantidad}</span>
+                <button class="qty-btn" onclick="cambiarCantidad(${index}, 1)">+</button>
+            </div>
+            <button class="btn-remove" onclick="eliminarDelCarrito(${index})"><i class="fa-solid fa-trash"></i></button>
+        </div>
+    `).join('');
+}
+
+        function toggleModalCarrito() {
+            const modal = document.getElementById('modal-carrito');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function enviarPedidoWhatsApp() {
+            if (carrito.length === 0) {
+                alert("Tu carrito está vacío.");
+                return;
+            }
+
+            const nombres = document.getElementById('input-nombres').value.trim();
+            const apellidos = document.getElementById('input-apellidos').value.trim();
+            const dni = document.getElementById('input-dni').value.trim();
+            const celular = document.getElementById('input-celular').value.trim();
+            const provincia = document.getElementById('input-provincia').value.trim();
+            const distrito = document.getElementById('input-distrito').value.trim();
+
+            if (!nombres || !apellidos || !dni || !celular || !provincia || !distrito) {
+                alert("Por favor, completa todos tus datos personales y de ubicación para el pedido.");
+                return;
+            }
+
+            // === REGISTRO AUTOMÁTICO PARA EL PANEL ADMIN ===
+            const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
+            
+            let nuevoPedidoAdmin = {
+                id: Date.now(),
+                nombres: nombres,
+                apellidos: apellidos,
+                dni: dni,
+                celular: celular,
+                provincia: provincia,
+                distrito: distrito,
+                items: carrito.map(item => ({ 
+                    nombre: item.nombre, 
+                    cantidad: item.cantidad, 
+                    subtotal: calcularPrecioTotalItem(item) 
+                })),
+                total: totalPrecio,
+                fecha: new Date().toLocaleString(),
+                estado: "pendiente"
+            };
+
+            let listaAdmin = JSON.parse(localStorage.getItem('admin_pedidos')) || [];
+            listaAdmin.unshift(nuevoPedidoAdmin); // Lo coloca al principio de la lista
+            localStorage.setItem('admin_pedidos', JSON.stringify(listaAdmin));
+            // ================================================
+
+            let mensaje = `*¡Nuevo Pedido - La Casa del Plástico (Cómodas)!*%0A%0A`;
+            mensaje += `*DATOS DEL CLIENTE:*%0A`;
+            mensaje += `- Nombre: ${nombres} ${apellidos}%0A`;
+            mensaje += `- DNI: ${dni}%0A`;
+            mensaje += `- Celular: ${celular}%0A`;
+            mensaje += `- Provincia: ${provincia}%0A`;
+            mensaje += `- Distrito: ${distrito}%0A%0A`;
+        
+            mensaje += `*DETALLE DEL PEDIDO:*%0A`;
+            carrito.forEach(item => {
+                // Usamos la función de cálculo para el subtotal del ítem en el mensaje
+                let subtotalItem = calcularPrecioTotalItem(item);
+                mensaje += `▪ Cómodas: ${item.nombre} | Cant: ${item.cantidad} | S/ ${subtotalItem.toFixed(2)}%0A`;
+            });
+        
+            // Usamos la misma lógica de reducción con la función de precios
+            mensaje += `%0A*TOTAL A PAGAR: S/ ${totalPrecio.toFixed(2)}*`;
+
+            window.open(`https://wa.me/51994299351?text=${mensaje}`, '_blank');
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarComodas();
+            actualizarCarritoUI();
+        });
+    </script>
+</body>
+</html>

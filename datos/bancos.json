@@ -6,8 +6,8 @@
             "img/banco-01.jpg"
         ],
         "opciones": [
-            {"label": "Unidad", "precio": 16.00},
-            { "label": "Docena", "precio": 156.00}
+            {"label": "Unidad", "precio": 14.00},
+            { "label": "Docena", "precio": 126.00}
         ]
     },
     {
@@ -17,42 +17,20 @@
             "img/banco-02.jpg"
         ],
         "opciones": [
-            {"label": "Unidad", "precio": 7.50},
+            {"label": "Unidad", "precio": 8.00},
             {"label": "Docena", "precio": 78.00},
             {"label": "40 Unidades", "precio": 232.00}
         ]
     },
     {
-        "id": "banco-03",
-        "nombre": "Banco Bali Ratan",
-        "imagen": [
-            "img/banco-03.jpg"
-        ],
-        "opciones": [
-            {"label": "Unidad", "precio": 14.00},
-            {"label": "Docena", "precio": 144.00}
-        ]
-    },
-    {
-        "id": "banco-04",
-        "nombre": "Banco Publix",
-        "imagen": [
-            "img/banco-04.jpg"
-        ],
-        "opciones": [
-            {"label": "Unidad", "precio": 10.00},
-            {"label": "Docena", "precio": 72.00}
-        ]
-    },
-    {
       "id": "banco-05",
-        "nombre": "Banco Tavarua Ratan",
+        "nombre": "Banco Tavarua Ratan Grande",
         "imagen": [
             "img/banco-04.jpg"
         ],
         "opciones": [
-            {"label": "Unidad", "precio": 18.00},
-            {"label": "Docena", "precio": 186.00}
+            {"label": "Unidad", "precio": 15.00},
+            {"label": "Docena", "precio": 138.00}
         ]  
     }
 ]

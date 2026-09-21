@@ -1,54 +1,146 @@
 [
     {
-        "id": "com-01",
-        "nombre": "Mickey",
-        "precio": 289.90,
-        "subcategoria": "comodas-rey",
-        "imagen": "img/com-01.jpg"
-    },
+    "id": "mickey",
+    "nombre": "Mickey",
+    "subtitulo": "Comoda Para Niños",
+    "imagen": ["img/com-01.jpg"],
+    "opciones": [
+        { 
+            "label": "4 pisos", 
+            "precio": 265.00,
+            "medidas": { "largo": "46.2", "ancho": "60.2", "alto": "120.0" },
+            "textoPromo": [
+                "¡El precio de la unidad + REGALO!",
+                "¡Llévate 3 unidades por S/ 750.00!"
+            ]
+        },
+        {
+            "label": "X3 unidades", 
+            "precio": 750.00, 
+            "medidas": { "largo": "46.2", "ancho": "60.2", "alto": "120.0" }
+        }
+    ],
+    "colores": [
+        {"nombre": "Borde Rojo / Cajón Azul", "borde": "#F81C30", "cajon": "#0000FF"}
+    ]
+},
     {
-        "id": "com-02",
+        "id": "toy-story",
         "nombre": "Toy Story",
-        "precio": 289.90,
-        "subcategoria": "comodas-rey",
-        "imagen": "img/com-02.jpg"
+        "subtitulo": "Comoda Para Niños",
+        "imagen": ["img/com-02.jpg"],
+        "opciones": [
+            { 
+                "label": "4 pisos", 
+                "precio": 265.00,
+                "medidas": { "largo": "46.2", "ancho": "60.2", "alto": "120.0" },
+                "textoPromo": [
+                    "¡El precio de la unidad + REGALO!",
+                    "¡Llévate 3 unidades por S/ 750.00 + REGALO!"
+                ]
+            },
+            {
+                "label": "X3 unidades",
+                "precio": 750.00,
+                "maedidas": {"largo": "46.2", "ancho": "60.2", "alto": "120.0"}
+            }
+        ],
+        "colores": [
+            {"nombre": "Borde Celeste / Cajón Verde", "borde": "#99D2E9", "cajon": "#82C43D"}
+        ]
     },
     {
-        "id": "com-03",
+        "id": "minie",
         "nombre": "Minnie",
-        "precio": 289.90,
-        "subcategoria": "comodas-rey",
-        "imagenes": [
+        "subtitulo": "Comoda Para Niños",
+        "imagen": [
             "img/com-03.1.jpg",
             "img/com-03.2.jpg"
+        ],
+        "opciones": [
+            { 
+                "label": "4 pisos", 
+                "precio": 265.00,
+                "medidas": { "largo": "46.2", "ancho": "60.2", "alto": "120.0" },
+                "textoPromo": [
+                    "¡El precio de la unidad + REGALO!",
+                    "¡Llévate 3 unidades por S/ 750.00!"
+                ]
+            },
+            {
+                "label": "X3 unidades",
+                "precio": 750.00,
+                "maedidas": {"largo": "46.2", "ancho": "60.2", "alto": "120.0"}
+            }
+        ],
+        "colores": [
+            {"nombre": "Borde Rosado Fuerte / Cajón Rosado Débil", "borde": "#FF1D73", "cajon": "#E6B5C9"},
+            {"nombre": "Borde Celeste / Cajón Rosado Débil", "borde": "#99D2E9", "cajon": "#E6B5C9"}
         ]
     },
     {
-        "id": "com-04",
+        "id": "frozen",
         "nombre": "Frozen",
-        "precio": 289.90,
-        "subcategoria": "comodas-rey",
-        "imagenes": [
+        "subtitulo": "Comoda Para Niños",
+        "imagen": [
             "img/com-04.1.jpg",
             "img/com-04.2.jpg"
+        ],
+        "opciones": [
+            { 
+                "label": "4 pisos", 
+                "precio": 265.00,
+                "medidas": { "largo": "46.2", "ancho": "60.2", "alto": "120.0" },
+                "textoPromo": [
+                    "¡El precio de la unidad + REGALO!",
+                    "¡Llévate 3 unidades por S/ 750.00!"
+                ]
+            },
+            {
+                "label": "X3 unidades",
+                "precio": 750.00,
+                "maedidas": {"largo": "46.2", "ancho": "60.2", "alto": "120.0"}
+            }
+        ],
+        "colores": [
+            {"nombre": "Borde Morado / Cajón Celeste", "borde": "#D1C4E9", "cajon": "#00B4FF"},
+            {"nombre": "Borde Celeste / Cajón Morado", "borde": "#00B4FF", "cajon": "#D1C4E9"}
         ]
     },
     {
-        "id": "com-05",
+        "id": "stich",
         "nombre": "Stitch",
-        "precio": 289.90,
-        "subcategoria": "comodas-rey",
-        "imagenes": [
+        "subtitulo": "Comoda Para Niños",
+        "imagen": [
             "img/com-05.1.jpg",
             "img/com-05.2.jpg"
+        ],
+        "opciones": [
+            { 
+                "label": "4 pisos", 
+                "precio": 265.00,
+                "medidas": { "largo": "46.2", "ancho": "60.2", "alto": "120.0" },
+                "textoPromo": [
+                    "¡El precio de la unidad + REGALO!",
+                    "¡Llévate 3 unidades por S/ 750.00!"
+                ]
+            },
+            {
+                "label": "X3 unidades",
+                "precio": 750.00,
+                "maedidas": {"largo": "46.2", "ancho": "60.2", "alto": "120.0"}
+            }
+        ],
+        "colores": [
+            {"nombre": "Borde Azul / Cajón Celeste", "borde": "#7E8CD0", "cajon": "#A6D1DE"},
+            {"nombre": "Borde Morado / Cajón Celeste", "borde": "#C9C1DC", "cajon": "#A6D1DE"}
         ]
     },
     {
-        "id": "com-06",
+        "id": "comoda-gigante1",
         "nombre": "Cómoda Gigante 6 pisos",
-        "precio": 253.90,
-        "subcategoria": "comodas-rey",
-        "imagenes": [
+        "subtitulo": "6 Pisos",
+        "imagen": [
             "img/com-06.1.jpg",
             "img/com-06.2.jpg",
             "img/com-06.3.jpg",
@@ -63,14 +155,43 @@
             "img/com-06.12.jpg",
             "img/com-06.13.jpg",
             "img/com-06.14.jpg"
+        ],
+        "opciones": [
+            { 
+                "label": "6 pisos", 
+                "precio": 250.00,
+                "medidas": { "largo": "54.1", "ancho": "46.2", "alto": "125.1" }
+            },
+            {
+                "label": "X3 unidades",
+                "precio": 690.00,
+                "medidas": { "largo": "54.1", "ancho": "46.2", "alto": "125.1" }
+            }
+            
+        ],
+        "colores": [
+            {"nombre": "Borde Piel / Cajón Crema", "borde": "#F2E6E2", "cajon": "#F2EFE9"},
+            {"nombre": "Borde Celeste / Cajón Rosado", "borde": "#11B4D4", "cajon": "#F2A4C2"},
+            {"nombre": "Borde Piel / Cajón Rosado", "borde": "#E8C4B8", "cajon": "#E0538C"},
+            {"nombre": "Borde Crema / Cajón Piel", "borde": "#F2EFE9", "cajon": "#F2E6E2"},
+            {"nombre": "Borde Crema / Cajón Marrón", "borde": "#F2EFE9", "cajon": "#B59E8E"},
+            {"nombre": "Borde Crema / Cajón Crema", "borde": "#F2EFE9", "cajon": "#F2EFE9"},
+            {"nombre": "Borde Celeste / Cajón Verde", "borde": "#4CB5D0", "cajon": "#62B056"},
+            {"nombre": "Borde Celeste / Cajón Celeste Claro", "borde": "#00ACC1", "cajon": "#CBE6F6"},
+            {"nombre": "Borde Celeste Claro / Cajón Azul", "borde": "#B2D2DF", "cajon": "#7A9BB5"},
+            {"nombre": "Multi Color", "borde": "#E61C34", "cajon": "#F1C40F"},
+            {"nombre": "Borde Celeste / Cajón Blanco", "borde": "#74C4D1", "cajon": "#E6E6E6"},
+            {"nombre": "Borde Morado / Cajón Rosado", "borde": "#B9B2D3", "cajon": "#F1B5CC"},
+            {"nombre": "Borde Celeste / Cajón Morado", "borde": "#7EC8E3", "cajon": "#B29EC3"},
+            {"nombre": "Borde Morado / Cajón Celeste", "borde": "#B29EC3", "cajon": "#7EC8E3"}
+
         ]
     },
     {
-        "id": "com-07",
+        "id": "comoda-gigante2",
         "nombre": "Cómoda Gigante 6 pisos + tocador c/espejo + set smart box 08",
-        "precio": 307.90,
-        "subcategoria": "comodas-rey",
-        "imagenes": [
+        "subtitulo": "6 Pisos",
+        "imagen": [
             "img/com-07.1.jpg",
             "img/com-07.2.jpg",
             "img/com-07.3.jpg",
@@ -80,13 +201,36 @@
             "img/com-07.7.jpg",
             "img/com-07.8.jpg",
             "img/com-07.9.jpg"
+        ],
+        "opciones": [
+            { 
+                "label": "6 pisos", 
+                "precio": 300.00,
+                "medidas": { "largo": "54.1", "ancho": "46.2", "alto": "125.1" }
+            },
+            {
+                "label": "X3 unidades",
+                "precio": 840.00,
+                "medidas": { "largo": "54.1", "ancho": "46.2", "alto": "125.1" }
+            }
+        ],
+        "colores": [
+            {"nombre": "Borde Piel / Cajón Crema", "borde": "#F2E6E2", "cajon": "#F2EFE9"},
+            {"nombre": "Borde Morado / Cajón Celeste", "borde": "#B29EC3", "cajon": "#7EC8E3"},
+            {"nombre": "Borde Piel / Cajón Rosado", "borde": "#E8C4B8", "cajon": "#E0538C"},
+            {"nombre": "Borde Morado / Cajón Piel", "borde": "#B9B2D3", "cajon": "#F2E6E2"},
+            {"nombre": "Borde Crema / Cajón Piel", "borde": "#F2EFE9", "cajon": "#F2E6E2"},
+            {"nombre": "Borde Celeste / Cajón Celeste Claro", "borde": "#00ACC1", "cajon": "#CBE6F6"},
+            {"nombre": "Borde Celeste Claro / Cajón Azul", "borde": "#B2D2DF", "cajon": "#7A9BB5"},
+            {"nombre": "Borde Crema / Cajón Marrón", "borde": "#F2EFE9", "cajon": "#B59E8E"},
+            {"nombre": "Borde Crema / Cajón Crema", "borde": "#F2EFE9", "cajon": "#F2EFE9"}
         ]
     },
     {
-        "id": "com-08",
+        "id": "kusi-ratan",
         "nombre": "Cómoda Kusi Ratan",
-        "subcategoria": "comodas-rey",
-        "imagenes": [
+        "subtitulo": "Modelo Ratán",
+        "imagen": [
             "img/com-08.1.jpg",
             "img/com-08.2.jpg",
             "img/com-08.3.jpg",
@@ -97,33 +241,62 @@
             "img/com-08.8.jpg"
         ],
         "opciones": [
-            {"piso": "4 pisos", "precio": 143.90},
-            { "piso": "5 pisos", "precio": 177.90},
-            {"piso": "6 pisos", "precio": 205.90},
-            {"piso": "7 pisos", "precio": 225.90}
+            { "label": "5 pisos", "precio": 165.00, "medidas": { "largo": "55.0", "ancho": "39.5", "alto": "104.0" }},
+            { "label": "6 pisos", "precio": 180.00, "medidas": { "largo": "55.0", "ancho": "39.5", "alto": "124.0" }, "textoPromo": ["X3 unidades a S/. 501"] },
+            {
+                "label": "6 pisos X3 unidades",
+                "precio": 501.00,
+                "medidas": { "largo": "54.1", "ancho": "46.2", "alto": "125.1" }
+            },
+            { "label": "7 pisos", "precio": 200.00, "medidas": { "largo": "55.0", "ancho": "39.5", "alto": "144.0" }, "textoPromo": ["X3 unidades a S/. 555"] },
+            {
+                "label": "7 pisos X3 unidades",
+                "precio": 555.00,
+                "medidas": { "largo": "54.1", "ancho": "46.2", "alto": "125.1" }
+            }
+        ],
+        "colores": [
+            {"nombre": "Borde Negro / Cajón Negro", "borde": "#363230", "cajon": "#363230"},
+            {"nombre": "Borde Piel / Cajón Morado", "borde": "#F3E5E2", "cajon": "#5E5062"},
+            {"nombre": "Borde Piel / Cajón Celeste", "borde": "#F3E5E2", "cajon": "#85B2B8"},
+            {"nombre": "Multi Color", "borde": "#D4D09B", "cajon": "#85B2B8"},
+            {"nombre": "Borde Piel / Cajón Rosado", "borde": "#F3E5E2", "cajon": "#E6B8B8"},
+            {"nombre": "Borde Piel / Cajón Negro", "borde": "#F3E5E2", "cajon": "#2B2524"},
+            {"nombre": "Borde Piel / Cajón Marrón", "borde": "#F3E5E2", "cajon": "#5E3D35"},
+            {"nombre": "Borde Piel / Cajón Piel", "borde": "#F3E5E2", "cajon": "#F3E5E2"}
         ]
     },
     {
-        "id": "com-09",
+        "id": "kusi-roble",
         "nombre": "Cómoda Kusi Roble",
-        "subcategoria": "comodas-rey",
-        "imagenes": [
+        "subtitulo": "Modelo Roble",
+        "imagen": [
             "img/com-09.1.jpg",
             "img/com-09.2.jpg",
             "img/com-09.3.jpg",
             "img/com-09.4.jpg"
         ],
-        "opciones":[
-            {"piso":"5 pisos", "precio": 177.90},
-            {"piso": "6 pisos", "precio":205.90},
-            {"piso":"7 pisos", "precio":225.90}
+        "opciones": [
+            { "label": "6 pisos", "precio": 180.00, "medidas": { "largo": "39.5", "ancho": "55.0", "alto": "124.0" }, "textoPromo": ["X3 unidades a S/. 501.0"] },
+            {
+                "label": "6 pisos X3 unidades",
+                "precio": 501.00,
+                "medidas": { "largo": "39.5", "ancho": "55.0", "alto": "124.0" }
+            }
+        ],
+        "colores": [
+            {"nombre": "Borde Negro / Cajón Piel", "borde": "#363230", "cajon": "#B8B2AD"},
+            {"nombre": "Borde Blanco / Cajón Blanco", "borde": "#F8F8F8", "cajon": "#F8F8F8"},
+            {"nombre": "Borde Blanco / Cajón Piel", "borde": "#F8F8F8", "cajon": "#B8B2AD"},
+            {"nombre": "Borde Gris / Cajón Gris", "borde": "#9E9B96", "cajon": "#9E9B96"}
         ]
     },
     {
-        "id": "com-10",
+        "id": "raymi",
         "nombre": "Cómoda Raymi",
-        "subcategoria": "comodas-rey",
-        "imagenes": [
+        "subtitulo": "Raymi",
+        "textoPromo": "¡Lleva 3 unidades con precio especial por mayor!",
+        "imagen": [
             "img/com-10.1.jpg",
             "img/com-10.2.jpg",
             "img/com-10.3.jpg",
@@ -135,49 +308,87 @@
             "img/com-10.9.jpg",
             "img/com-10.10.jpg"
         ],
-        "opciones":[
-            {"piso":"4 pisos", "precio": 143.90},
-            {"piso":"5 pisos", "precio": 169.90},
-            {"piso": "6 pisos", "precio": 192.90},
-            {"piso":"7 pisos", "precio": 210.90}
-        ]
-    },
-    {
-        "id": "com-11",
-        "nombre": "Cómoda Super Gigante con Tapa Reforzada",
-        "subcategoria": "comodas-rey",
-        "imagenes": [
-            "img/com-11.1.jpg",
-            "img/com-11.2.jpg",
-            "img/com-11.3.jpg",
-            "img/com-11.4.jpg",
-            "img/com-11.5.jpg",
-            "img/com-11.6.jpg",
-            "img/com-11.7.jpg",
-            "img/com-11.8.jpg",
-            "img/com-11.9.jpg",
-            "img/com-11.10.jpg"
+        "opciones": [
+            { "label": "4 pisos", "precio": 140.00, "medidas": { "largo": "39.5", "ancho": "55.0", "alto": "84.0" }, "textoPromo": ["X3 unidades a S/. 340.0"] },
+            { "label": "X3 unidades (4 Pisos)", "precio": 340.00 },
+            { "label": "5 pisos", "precio": 155.00, "medidas": { "largo": "39.5", "ancho": "55.0", "alto": "104.0" }, "textoPromo": ["X3 unidades a S/. 435.0"] },
+            { "label": "X3 unidades (5 Pisos)", "precio": 435.00 },
+            { "label": "6 pisos", "precio": 175.00, "medidas": { "largo": "39.5", "ancho": "55.0", "alto": "124.0" }, "textoPromo": ["X3 unidades a S/. 495.0"] },
+            { "label": "X3 unidades (6 Pisos)", "precio": 495.00 },
+            { "label": "7 pisos", "precio": 190.0, "medidas": { "largo": "39.5", "ancho": "55.0", "alto": "144.0" }, "textoPromo": ["X3 unidades a S/. 540.0"] },
+            { "label": "X3 unidades (7 Pisos)", "precio": 540.00 }
         ],
-        "opciones":[
-            {"piso":"4 pisos", "precio": 327.90},
-            {"piso":"5 pisos", "precio": 379.90},
-            {"piso":"6 pisos", "precio": 433.90}
+        "colores": [
+            {"nombre": "Borde Piel / Cajón Crema", "borde": "#F2E6E2", "cajon": "#F2EFE9"},
+            {"nombre": "Borde Crema / Cajón Piel", "borde": "#F2EFE9", "cajon": "#F2E6E2"},
+            {"nombre": "Borde Gris / Cajón Crema", "borde": "#A29B90", "cajon": "#F2EFE9"},
+            {"nombre": "Borde Crema / Cajón Crema", "borde": "#F2EFE9", "cajon": "#F2EFE9"},
+            {"nombre": "Borde Morado / Cajón Rosado", "borde": "#B9B2D3", "cajon": "#F1B5CC"},
+            {"nombre": "Borde Celeste / Cajón Morado", "borde": "#7EC8E3", "cajon": "#B29EC3"},
+            {"nombre": "Borde Celeste / Cajón Verde", "borde": "#4CB5D0", "cajon": "#62B056"},
+            {"nombre": "MultiColor", "borde": "#E73B42", "cajon": "#F1B31C"},
+            {"nombre": "Borde Crema / Cajón Celeste", "borde": "#F2EFE9", "cajon": "#7EC8E3"},
+            {"nombre": "Borde Crema / Cajón Marrón", "borde": "#F2EFE9", "cajon": "#7B6A5D"}
+
         ]
     },
     {
-        "id": "com-12",
+    "id": "supergigante",
+    "nombre": "CÓMODA SÚPER GIGANTE ",
+    "subtitulo": "Con Tapa Reforzada",
+    "descripcion": "Organización elegante y resistente. Diseño ratán moderno con niveles amplios y tapa reforzada para soportar peso. Ideal para dormitorio, baño o closet.",
+    "imagen": [
+      "img/com-11.1.jpg",
+      "img/com-11.2.jpg"
+    ],
+    "opciones": [
+      { 
+        "label": "6 pisos", 
+        "precio": 375.00,
+        "medidas": { "largo": "63.8", "ancho": "47.1", "alto": "159.7" },
+        "textoPromo": ["X3 unidades a S/. 1080.0"]
+      },
+      { "label": "X3 unidades (6 Pisos)", "precio": 1080.00 }
+    ],
+    "colores": [
+      {"nombre": "Cajón Blanco / Borde Rosado", "cajon": "#ffffff", "borde": "#ffb6c1"},
+      {"nombre": "Cajón Piel / Borde Marrón", "cajon": "#FCEEE2", "borde": "#8B4513"}
+    ]
+  },
+    {
+        "id": "super-ratan",
         "nombre": "Cómoda Super Gigante Ratan con Tapa Reforzada",
-        "subcategoria": "comodas-rey",
-        "imagenes": [
+        "subtitulo": "Ratan Con Tapa Reforzada",
+        "imagen": [
             "img/com-12.1.jpg",
             "img/com-12.2.jpg",
             "img/com-12.3.jpg",
             "img/com-12.4.jpg"
         ],
-        "opciones":[
-            {"piso":"4 pisos", "precio": 327.90},
-            {"piso":"5 pisos", "precio":379.90},
-            {"piso":"6 pisos", "precio": 433.90}
+        "opciones": [
+            { "label": "6 pisos", "precio": 375.00, "medidas": { "largo": "63.8", "ancho": "48.7", "alto": "159.7" }, "textoPromo": ["X3 unidades a S/. 1080.0"] },
+            { "label": "X3 unidades (6 Pisos)", "precio": 1080.00 }
+        ],
+        "colores": [
+            {"nombre": "Borde Beige Oscuro / Cajón Marrón", "borde": "#B2AB9F", "cajon": "#32302A"},
+            {"nombre": "Borde Beige Claro / Cajón Marrón Oscuro", "borde": "#D5CFCA", "cajon": "#38312E"},
+            {"nombre": "Borde Crema / Cajón Ciruela ", "borde": "#EAD5C5", "cajon": "#68535E"},
+            {"nombre": "Borde Marrón / Cajón Marrón", "borde": "#3B3532", "cajon": "#3B3532"}
+        ]
+    },
+    {
+        "id": "big-box",
+        "nombre": "Cómoda Big Box",
+        "subtitulo": "Big Box",
+        "imagen": [
+            "img/com-13.1.jpg"
+        ],
+        "opciones": [
+            { "label": "5 pisos", "precio": 245.00, "medidas": { "largo": "46.2", "ancho": "60.2", "alto": "148.8" }, "textoPromo": ["X3 unidades a S/. 684.0"] },
+            { "label": "X3 unidades (5 Pisos)", "precio": 684.00 }
+        ],
+        "colores": [
+            {"nombre": "Borde Blanco / Cajón Celeste", "borde": "#F4F0F2", "cajon": "#8EB8C4"}
         ]
     }
 ]

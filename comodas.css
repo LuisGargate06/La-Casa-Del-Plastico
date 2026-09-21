@@ -1,0 +1,217 @@
+/* Layout Principal Cómodas */
+.detalle-comoda-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.comoda-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.comoda-imagen-box img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+/* Tipografía y Textos */
+.titulo-principal {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #111;
+    margin: 10px 0;
+}
+
+.titulo-principal .texto-destacado {
+    display: block;
+    color: #111;
+}
+
+.subtitulo-modelo {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.linea-roja {
+    width: 40px;
+    height: 3px;
+    background-color: #dc2626;
+    margin-bottom: 20px;
+}
+
+.descripcion-texto {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Selector de Pisos */
+.selector-grupo {
+    margin-bottom: 25px;
+}
+
+.selector-grupo label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.custom-select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fff;
+    cursor: pointer;
+}
+
+/* Tarjetas de Medidas */
+.medidas-seccion {
+    margin-bottom: 25px;
+}
+
+.medidas-titulo-seccion {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #4b5563;
+    letter-spacing: 1px;
+}
+
+.unidad-medida {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    font-weight: normal;
+}
+
+.medidas-grid-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.medida-tarjeta {
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px 10px;
+    text-align: center;
+    background: #fff;
+}
+
+.medida-tarjeta .m-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #6b7280;
+    margin-bottom: 5px;
+}
+
+.medida-tarjeta .m-valor-box {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #111;
+}
+
+.medida-tarjeta .m-valor-box small {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: #6b7280;
+}
+
+.medida-tarjeta .m-sub {
+    display: block;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-top: 2px;
+}
+
+/* Colores */
+.colores-seccion {
+    margin-bottom: 30px;
+}
+
+.colores-titulo {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #4b5563;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.colores-opciones {
+    display: flex;
+    align-items: center;
+}
+
+.color-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 2px solid #2563eb;
+    padding: 8px 15px;
+    border-radius: 30px;
+    background: #f8fafc;
+}
+
+.circulo-color {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #ccc;
+}
+
+.color-nombre {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.color-sub {
+    display: block;
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+/* Footer de Compra */
+.comprar-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.precio-etiqueta {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #111;
+}
+
+.btn-comprar-comoda {
+    flex: 1;
+    background-color: #1e40af;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-comprar-comoda:hover {
+    background-color: #1d4ed8;
+}

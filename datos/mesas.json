@@ -5,8 +5,8 @@
         "subcategoria": "mesas",
         "imagen": "img/mesa-01.jpg",
         "opciones": [
-            {"label": "Unidad", "precio": 73.00},
-            {"label": "6 Unidades", "precio": 405.00}
+            {"label": "Unidad", "precio": 57.00},
+            {"label": "6 Unidades", "precio": 300.00}
         ]
     },
     {
@@ -15,8 +15,8 @@
         "subcategoria": "mesas",
         "imagen": "img/mesa-02.jpg",
         "opciones": [
-            {"label": "Unidad", "precio": 70.00},
-            {"label": "6 Unidades", "precio": 399.00}
+            {"label": "Unidad", "precio": 53.50},
+            {"label": "6 Unidades", "precio": 291.00}
         ]
     },
     {
@@ -25,8 +25,8 @@
         "subcategoria": "mesas",
         "imagen": "img/mesa-03.jpg",
         "opciones": [
-            {"label": "Unidad", "precio": 220.00},
-            {"label": "6 Unidades", "precio": 1236.00}
+            {"label": "Unidad", "precio": 200.00},
+            {"label": "6 Unidades", "precio": 1012.00}
         ]
     },
     {
@@ -35,8 +35,8 @@
         "subcategoria": "mesas",
         "imagen": "img/mesa-04.jpg",
         "opciones": [
-            {"label": "Unidad", "precio": 130.00},
-            {"label": "6 Unidades", "precio": 726.00}
+            {"label": "Unidad", "precio": 115.00},
+            {"label": "6 Unidades", "precio": 654.00}
         ]
     }
 ]

@@ -7,7 +7,7 @@
         ],
         "opciones": [
             {"label": "Unidad", "precio": 4.50},
-            {"label": "Decena", "precio": 27.60}
+            {"label": "Docena", "precio": 27.60}
         ]
     },
     {
@@ -18,9 +18,10 @@
         ],
         "opciones": [
             {"label": "Unidad", "precio": 5.50},
-            {"label": "Decena", "precio": 27.60}
+            {"label": "Docena", "precio": 32.40}
         ]
     },
+    
     {
         "id": "envase-03",
         "nombre": "Envase Hermético 1L con Tapa Rosca",
@@ -28,7 +29,41 @@
             "img/envase-03.jpg"
         ],
         "opciones": [
-            {"label": "Unidad", "precio": 4.00}
+            {"label": "Unidad", "precio": 4.00},
+            {"label": "Docena", "precio": 25.20}
+        ]
+    },
+    {
+        "id": "envase-03",
+        "nombre": "Envase Hermético 1L con Tapa Rosca Ancha",
+        "imagen": [
+            "img/envase-03.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 4.50},
+            {"label": "Docena", "precio": 26.40}
+        ]
+    },
+    {
+        "id": "envase-03",
+        "nombre": "Envase Hermético 0.50L con Tapa Rosca",
+        "imagen": [
+            "img/envase-03.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 3.50},
+            {"label": "Docena", "precio": 21.60}
+        ]
+    },
+    {
+        "id": "envase-03",
+        "nombre": "Envase Hermético 0.75L con Tapa Rosca",
+        "imagen": [
+            "img/envase-03.jpg"
+        ],
+        "opciones": [
+            {"label": "Unidad", "precio": 4.00},
+            {"label": "Docena", "precio": 24.00}
         ]
     }
 ]

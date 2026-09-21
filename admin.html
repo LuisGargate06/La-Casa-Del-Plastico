@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - La Casa del Plástico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --azul-oscuro: #0B132B;
+            --azul-rey: #1E40AF;
+            --rojo-acento: #DC2626;
+            --verde-wa: #25D366;
+            --bg-body: #FDFBF6;
+            --texto-oscuro: #0F172A;
+            --texto-suave: #475569;
+            --borde: #E2E8F0;
+            --transicion: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--texto-oscuro);
+            padding: 20px;
+        }
+
+        /* PANTALLA DE CONTRASEÑA */
+        #auth-screen {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        #auth-screen h2 {
+            color: var(--azul-oscuro);
+            margin-bottom: 20px;
+        }
+
+        .input-pass {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--borde);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--azul-rey);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transicion);
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* PANEL PRINCIPAL (OCULTO HASTA AUTENTICAR) */
+        #admin-panel {
+            display: none;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            color: var(--azul-oscuro);
+        }
+
+        /* PESTAÑAS DE NAVEGACIÓN */
+        .tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            background: white;
+            border: 2px solid var(--borde);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            color: var(--texto-suave);
+            transition: var(--transicion);
+        }
+
+        .tab-btn.active {
+            background: var(--azul-rey);
+            color: white;
+            border-color: var(--azul-rey);
+        }
+
+        /* CONTENEDOR DE TARJETAS (FLASH CARDS) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 2px solid var(--borde);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: var(--transicion);
+        }
+
+        .order-card.pendiente {
+            border-left: 6px solid var(--rojo-acento);
+        }
+
+        .order-card.realizado {
+            border-left: 6px solid var(--verde-wa);
+            opacity: 0.85;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--borde);
+            padding-bottom: 8px;
+        }
+
+        .card-client {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--azul-oscuro);
+        }
+
+        .card-date {
+            font-size: 0.8rem;
+            color: var(--texto-suave);
+        }
+
+        .card-details {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            color: var(--texto-suave);
+        }
+
+        .card-details p {
+            margin-bottom: 4px;
+        }
+
+        .items-list {
+            background: #F8FAFC;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--borde);
+            padding-top: 12px;
+        }
+
+        .card-total {
+            font-weight: 800;
+            color: var(--rojo-acento);
+            font-size: 1.05rem;
+        }
+
+        .actions-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-action {
+            background: #F1F5F9;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transicion);
+        }
+
+        .btn-action.toggle { color: var(--azul-rey); }
+        .btn-action.toggle:hover { background: #E0F2FE; }
+        .btn-action.delete { color: var(--rojo-acento); }
+        .btn-action.delete:hover { background: #FEE2E2; }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: var(--texto-suave);
+            background: white;
+            border-radius: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PANTALLA DE ACCESO -->
+    <div id="auth-screen">
+        <h2>Panel Administrativo</h2>
+        <p style="color: var(--texto-suave); font-size: 0.9rem; margin-bottom: 20px;">Ingresa tu contraseña para ver los pedidos.</p>
+        <input type="password" id="input-password" class="input-pass" placeholder="Contraseña">
+        <button class="btn-primary" onclick="verificarPassword()">Ingresar</button>
+    </div>
+
+    <!-- PANEL DE ADMINISTRACIÓN -->
+    <div id="admin-panel">
+        <header>
+            <h1><i class="fa-solid fa-boxes-stacked"></i> Administración de Pedidos</h1>
+            <button class="btn-primary" style="width: auto; padding: 8px 15px; font-size: 0.85rem; background: var(--rojo-acento);" onclick="cerrarSesion()">Salir</button>
+        </header>
+
+        <!-- PESTAÑAS -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="filtrarPedidos('todos', this)">Todos</button>
+            <button class="tab-btn" onclick="filtrarPedidos('pendiente', this)">Faltantes (Pendientes)</button>
+            <button class="tab-btn" onclick="filtrarPedidos('realizado', this)">Realizados</button>
+        </div>
+
+        <!-- CONTENEDOR DE TARJETAS -->
+        <div id="pedidos-grid" class="cards-grid">
+            <!-- Las tarjetas se generan dinámicamente aquí -->
+        </div>
+    </div>
+
+    <script>
+        // CAMBIA AQUÍ TU CONTRASEÑA SEGURA
+        const PASSWORD_SECRETA = "Amirl125"; 
+
+        function verificarPassword() {
+            const pass = document.getElementById('input-password').value;
+            if (pass === PASSWORD_SECRETA) {
+                document.getElementById('auth-screen').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+                cargarPedidos('todos');
+            } else {
+                alert("Contraseña incorrecta.");
+            }
+        }
+
+        function cerrarSesion() {
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('auth-screen').style.display = 'block';
+            document.getElementById('input-password').value = '';
+        }
+
+        // Simulación o lectura de pedidos locales
+        // Nota: Para que los pedidos de tu catálogo principal lleguen aquí automáticamente, 
+        // puedes asegurarte de guardarlos en el localStorage al hacer clic en enviar por WhatsApp.
+        let pedidos = JSON.parse(localStorage.getItem('admin_pedidos')) || [
+            {
+                id: 1,
+                nombres: "Juan",
+                apellidos: "Pérez",
+                dni: "12345678",
+                celular: "987654321",
+                provincia: "Lima",
+                distrito: "Comas",
+                items: [{ nombre: "Silla Rattan x1", cantidad: 4, subtotal: 120.00 }],
+                total: 120.00,
+                fecha: "2026-06-06 14:30",
+                estado: "pendiente" // pendiente o realizado
+            }
+        ];
+
+        let filtroActual = 'todos';
+
+        function cargarPedidos(filtro) {
+            filtroActual = filtro;
+            const grid = document.getElementById('pedidos-grid');
+            
+            let pedidosFiltrados = pedidos;
+            if (filtro !== 'todos') {
+                pedidosFiltrados = pedidos.filter(p => p.estado === filtro);
+            }
+
+            if (pedidosFiltrados.length === 0) {
+                grid.innerHTML = `<div class="empty-state">No hay pedidos en esta sección.</div>`;
+                return;
+            }
+
+            grid.innerHTML = pedidosFiltrados.map(p => `
+                <div class="order-card ${p.estado}">
+                    <div>
+                        <div class="card-header">
+                            <div>
+                                <div class="card-client">${p.nombres} ${p.apellidos}</div>
+                                <div class="card-date"><i class="fa-regular fa-clock"></i> ${p.fecha}</div>
+                            </div>
+                            <span style="font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 4px; background: ${p.estado === 'pendiente' ? '#FEE2E2; color: #DC2626;' : '#DCFCE7; color: #16A34A;'}">
+                                ${p.estado.toUpperCase()}
+                            </span>
+                        </div>
+                        <div class="card-details">
+                            <p><strong>DNI:</strong> ${p.dni}</p>
+                            <p><strong>Celular:</strong> ${p.celular}</p>
+                            <p><strong>Ubicación:</strong> ${p.provincia} - ${p.distrito}</p>
+                        </div>
+                        <div class="items-list">
+                            <strong>Productos:</strong><br>
+                            ${p.items.map(i => `▪ ${i.nombre} (Cant: ${i.cantidad}) - S/ ${i.subtotal.toFixed(2)}`).join('<br>')}
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-total">S/ ${p.total.toFixed(2)}</div>
+                        <div class="actions-btns">
+                            <button class="btn-action toggle" title="Cambiar Estado" onclick="cambiarEstado(${p.id})">
+                                <i class="fa-solid fa-arrow-rotate-right"></i>
+                            </button>
+                            <button class="btn-action delete" title="Eliminar" onclick="eliminarPedido(${p.id})">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filtrarPedidos(filtro, btnElement) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+            cargarPedidos(filtro);
+        }
+
+        function cambiarEstado(id) {
+            const pedido = pedidos.find(p => p.id === id);
+            if (pedido) {
+                pedido.estado = pedido.estado === 'pendiente' ? 'realizado' : 'pendiente';
+                localStorage.setItem('admin_pedidos', JSON.stringify(pedidos));
+                cargarPedidos(filtroActual);
+            }
+        }
+
+        function eliminarPedido(id) {
+            if (confirm("¿Estás seguro de eliminar este registro?")) {
+                pedidos = pedidos.filter(p => p.id !== id);
+                localStorage.setItem('admin_pedidos', JSON.stringify(pedidos));
+                cargarPedidos(filtroActual);
+            }
+        }
+    </script>
+</body>
+</html>

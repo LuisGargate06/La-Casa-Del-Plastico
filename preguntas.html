@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Casa del Plástico</title>
+    <title>Preguntas Frecuentes - La Casa del Plástico</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -18,7 +18,7 @@
             
             --bg-body: #FDFBF6;
             --texto-oscuro: #0F172A;
-            --texto-suave: #64748B;
+            --texto-suave: #475569;
             --borde: #E2E8F0;
 
             --transicion: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -234,221 +234,94 @@
             font-size: 0.9rem;
         }
 
-        /* BANNER ÚNICO (IMAGEN COMPLETA) */
-        .hero-banner-section {
-            padding: 40px 5%;
-            background: #FDFBF6;
-            display: flex;
-            justify-content: center;
-        }
-
-        .banner-container {
-            max-width: 1200px;
-            width: 100%;
-            position: relative;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-            border: 1px solid #E2E8F0;
-            background: #FFFFFF;
-        }
-
-        .banner-track {
-            display: flex;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            width: 100%;
-        }
-
-        .banner-slide {
-            min-width: 100%;
-            position: relative;
-            box-sizing: border-box;
-        }
-
-        .banner-img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .hotspot-ver-modelos {
-            position: absolute;
-            bottom: 4.5%;  
-            left: 5.2%;    
-            width: 22%;    
-            height: 11%;   
-            cursor: pointer;
-            border-radius: 20px;
-            z-index: 5;
-        }
-
-        .hotspot-ver-modelos:hover {
-            background: rgba(30, 64, 175, 0.15);
-            box-shadow: 0 0 15px rgba(30, 64, 175, 0.4);
-        }
-
-        .hotspot-silla {
-            position: absolute;
-            bottom: 4.5%;  
-            left: 7.2%;    
-            width: 17%;    
-            height: 11%;   
-            cursor: pointer;
-            border-radius: 20px;
-            z-index: 5;
-        }
-
-        .hotspot-silla:hover {
-            background: rgba(30, 64, 175, 0.2);
-            box-shadow: 0 0 15px rgba(30, 64, 175, 0.4);
-        }
-
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.85);
-            color: var(--azul-oscuro);
-            border: 1px solid var(--borde);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            z-index: 10;
-            transition: var(--transicion);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .carousel-btn:hover {
-            background-color: #ffffff;
-            color: var(--azul-rey);
-            transform: translateY(-50%) scale(1.08);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        }
-
-        .carousel-btn.prev { left: 20px; }
-        .carousel-btn.next { right: 20px; }
-
-        /* SECCIÓN DE BENEFICIOS FLOTANTES */
-        .benefits-section {
-            max-width: 1200px;
-            margin: -25px auto 40px auto;
+        /* CONTENIDO DE PREGUNTAS FRECUENTES */
+        .faq-container {
+            max-width: 1000px;
+            margin: 50px auto;
             padding: 0 5%;
-            position: relative;
-            z-index: 10;
         }
 
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .benefit-card:nth-child(1) { grid-column: 1; }
-        .benefit-card:nth-child(2) { grid-column: 2; }
-        .benefit-card:nth-child(3) { grid-column: 3; }
-        .benefit-card:nth-child(4) { grid-column: 2; }
-
-        .benefit-card {
-            background: white;
-            padding: 22px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            border: 1px solid var(--borde);
-            transition: var(--transicion);
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.09);
-        }
-
-        .benefit-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            flex-shrink: 0;
-        }
-
-        .benefit-icon.blue { background-color: #EFF6FF; color: var(--azul-rey); }
-        .benefit-icon.red { background-color: #FEF2F2; color: var(--rojo-acento); }
-        .benefit-icon.green { background-color: #F0FDF4; color: var(--verde-wa); }
-        .benefit-icon.dark { background-color: #F8FAFC; color: #000; border: 1px solid var(--borde); }
-
-        .benefit-info h4 {
-            font-size: 0.95rem;
-            color: var(--texto-oscuro);
-            margin-bottom: 3px;
-            font-weight: 700;
-        }
-
-        .benefit-info p {
-            font-size: 0.8rem;
-            color: var(--texto-suave);
-            margin: 0;
-            line-height: 1.4;
-        }
-
-        /* SECCIÓN DE TIKTOK */
-        .tiktok-section {
-            padding: 50px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
+        .page-header-title {
             text-align: center;
+            margin-bottom: 50px;
         }
 
-        .section-title {
-            font-size: 2.2rem;
+        .page-header-title h1 {
+            font-size: 2.5rem;
             color: var(--azul-oscuro);
             font-weight: 800;
             margin-bottom: 10px;
         }
 
-        .section-subtitle {
+        .page-header-title p {
             color: var(--texto-suave);
-            margin-bottom: 40px;
+            font-size: 1.05rem;
         }
 
-        .tiktok-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 900px;
-            margin: 30px auto;
+        .faq-row {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 45px;
         }
 
-        .tiktok-card {
-            width: 100%;
-            height: 380px;
-            background: #000;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            overflow: hidden;
+        .faq-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .faq-avatar-box {
+            flex: 0 0 320px;
+            text-align: center;
+        }
+
+        /* TAMAÑO ESTÁNDAR FIJO PARA TODAS LAS IMÁGENES DE AVATAR */
+        .faq-avatar-img {
+            width: 300px;
+            height: 300px;
+            object-fit: contain;
+            filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.1));
+            transition: var(--transicion);
+        }
+
+        .faq-avatar-img:hover {
+            transform: scale(1.03);
+        }
+
+        .faq-bubble {
+            flex: 1;
+            background: white;
+            border: 2px solid #E0F2FE;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(30, 64, 175, 0.05);
             position: relative;
+            transition: var(--transicion);
         }
 
-        .tiktok-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            background-color: var(--azul-oscuro);
+        .faq-bubble:hover {
+            box-shadow: 0 15px 30px rgba(30, 64, 175, 0.1);
+            border-color: #BAE6FD;
         }
 
-        .tiktok-card:hover {
-            transform: translateY(-4px);
+        .faq-question {
+            font-size: 1.4rem;
+            color: var(--azul-rey);
+            font-weight: 800;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .faq-highlight {
+            font-size: 1.15rem;
+            color: var(--rojo-acento);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .faq-answer {
+            color: var(--texto-suave);
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         /* FOOTER */
@@ -456,7 +329,7 @@
             background-color: var(--azul-oscuro);
             color: white;
             padding: 50px 5% 20px 5%;
-            margin-top: 50px;
+            margin-top: 80px;
         }
 
         .footer-content {
@@ -488,10 +361,18 @@
             color: #64748B;
         }
 
-        @media (max-width: 968px) {
-            .benefits-grid { grid-template-columns: 1fr; }
-            .benefit-card:nth-child(n) { grid-column: auto; }
-            .tiktok-grid { grid-template-columns: 1fr; }
+        @media (max-width: 850px) {
+            .faq-row, .faq-row.reverse {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .faq-avatar-box {
+                flex: none;
+            }
+            .faq-avatar-img {
+                width: 200px;  /* Tamaño que tendrán en celulares */
+                height: 200px; /* Tamaño que tendrán en celulares */
+            }
             nav ul { display: none; }
         }
     </style>
@@ -507,11 +388,11 @@
 
         <nav>
             <ul>
-                <li><a href="index.html" style="color: #93c5fd;">Inicio</a></li>
+                <li><a href="index.html">Inicio</a></li>
                 <li><a href="productos.html">Catálogo</a></li>
                 <li><a href="comodas.html">Cómodas</a></li>
                 <li><a href="sillas.html">Sillas</a></li>
-                <li><a href="preguntas.html">Preguntas Frecuentes</a></li>
+                <li><a href="preguntas.html" style="color: #93c5fd;">Preguntas Frecuentes</a></li>
             </ul>
         </nav>
 
@@ -567,88 +448,70 @@
         </div>
     </div>
 
-    <!-- BANNER CARRUSEL -->
-    <section class="hero-banner-section">
-        <div class="banner-container">
-            <div class="banner-track">
-                <div class="banner-slide">
-                    <img src="principal/prin1.jpg" alt="Cómodas Kusi Ratan de 6 Pisos" class="banner-img">
-                    <a href="productos.html?producto=kusi-ratan&variante=6" class="hotspot-ver-modelos" title="Ver modelos de Kusi Ratan"></a>
-                </div>
-                <div class="banner-slide">
-                    <img src="principal/prin2.jpg" alt="Cómoda Big Box de 5 Pisos" class="banner-img">
-                    <a href="productos.html?producto=big-box&variante=5" class="hotspot-ver-modelos" title="Ver modelos de Big Box"></a>
-                </div>
-                <div class="banner-slide">
-                    <img src="principal/prin3.jpg" alt="Silla Top Elegant" class="banner-img">
-                    <a href="productos.html?producto=silla-elegant&variante=Unidad" class="hotspot-silla" title="Ver Sillas Top Elegant"></a>
-                </div>
-                <div class="banner-slide">
-                    <img src="principal/prin4.jpg" alt="Cómoda Frozen de 4 Pisos" class="banner-img">
-                    <a href="productos.html?producto=frozen&variante=Única" class="hotspot-ver-modelos" title="Ver modelos"></a>
-                </div>
-            </div>
-            <button class="carousel-btn prev" onclick="cambiarSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="carousel-btn next" onclick="cambiarSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    <!-- SECCIÓN DE PREGUNTAS FRECUENTES -->
+    <main class="faq-container">
+        <div class="page-header-title">
+            <h1>Preguntas Frecuentes</h1>
+            <p>Resuelve tus dudas de manera rápida y directa con nuestro asistente virtual.</p>
         </div>
-    </section>
 
-    <!-- SECCIÓN DE BENEFICIOS FLOTANTES -->
-    <section class="benefits-section">
-        <div class="benefits-grid">
-            <div class="benefit-card">
-                <div class="benefit-icon blue"><i class="fa-solid fa-truck-fast"></i></div>
-                <div class="benefit-info">
-                    <h4>Envíos Seguros</h4>
-                    <p>Llevamos tus productos a todo el país.</p>
-                </div>
+        <!-- Pregunta 1 -->
+        <div class="faq-row">
+            <div class="faq-avatar-box">
+                <img src="preguntas/pre1.png" alt="Avatar La Casa del Plástico" class="faq-avatar-img">
             </div>
-            <div class="benefit-card">
-                <div class="benefit-icon red"><i class="fa-solid fa-shield-halved"></i></div>
-                <div class="benefit-info">
-                    <h4>Marcas Líderes</h4>
-                    <p>Trabajamos con Rey y Magicplast.</p>
-                </div>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon green"><i class="fa-brands fa-whatsapp"></i></div>
-                <div class="benefit-info">
-                    <h4>Atención Directa</h4>
-                    <p>Cotiza y compra al instante por WhatsApp.</p>
-                </div>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon dark"><i class="fa-brands fa-tiktok"></i></div>
-                <div class="benefit-info">
-                    <h4>+43.4K Seguidores</h4>
-                    <p>Gracias por su confianza en nosotros.</p>
+            <div class="faq-bubble">
+                <div class="faq-question">¿Tienen tienda física?</div>
+                <div class="faq-highlight">¡Por supuesto que sí!</div>
+                <div class="faq-answer">
+                    Tenemos una tienda en Comas, Lima ubicada en la Av. Rosa de América, atendiendo de Lunes a Sábado entre las 9 am hasta las 7 pm. ¡Los esperamos!
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- SECCIÓN DE TIKTOK -->
-    <section class="tiktok-section">
-        <h2 class="section-title">Nuestros Videos en TikTok</h2>
-        <p class="section-subtitle">¡Mira nuestros videos más populares y conoce nuestros productos!</p>
-        <div class="tiktok-grid">
-            <div class="tiktok-card">
-                <video class="tiktok-video" controls poster="images/miniatura1.jpg">
-                    <source src="videos/video1.mp4" type="video/mp4">
-                </video>
+        <!-- Pregunta 2 (Invertida) -->
+        <div class="faq-row reverse">
+            <div class="faq-avatar-box">
+                <img src="preguntas/pre2.png" alt="Avatar La Casa del Plástico" class="faq-avatar-img">
             </div>
-            <div class="tiktok-card">
-                <video class="tiktok-video" controls poster="images/miniatura2.jpg">
-                    <source src="videos/video2.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="tiktok-card">
-                <video class="tiktok-video" controls poster="images/miniatura3.jpg">
-                    <source src="videos/video3.mp4" type="video/mp4">
-                </video>
+            <div class="faq-bubble">
+                <div class="faq-question">¿Cómo realizo un pedido?</div>
+                <div class="faq-highlight">¡Es muy fácil y rápido!</div>
+                <div class="faq-answer">
+                    Puedes navegar por nuestro catálogo, agregar los productos que desees al carrito de compras y hacer clic en "Enviar Pedido por WhatsApp" para coordinar directamente con nosotros.
+                </div>
             </div>
         </div>
-    </section>
+
+        <!-- Pregunta 3 -->
+        <div class="faq-row">
+            <div class="faq-avatar-box">
+                <img src="preguntas/pre3.png" alt="Avatar La Casa del Plástico" class="faq-avatar-img">
+            </div>
+            <div class="faq-bubble">
+                <div class="faq-question">¿Realizan envíos a provincias?</div>
+                <div class="faq-highlight">¡Llegamos a todo el Perú!</div>
+                <div class="faq-answer">
+                    Sí, realizamos envíos seguros a nivel nacional. Al enviar tu pedido mediante WhatsApp, indícanos tu provincia y distrito para coordinar la agencia de transporte.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 4 (Invertida) -->
+        <div class="faq-row reverse">
+            <div class="faq-avatar-box">
+                <img src="avatar-faq.png" alt="Avatar La Casa del Plástico" class="faq-avatar-img">
+            </div>
+            <div class="faq-bubble">
+                <div class="faq-question">¿Qué marcas de productos ofrecen?</div>
+                <div class="faq-highlight">¡Trabajamos con lo mejor!</div>
+                <div class="faq-answer">
+                    Ofrecemos productos de la más alta calidad y durabilidad, destacando artículos plásticos de las marcas líderes **Rey** y **Magicplast**.
+                </div>
+            </div>
+        </div>
+
+    </main>
 
     <footer id="contacto">
         <div class="footer-content">
@@ -826,6 +689,28 @@
                 return;
             }
 
+            // === CÓDIGO AÑADIDO PARA EL PANEL DE ADMINISTRACIÓN ===
+            const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
+            
+            let nuevoPedidoAdmin = {
+                id: Date.now(),
+                nombres: nombres,
+                apellidos: apellidos,
+                dni: dni,
+                celular: celular,
+                provincia: provincia,
+                distrito: distrito,
+                items: carrito.map(item => ({ nombre: item.nombre, cantidad: item.cantidad, subtotal: calcularPrecioTotalItem(item) })),
+                total: totalPrecio,
+                fecha: new Date().toLocaleString(),
+                estado: "pendiente"
+            };
+
+            let listaAdmin = JSON.parse(localStorage.getItem('admin_pedidos')) || [];
+            listaAdmin.unshift(nuevoPedidoAdmin); // Lo agrega al inicio de la lista
+            localStorage.setItem('admin_pedidos', JSON.stringify(listaAdmin));
+            // ======================================================
+
             let mensaje = `*¡Nuevo Pedido - La Casa del Plástico!*%0A%0A`;
             mensaje += `*DATOS DEL CLIENTE:*%0A`;
             mensaje += `- Nombre: ${nombres} ${apellidos}%0A`;
@@ -840,7 +725,6 @@
                 mensaje += `▪ ${item.nombre} | Cant: ${item.cantidad} | S/ ${subtotalItem.toFixed(2)}%0A`;
             });
             
-            const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
             mensaje += `%0A*TOTAL A PAGAR: S/ ${totalPrecio.toFixed(2)}*`;
 
             window.open(`https://wa.me/51994299351?text=${mensaje}`, '_blank');
@@ -849,36 +733,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             actualizarCarritoUI();
         });
-
-        // --- SCRIPTS DE TIKTOK Y CARRUSEL ORIGINALES ---
-        document.querySelectorAll('.tiktok-card').forEach(card => {
-            const video = card.querySelector('.tiktok-video');
-            card.addEventListener('mouseenter', () => {
-                video.play().catch(() => {});
-            });
-            card.addEventListener('mouseleave', () => {
-                video.pause();
-                video.currentTime = 0;
-            });
-        });
-
-        let slideActual = 0;
-        function mostrarSlide(n) {
-            const slides = document.querySelectorAll('.banner-slide');
-            const track = document.querySelector('.banner-track');
-            if (slides.length === 0 || !track) return;
-            if (n >= slides.length) slideActual = 0;
-            if (n < 0) slideActual = slides.length - 1;
-            track.style.transform = `translateX(-${slideActual * 100}%)`;
-        }
-        function cambiarSlide(direccion) {
-            slideActual += direccion;
-            mostrarSlide(slideActual);
-        }
-        setInterval(() => {
-            slideActual++;
-            mostrarSlide(slideActual);
-        }, 6000);
     </script>
 </body>
 </html>

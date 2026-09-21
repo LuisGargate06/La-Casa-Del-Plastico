@@ -2,19 +2,82 @@
     {
         "id": "jarra-01",
         "nombre": "Jarra Reyware Práctica 1.5L c/Tapa",
-        "precio": 5.00,
+        "opciones": [
+            {"label": "Unidad", "precio": 5.00},
+            {"label": "Docena", "precio": 42.00}
+        ],
         "imagen": "img/jarra-01.jpg"
     },
     {
         "id": "jarra-02",
         "nombre": "Jarra Bonita 4L c/Tapa",
-        "precio": 10.00,
-        "imagen": "img/jarra-02.jpg"
+        "imagen": "img/jarra-02.jpg",
+        "opciones": [
+            {"label": "Unidad", "precio": 10.00},
+            {"label": "Docena", "precio": 84.00}
+        ]
     },
     {
         "id": "jarra-03",
         "nombre": "Jarra Cristalux 2.5L",
-        "precio": 7.00,
-        "imagen": "img/jarra-03.jpg"
+        "imagen": "img/jarra-03.jpg",
+        "opciones": [
+            {"label": "Unidad", "precio": 7.00},
+            {"label": "Docena", "precio": 55.20}
+        ]
+    },
+    {
+        "id": "jarra-03",
+        "nombre": "Jarra Bonita 2.5L",
+        "imagen": "img/jarra-03.jpg",
+        "opciones": [
+            {"label": "Unidad", "precio": 7.00},
+            {"label": "Docena", "precio": 60.00}
+        ]
+    },
+    {
+        "id": "jarra-03",
+        "nombre": "Jarra Reyware 3.0L",
+        "imagen": "img/jarra-03.jpg",
+        "opciones": [
+            {"label": "Unidad", "precio": 8.00},
+            {"label": "Docena", "precio": 66.00}
+        ]
+    },
+    {
+        "id": "jarra-03",
+        "nombre": "Jarra Reyware 1.0L",
+        "imagen": "img/jarra-03.jpg",
+        "opciones": [
+            {"label": "Unidad", "precio": 4.50},
+            {"label": "Docena", "precio": 30.00}
+        ]
+    },
+    {
+        "id": "jarra-03",
+        "nombre": "Jarra Reyware 0.5L",
+        "imagen": "img/jarra-03.jpg",
+        "opciones": [
+            {"label": "Unidad", "precio": 3.50},
+            {"label": "Docena", "precio": 21.60}
+        ]
+    },
+    {
+        "id": "jarra-03",
+        "nombre": "Jarra Cristalux 4.0L",
+        "imagen": "img/jarra-03.jpg",
+        "opciones": [
+            {"label": "Unidad", "precio": 11.00},
+            {"label": "Docena", "precio": 96.00}
+        ]
+    },
+    {
+        "id": "jarra-03",
+        "nombre": "Jarra Reyware Gigante 4.0L",
+        "imagen": "img/jarra-03.jpg",
+        "opciones": [
+            {"label": "Unidad", "precio": 10.00},
+            {"label": "Docena", "precio": 84.00}
+        ]
     }
 ]

@@ -1,87 +1,138 @@
 [
   {
-    "id": "sil-01",
+    "id": "silla-barcelona",
     "nombre": "Silla Comercial Barcelona",
     "subcategoria": "sillas",
-    "imagen": "img/silla-01.jpg",
+    "imagen": ["img/silla-01.jpg"],
+    "textosPromo": [
+      "¡X12 unidades a S/.360.00!",
+      "¡X30 unidades a S/.864.00!"
+    ],
     "opciones": [
-      {"label": "Unidad", "precio": 34.00},
-      {"label": "Docena", "precio": 372.00},
-      {"label": "Paquete de 30", "precio": 915.00}
+        { "label": "Unidad", "precio": 32.00, "medidas": { "largo": "46.2", "ancho": "60.2", "alto": "120.0" } },
+        { "label": "Docena", "precio": 360.00, "medidas": { "largo": "46.2", "ancho": "60.2", "alto": "120.0" } },
+        { "label": "Paquete de 30", "precio": 864.00, "medidas": { "largo": "46.2", "ancho": "60.2", "alto": "120.0" } }
     ]
-  },
+},
   {
-    "id": "sil-02",
+    "id": "silla-fiesta",
     "nombre": "Silla Fiesta",
+    "subtitulo": "Sin Brazo",
     "subcategoria": "sillas",
-    "imagen": "img/silla-02.jpg",
+    "imagen": ["img/silla-02.jpg"],
+    "textosPromo": [
+      "¡X12 unidades a S/.384.00!",
+      "¡X25 unidades a S/.775.00!"
+    ],
     "opciones": [
-      {"label": "Unidad", "precio": 36.00},
-      {"label": "Docena", "precio": 402.00},
-      {"label": "Paquete de 25", "precio": 825.00}
+      {"label": "Unidad", "precio": 34.00, "medidas": { "largo": "51.3", "ancho": "46.8", "alto": "89.2" }},
+      {"label": "Docena", "precio": 384.00, "medidas": { "largo": "51.3", "ancho": "46.8", "alto": "89.2" }},
+      {"label": "Paquete de 25", "precio": 775.00, "medidas": { "largo": "51.3", "ancho": "46.8", "alto": "89.2" }}
     ]
   },
   {
-    "id": "sil-03",
+    "id": "silla-tavarua",
     "nombre": "Silla Tavarúa Modelo Ratán",
     "subcategoria": "sillas",
-    "imagen": "img/silla-03.jpg",
+    "imagen": ["img/silla-03.jpg"],
+    "textosPromo": [
+      "¡X12 unidades a S/.660.00!",
+      "¡X18 unidades a S/.954.00!"
+    ],
     "opciones": [
-      {"label": "Unidad", "precio": 64.00},
-      {"label": "Docena", "precio": 708.00}
+      {"label": "Unidad", "precio": 60.00, "medidas": { "largo": "55.5", "ancho": "51.5", "alto": "86.2" }},
+      {"label": "Docena", "precio": 660.00, "medidas": { "largo": "55.5", "ancho": "51.5", "alto": "86.2" }},
+      {"label": "Paquete de 18", "precio": 954.00, "medidas": { "largo": "55.5", "ancho": "51.5", "alto": "86.2" }}
     ]
   },
   {
-    "id": "sil-04",
-    "nombre": "Silla Moderna Caoba",
-    "subcategoria": "sillas",
-    "imagen": "img/silla-04.jpg",
-    "opciones": [
-      {"label": "Unidad", "precio": 28.00},
-      {"label": "Docena", "precio": 336.00}
-    ]
-  },
-  {
-    "id": "sil-05",
+    "id": "silla-forte",
     "nombre": "Silla Forte Olimpia",
     "subcategoria": "sillas",
-    "imagen": "img/silla-05.jpg",
+    "imagen": ["img/silla-05.jpg"],
+    "textosPromo": [
+      "¡X12 unidades a S/.440.00!",
+      "¡X25 unidades a S/.900.00!"
+    ],
     "opciones": [
-      {"label": "Unidad", "precio": 42.00},
-      {"label": "Docena", "precio": 474.00},
-      {"label": "Paquete de 25", "precio": 962.50}
+      {"label": "Unidad", "precio": 40.00, "medidas": { "largo": "54.5", "ancho": "47.0", "alto": "88.9" }},
+      {"label": "Docena", "precio": 444.00, "medidas": { "largo": "54.5", "ancho": "47.0", "alto": "88.9" }},
+      {"label": "Paquete de 25", "precio": 900.00, "medidas": { "largo": "54.5", "ancho": "47.0", "alto": "88.9" }}
     ]
   },
   {
-    "id": "sil-06",
+    "id": "silla-clasica",
     "nombre": "Silla Clásica París",
     "subcategoria": "sillas",
-    "imagen": "img/silla-06.jpg",
+    "imagen": ["img/silla-06.jpg"],
+    "textosPromo": [
+      "¡X12 unidades a S/.480.00!",
+      "¡X25 unidades a S/.950.00!"
+    ],
     "opciones": [
-      {"label": "Unidad", "precio": 45.00},
-      {"label": "Docena", "precio": 492.00},
-      {"label": "Paquete de 25", "precio": 1012.50}
+      {"label": "Unidad", "precio": 42.00, "medidas": { "largo": "61.3", "ancho": "58.4", "alto": "81.3" }},
+      {"label": "Docena", "precio": 480.00, "medidas": { "largo": "61.3", "ancho": "58.4", "alto": "81.3" }},
+      {"label": "Paquete de 25", "precio": 950.00, "medidas": { "largo": "61.3", "ancho": "58.4", "alto": "81.3" }}
     ]
   },
   {
-    "id": "sil-07",
+    "id": "silla-tahuari",
     "nombre": "Silla Modelo Tahuari",
     "subcategoria": "sillas",
-    "imagen": "img/silla-07.jpg",
+    "imagen": ["img/silla-07.jpg"],
+    "textosPromo": [
+      "¡X12 unidades a S/.492.00!",
+      "¡X25 unidades a S/.1012.50!"
+    ],
     "opciones": [
-      {"label": "Unidad", "precio": 50.00},
-      {"label": "Docena", "precio": 546.00}
+      {"label": "Unidad", "precio": 45.00, "medidas": { "largo": "55.2", "ancho": "53.5", "alto": "83.8" }},
+      {"label": "Docena", "precio": 492.00, "medidas": { "largo": "55.2", "ancho": "53.5", "alto": "83.8" }},
+      {"label": "Paquete de 25", "precio": 1012.50, "medidas": { "largo": "55.2", "ancho": "53.5", "alto": "83.8" }}
     ]
   },
   {
-    "id": "sil-08",
+    "id": "silla-elegant",
     "nombre": "Silla Top Elegant",
     "subcategoria": "sillas",
-    "imagen": "img/silla-08.jpg",
+    "imagen": ["img/silla-08.jpg"],
+    "textosPromo": [
+      "¡X12 unidades a S/.360.00!",
+      "¡X24 unidades a S/.686.00!"
+    ],
     "opciones": [
-      {"label": "Unidad", "precio": 34.00},
-      {"label": "Docena", "precio": 372.00},
-      {"label": "24 Unidades", "precio": 732.00}
+      {"label": "Unidad", "precio": 32.00, "medidas": { "largo": "52.0", "ancho": "46.7", "alto": "89.0" }},
+      {"label": "Docena", "precio": 360.00, "medidas": { "largo": "52.0", "ancho": "46.7", "alto": "89.0" }},
+      {"label": "Paquete de 24", "precio": 686.40, "medidas": { "largo": "52.0", "ancho": "46.7", "alto": "89.0" }}
+    ]
+  },
+  {
+    "id": "silla-lombok",
+    "nombre": "Silla Lombok",
+    "subcategoria": "sillas",
+    "imagen": ["img/silla-08.jpg"],
+    "textosPromo": [
+      "¡X12 unidades a S/.492.00!",
+      "¡X20 unidades a S/.784.00!"
+    ],
+    "opciones": [
+      {"label": "Unidad", "precio": 43.00, "medidas": { "largo": "52.0", "ancho": "46.7", "alto": "89.0" }},
+      {"label": "Docena", "precio": 492.00, "medidas": { "largo": "52.0", "ancho": "46.7", "alto": "89.0" }},
+      {"label": "Paquete de 20", "precio": 784.00, "medidas": { "largo": "52.0", "ancho": "46.7", "alto": "89.0" }}
+    ]
+  },
+  {
+    "id": "silla-aruba",
+    "nombre": "Sillon Aruba",
+    "subcategoria": "sillas",
+    "imagen": ["img/silla-08.jpg"],
+    "textosPromo": [
+      "¡X12 unidades a S/.600.00!",
+      "¡X24 unidades a S/.1176.00!"
+    ],
+    "opciones": [
+      {"label": "Unidad", "precio": 55.00, "medidas": { "largo": "52.0", "ancho": "46.7", "alto": "89.0" }},
+      {"label": "Docena", "precio": 600.00, "medidas": { "largo": "52.0", "ancho": "46.7", "alto": "89.0" }},
+      {"label": "Paquete de 24", "precio": 1176.00, "medidas": { "largo": "52.0", "ancho": "46.7", "alto": "89.0" }}
     ]
   }
 ]
