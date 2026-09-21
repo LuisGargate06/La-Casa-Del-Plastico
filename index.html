@@ -488,6 +488,43 @@
             color: #64748B;
         }
 
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--azul-oscuro);
+            margin-bottom: 4px;
+        }
+
+        .form-group input {
+            padding: 10px 12px;
+            border: 1px solid var(--borde);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: var(--transicion);
+        }
+
+        .form-group input:focus {
+            border-color: var(--azul-rey);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
         @media (max-width: 968px) {
             .benefits-grid { grid-template-columns: 1fr; }
             .benefit-card:nth-child(n) { grid-column: auto; }
@@ -548,13 +585,36 @@
                 <span style="color: var(--rojo-acento);">S/ <span id="modal-total">0.00</span></span>
             </div>
 
-            <h4 style="font-size: 0.95rem; margin-bottom: 10px; color: var(--azul-oscuro);">Datos del Cliente</h4>
-            <input type="text" id="input-nombres" placeholder="Nombres" class="form-control-input">
-            <input type="text" id="input-apellidos" placeholder="Apellidos" class="form-control-input">
-            <input type="text" id="input-dni" placeholder="DNI (8 dígitos)" class="form-control-input" maxlength="8">
-            <input type="text" id="input-celular" placeholder="Celular" class="form-control-input">
-            <input type="text" id="input-provincia" placeholder="Provincia (Ej. Lima)" class="form-control-input">
-            <input type="text" id="input-distrito" placeholder="Distrito (Ej. Comas)" class="form-control-input">
+            <div style="font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; color: var(--azul-oscuro);">
+                <i class="fa-solid fa-user"></i> Datos del Cliente
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Nombres</label>
+                    <input type="text" id="input-nombres" placeholder="Tus nombres">
+                </div>
+                <div class="form-group">
+                    <label>Apellidos</label>
+                    <input type="text" id="input-apellidos" placeholder="Tus apellidos">
+                </div>
+                <div class="form-group">
+                    <label>DNI</label>
+                    <input type="text" id="input-dni" placeholder="8 dígitos" maxlength="8">
+                </div>
+                <div class="form-group">
+                    <label>Celular</label>
+                    <input type="text" id="input-celular" placeholder="999999999" maxlength="9">
+                </div>
+                <div class="form-group">
+                    <label>Provincia</label>
+                    <input type="text" id="input-provincia" placeholder="Ej. Lima">
+                </div>
+                <div class="form-group">
+                    <label>Distrito</label>
+                    <input type="text" id="input-distrito" placeholder="Ej. Comas">
+                </div>
+            </div>
 
             <div style="display: flex; gap: 10px; margin-top: 15px;">
                 <button onclick="enviarPedidoWhatsApp()" style="flex: 2; background: var(--verde-wa); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;">
