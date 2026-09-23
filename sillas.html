@@ -813,12 +813,12 @@ function enviarPedidoWhatsApp() {
         return;
     }
 
-    const nombres = document.getElementById('input-nombres').value.trim();
-    const apellidos = document.getElementById('input-apellidos').value.trim();
-    const dni = document.getElementById('input-dni').value.trim();
-    const celular = document.getElementById('input-celular').value.trim();
-    const provincia = document.getElementById('input-provincia').value.trim();
-    const distrito = document.getElementById('input-distrito').value.trim();
+    const nombres = document.getElementById('input-nombres')?.value.trim() || '';
+    const apellidos = document.getElementById('input-apellidos')?.value.trim() || '';
+    const dni = document.getElementById('input-dni')?.value.trim() || '';
+    const celular = document.getElementById('input-celular')?.value.trim() || '';
+    const provincia = document.getElementById('input-provincia')?.value.trim() || '';
+    const distrito = document.getElementById('input-distrito')?.value.trim() || '';
 
     if (!nombres || !apellidos || !dni || !celular || !provincia || !distrito) {
         alert("Por favor, completa todos tus datos personales y de ubicación para el pedido.");
@@ -826,7 +826,8 @@ function enviarPedidoWhatsApp() {
     }
 
     const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
-    
+
+    // 1. CREAR EL OBJETO DEL PEDIDO PARA EL ADMIN
     let nuevoPedidoAdmin = {
         id: Date.now(),
         nombres: nombres,
@@ -845,11 +846,13 @@ function enviarPedidoWhatsApp() {
         estado: "pendiente"
     };
 
-    let listaAdmin = JSON.parse(sessionStorage.getItem('admin_pedidos')) || [];
+    // 2. GUARDAR EN localStorage PARA QUE EL ADMIN.HTML LO PUEDA LEER SIEMPRE
+    let listaAdmin = JSON.parse(localStorage.getItem('admin_pedidos')) || [];
     listaAdmin.unshift(nuevoPedidoAdmin);
-    sessionStorage.setItem('admin_pedidos', JSON.stringify(listaAdmin));
+    localStorage.setItem('admin_pedidos', JSON.stringify(listaAdmin));
 
-    let mensaje = `*¡Nuevo Pedido - La Casa del Plástico (Sillas)!*%0A%0A`;
+    // 3. ARMAR EL MENSAJE DE WHATSAPP
+    let mensaje = `*¡Nuevo Pedido - La Casa del Plástico!*%0A%0A`;
     mensaje += `*DATOS DEL CLIENTE:*%0A`;
     mensaje += `- Nombre: ${nombres} ${apellidos}%0A`;
     mensaje += `- DNI: ${dni}%0A`;
@@ -859,12 +862,13 @@ function enviarPedidoWhatsApp() {
     
     mensaje += `*DETALLE DEL PEDIDO:*%0A`;
     carrito.forEach(item => {
-        let totalItem = calcularPrecioTotalItem(item);
-        mensaje += `▪ Silla: ${item.nombre} | Cant: ${item.cantidad} | S/ ${totalItem.toFixed(2)}%0A`;
+        const subtotalItem = calcularPrecioTotalItem(item);
+        mensaje += `▪ ${item.nombre} | Cant: ${item.cantidad} | S/ ${subtotalItem.toFixed(2)}%0A`;
     });
     
     mensaje += `%0A*TOTAL A PAGAR: S/ ${totalPrecio.toFixed(2)}*`;
 
+    // 4. ABRIR WHATSAPP
     window.open(`https://wa.me/51994299351?text=${mensaje}`, '_blank');
 }
     </script>

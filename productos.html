@@ -798,8 +798,33 @@ function enviarPedidoWhatsApp() {
         return;
     }
 
-    const categoriaActiva = document.querySelector('.category-btn.active')?.innerText || 'Catálogo';
+    const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
 
+    // 1. CREAR EL OBJETO DEL PEDIDO PARA EL ADMIN
+    let nuevoPedidoAdmin = {
+        id: Date.now(),
+        nombres: nombres,
+        apellidos: apellidos,
+        dni: dni,
+        celular: celular,
+        provincia: provincia,
+        distrito: distrito,
+        items: carrito.map(item => ({ 
+            nombre: item.nombre, 
+            cantidad: item.cantidad, 
+            subtotal: calcularPrecioTotalItem(item) 
+        })),
+        total: totalPrecio,
+        fecha: new Date().toLocaleString(),
+        estado: "pendiente"
+    };
+
+    // 2. GUARDAR EN localStorage PARA QUE EL ADMIN.HTML LO PUEDA LEER SIEMPRE
+    let listaAdmin = JSON.parse(localStorage.getItem('admin_pedidos')) || [];
+    listaAdmin.unshift(nuevoPedidoAdmin);
+    localStorage.setItem('admin_pedidos', JSON.stringify(listaAdmin));
+
+    // 3. ARMAR EL MENSAJE DE WHATSAPP
     let mensaje = `*¡Nuevo Pedido - La Casa del Plástico!*%0A%0A`;
     mensaje += `*DATOS DEL CLIENTE:*%0A`;
     mensaje += `- Nombre: ${nombres} ${apellidos}%0A`;
@@ -811,12 +836,12 @@ function enviarPedidoWhatsApp() {
     mensaje += `*DETALLE DEL PEDIDO:*%0A`;
     carrito.forEach(item => {
         const subtotalItem = calcularPrecioTotalItem(item);
-        mensaje += `▪ *${categoriaActiva}*: ${item.nombre} | Cant: ${item.cantidad} | S/ ${subtotalItem.toFixed(2)}%0A`;
+        mensaje += `▪ ${item.nombre} | Cant: ${item.cantidad} | S/ ${subtotalItem.toFixed(2)}%0A`;
     });
     
-    const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
     mensaje += `%0A*TOTAL A PAGAR: S/ ${totalPrecio.toFixed(2)}*`;
 
+    // 4. ABRIR WHATSAPP
     window.open(`https://wa.me/51994299351?text=${mensaje}`, '_blank');
 }
 
