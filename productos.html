@@ -392,8 +392,8 @@
         </div>
     </footer>
 
-    <script>
-        let carrito = JSON.parse(localStorage.getItem('carrito_plastico')) || [];
+<script>
+        let carrito = JSON.parse(sessionStorage.getItem('carrito_plastico')) || [];
 let productosGlobal = [];
 let paginaActual = 1;
 const productosPorPagina = 6;
@@ -417,8 +417,11 @@ async function cambiarCategoria(categoria, botonClickeado) {
     paginaActual = 1;
     
     const contenedor = document.getElementById('productos-container');
-    contenedor.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--texto-suave);">Cargando productos...</p>';
-    document.getElementById('pagination-controls').style.display = 'none';
+    if (contenedor) {
+        contenedor.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--texto-suave);">Cargando productos...</p>';
+    }
+    const pagControls = document.getElementById('pagination-controls');
+    if (pagControls) pagControls.style.display = 'none';
 
     try {
         const respuesta = await fetch(`datos/${categoria}.json`);
@@ -429,18 +432,21 @@ async function cambiarCategoria(categoria, botonClickeado) {
 
     } catch (error) {
         console.error(error);
-        contenedor.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--rojo-acento);">Error al cargar los productos. Asegúrate de tener los archivos JSON en la carpeta datos/.</p>';
+        if (contenedor) {
+            contenedor.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--rojo-acento);">Error al cargar los productos. Asegúrate de tener los archivos JSON en la carpeta datos/.</p>';
+        }
     }
 }
 
 function renderizarProductosPagina() {
     const contenedor = document.getElementById('productos-container');
     const pagControls = document.getElementById('pagination-controls');
+    if (!contenedor) return;
     contenedor.innerHTML = '';
 
     if (productosGlobal.length === 0) {
         contenedor.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--texto-suave);">No hay productos en esta categoría.</p>';
-        pagControls.style.display = 'none';
+        if (pagControls) pagControls.style.display = 'none';
         return;
     }
 
@@ -459,22 +465,42 @@ function renderizarProductosPagina() {
 
         if (producto.opciones && producto.opciones.length > 0) {
             let opcionesValidas = producto.opciones.filter(opt => {
-                let textoLabel = (opt.label || opt.nombre || "").toLowerCase();
-                return !textoLabel.includes('x3') && !textoLabel.includes('pack') && !textoLabel.includes('docena');
-            });
+    let textoLabel = (opt.label || opt.nombre || "").toLowerCase();
+    
+    // Una opción es válida para el select principal SI es la unidad o una variante principal (como pisos o colores)
+    // Excluimos todo lo que sea paquetes, combos, docenas o cantidades mayores a 1
+    let esPaqueteOCombo = textoLabel.includes('paquete') || 
+                          textoLabel.includes('combo') || 
+                          textoLabel.includes('docena') || 
+                          textoLabel.includes('unidades') || 
+                          (textoLabel.match(/\d+/) && !textoLabel.includes('piso'));
 
-            if (opcionesValidas.length === 0) opcionesValidas = producto.opciones;
+    return !esPaqueteOCombo;
+});
+
+// Por seguridad, si el filtro dejó vacía la lista, aseguramos al menos la primera opción
+if (opcionesValidas.length === 0 && producto.opciones.length > 0) {
+    opcionesValidas = [producto.opciones[0]];
+}
 
             let opUnidad = opcionesValidas[0];
             precioInicial = opUnidad.precio;
-            if (opUnidad.textoPromo && Array.isArray(opUnidad.textoPromo)) {
-                textosPromoIniciales = opUnidad.textoPromo;
+
+            let promoOpt = opUnidad.textoPromo || opUnidad.textosPromo || producto.textoPromo || producto.textosPromo || [];
+            if (typeof promoOpt === 'string') {
+                textosPromoIniciales = [promoOpt];
+            } else if (Array.isArray(promoOpt)) {
+                textosPromoIniciales = promoOpt;
             }
 
             let opcionesOptionsHTML = opcionesValidas.map((opt, index) => {
                 let seleccionado = (index === 0) ? 'selected' : '';
                 let etiquetaOpt = opt.label || opt.nombre;
-                let promoJson = (opt.textoPromo && Array.isArray(opt.textoPromo)) ? JSON.stringify(opt.textoPromo) : '[]';
+                
+                let promoSub = opt.textoPromo || opt.textosPromo || producto.textoPromo || producto.textosPromo || [];
+                if (typeof promoSub === 'string') promoSub = [promoSub];
+                let promoJson = Array.isArray(promoSub) ? JSON.stringify(promoSub) : '[]';
+
                 return '<option value="' + opt.precio + '" data-promo=\'' + promoJson + '\' ' + seleccionado + '>' + etiquetaOpt + ' - S/ ' + Number(opt.precio).toFixed(2) + '</option>';
             }).join('');
 
@@ -483,6 +509,13 @@ function renderizarProductosPagina() {
                 opcionesOptionsHTML +
                 '</select>' +
                 '</div>';
+        } else {
+            let promoGlob = producto.textoPromo || producto.textosPromo || [];
+            if (typeof promoGlob === 'string') {
+                textosPromoIniciales = [promoGlob];
+            } else if (Array.isArray(promoGlob)) {
+                textosPromoIniciales = promoGlob;
+            }
         }
 
         let htmlBadgesPromo = '<div id="promo-container-' + producto.id + '" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; width: 100%;">';
@@ -494,8 +527,7 @@ function renderizarProductosPagina() {
         htmlBadgesPromo += '</div>';
 
         let rawImg = (producto.imagen && producto.imagen.length > 0) ? producto.imagen[0] : '';
-// Esto quita cualquier barra inicial o punto inicial para evitar conflictos y construye una ruta limpia relativa al documento actual
-let imgUrl = rawImg.replace(/^\/+/, '').replace(/^\.\/+/, '');
+        let imgUrl = rawImg.replace(/^\/+/, '').replace(/^\.\/+/, '');
         let subtituloHTML = producto.subtitulo ? '<div style="font-size: 0.8rem; color: #666; text-align: center; margin-bottom: 6px;">' + producto.subtitulo + '</div>' : '';
 
         tarjeta.innerHTML = '<div class="product-img-wrapper">' +
@@ -512,19 +544,28 @@ let imgUrl = rawImg.replace(/^\/+/, '').replace(/^\.\/+/, '');
     });
 
     const totalPaginas = Math.ceil(productosGlobal.length / productosPorPagina);
-    if (totalPaginas > 1) {
-        pagControls.style.display = 'flex';
-        document.getElementById('page-info').innerText = 'Página ' + paginaActual + ' de ' + totalPaginas;
-        document.getElementById('btn-prev').disabled = paginaActual === 1;
-        document.getElementById('btn-next').disabled = paginaActual === totalPaginas;
-    } else {
-        pagControls.style.display = 'none';
+    if (pagControls) {
+        if (totalPaginas > 1) {
+            pagControls.style.display = 'flex';
+            const pageInfo = document.getElementById('page-info');
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+            if (pageInfo) pageInfo.innerText = 'Página ' + paginaActual + ' de ' + totalPaginas;
+            if (btnPrev) btnPrev.disabled = paginaActual === 1;
+            if (btnNext) btnNext.disabled = paginaActual === totalPaginas;
+        } else {
+            pagControls.style.display = 'none';
+        }
     }
 }
 
 function actualizarPrecioYSegunOpcion(idProducto, selectElement) {
-    const precioContainer = document.getElementById('precio-' + idProducto).querySelector('.valor-precio');
-    precioContainer.innerText = parseFloat(selectElement.value).toFixed(2);
+    const precioEl = document.getElementById('precio-' + idProducto);
+    if (!precioEl) return;
+    const precioContainer = precioEl.querySelector('.valor-precio');
+    if (precioContainer) {
+        precioContainer.innerText = parseFloat(selectElement.value).toFixed(2);
+    }
 
     const selectedOption = selectElement.options[selectElement.selectedIndex];
     let promoData = [];
@@ -598,7 +639,7 @@ function agregarAlCarrito(idProducto, nombreProducto) {
         });
     }
 
-    localStorage.setItem('carrito_plastico', JSON.stringify(carrito));
+    sessionStorage.setItem('carrito_plastico', JSON.stringify(carrito));
     actualizarCarritoUI();
     
     if (typeof abrirCarrito === 'function') {
@@ -606,92 +647,65 @@ function agregarAlCarrito(idProducto, nombreProducto) {
     }
 }
 
-function cambiarCantidad(index, delta) {
-    carrito[index].cantidad += delta;
-    if (carrito[index].cantidad <= 0) {
-        carrito.splice(index, 1);
-    }
-    localStorage.setItem('carrito_plastico', JSON.stringify(carrito));
-    actualizarCarritoUI();
-}
-
 function eliminarDelCarrito(index) {
     carrito.splice(index, 1);
-    localStorage.setItem('carrito_plastico', JSON.stringify(carrito));
+    sessionStorage.setItem('carrito_plastico', JSON.stringify(carrito));
     actualizarCarritoUI();
 }
 
 function calcularPrecioTotalItem(item) {
-    let cantidadRestante = item.cantidad;
+    let cantidad = item.cantidad;
     let precioBase = item.precioUnitario || item.precio || 0;
 
-    if (cantidadRestante < 3) {
-        return precioBase * cantidadRestante;
+    if (!item.opcionesDisponibles || item.opcionesDisponibles.length === 0) {
+        return precioBase * cantidad;
     }
 
     let opcionesFuente = item.opcionesDisponibles;
-    let esComoda = (item.nombre || "").toLowerCase().includes('cómoda') || item.id.includes('ratan') || item.id.includes('toy-story') || item.id.includes('stitch') || item.id.includes('kusi');
+    let opcionesMapeadas = [];
 
-    if (esComoda && opcionesFuente && opcionesFuente.length > 0) {
-        let opcionX3 = opcionesFuente.find(op => {
-            let label = (op.label || op.nombre || "").toLowerCase();
-            let esX3 = label.includes('x3') || label.includes('3 unidades');
-            
-            let textoOpcion = (item.opcionLabel || item.opcion || "").toLowerCase();
-            let numeroPiso = textoOpcion.replace(/[^0-9]/g, '');
-            if (numeroPiso) {
-                return esX3 && label.includes(numeroPiso);
-            }
-            return esX3;
+    // 1. Extraemos y analizamos todas las opciones disponibles del JSON del producto
+    opcionesFuente.forEach(op => {
+        let label = (op.label || op.nombre || "").toLowerCase();
+        let numerosEnLabel = label.match(/\d+/g);
+        let minRequerido = 1;
+
+        if (numerosEnLabel && numerosEnLabel.length > 0) {
+            // Si el texto dice algo como "3 unidades" o "x3" o "Paquete de 30", extraemos ese número
+            minRequerido = parseInt(numerosEnLabel[numerosEnLabel.length - 1], 10);
+        } else if (label.includes('docena') || label.includes('x12')) {
+            minRequerido = 12;
+        }
+
+        // Evitamos confundir los pisos (ej: "6 pisos") con la cantidad mínima del paquete si la cantidad es menor a los pisos
+        opcionesMapeadas.push({
+            minRequerido: minRequerido,
+            precio: parseFloat(op.precio) || 0,
+            label: label
         });
+    });
 
-        if (!opcionX3) {
-            opcionX3 = opcionesFuente.find(op => {
-                let label = (op.label || op.nombre || "").toLowerCase();
-                return label.includes('x3') || label.includes('3 unidades');
-            });
-        }
+    // Ordenamos las opciones de mayor a menor cantidad requerida para evaluar primero los paquetes grandes (ej: 30, 25, 12, 3)
+    opcionesMapeadas.sort((a, b) => b.minRequerido - a.minRequerido);
 
-        if (opcionX3 && opcionX3.precio) {
-            let precioComboX3 = parseFloat(opcionX3.precio);
-            let paquetesDe3 = Math.floor(cantidadRestante / 3);
-            let unidadesSueltas = cantidadRestante % 3;
-            return (paquetesDe3 * precioComboX3) + (unidadesSueltas * precioBase);
-        }
-    }
-
+    // 2. Buscamos la mejor combinación de paquetes y unidades sueltas
     let precioTotal = 0;
-    if (!opcionesFuente || opcionesFuente.length === 0) {
-        return precioBase * cantidadRestante;
-    }
+    let cantidadRestante = cantidad;
 
-    let opcionesOrdenadas = [...opcionesFuente].map(op => {
-        let texto = (op.label || op.nombre || "").toLowerCase();
-        let match = texto.match(/\d+/);
-        let cantMinima = match ? parseInt(match[0]) : 1;
-
-        if (texto.includes('docena')) {
-            cantMinima = 12;
-        } else if (texto.includes('unidad') || texto.includes('pieza')) {
-            cantMinima = 1;
-        }
-
-        return { ...op, cantMinima, precio: Number(op.precio) || 0 };
-    }).sort((a, b) => b.cantMinima - a.cantMinima);
-
-    let opcionUnidad = opcionesOrdenadas.find(op => op.cantMinima === 1) || opcionesOrdenadas[opcionesOrdenadas.length - 1];
-    let precioUnitarioCalculado = opcionUnidad ? (opcionUnidad.precio / opcionUnidad.cantMinima) : precioBase;
-
-    for (let op of opcionesOrdenadas) {
-        if (op.cantMinima > 1 && cantidadRestante >= op.cantMinima) {
-            let paquetes = Math.floor(cantidadRestante / op.cantMinima);
+    for (let op of opcionesMapeadas) {
+        if (op.minRequerido > 1 && cantidadRestante >= op.minRequerido) {
+            let paquetes = Math.floor(cantidadRestante / op.minRequerido);
             precioTotal += paquetes * op.precio;
-            cantidadRestante %= op.cantMinima;
+            cantidadRestante %= op.minRequerido;
         }
     }
 
+    // Lo que no alcanzó a formar un paquete se cobra al precio base unitario
     if (cantidadRestante > 0) {
-        precioTotal += cantidadRestante * precioUnitarioCalculado;
+        // Buscamos si hay un precio unitario puro en las opciones, de lo contrario usamos el precio base
+        let opcionUnitaria = opcionesMapeadas.find(op => op.minRequerido === 1);
+        let precioPorUnidad = opcionUnitaria ? opcionUnitaria.precio : precioBase;
+        precioTotal += cantidadRestante * precioPorUnidad;
     }
 
     return precioTotal;
@@ -724,13 +738,39 @@ function actualizarCarritoUI() {
                 <span style="color: var(--rojo-acento); font-weight: 700; font-size: 0.8rem;">S/ ${calcularPrecioTotalItem(item).toFixed(2)}</span>
             </div>
             <div class="qty-controls">
-                <button class="qty-btn" onclick="cambiarCantidad(${index}, -1)">-</button>
-                <span style="font-size: 0.85rem; font-weight: 700;">${item.cantidad}</span>
-                <button class="qty-btn" onclick="cambiarCantidad(${index}, 1)">+</button>
+                <input type="number" min="1" value="${item.cantidad}" 
+                    onchange="actualizarCantidadInput(${index}, this.value)" 
+                    oninput="actualizarCantidadInput(${index}, this.value)"
+                    style="width: 55px; padding: 2px 4px; text-align: center; border-radius: 4px; border: 1px solid #ccc; font-weight: 700; font-size: 0.85rem;">
             </div>
             <button class="btn-remove" onclick="eliminarDelCarrito(${index})"><i class="fa-solid fa-trash"></i></button>
         </div>
     `).join('');
+}
+
+function actualizarCantidadInput(index, nuevoValor) {
+    let cantidad = parseInt(nuevoValor);
+    if (isNaN(cantidad) || cantidad <= 0) {
+        cantidad = 1;
+    }
+    carrito[index].cantidad = cantidad;
+    sessionStorage.setItem('carrito_plastico', JSON.stringify(carrito));
+    
+    const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+    const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
+    
+    const elTotalHeader = document.getElementById('cart-total-header');
+    const elCountHeader = document.getElementById('cart-count-header');
+    const elModalTotal = document.getElementById('modal-total');
+
+    if (elTotalHeader) elTotalHeader.innerText = totalPrecio.toFixed(2);
+    if (elCountHeader) elCountHeader.innerText = totalItems;
+    if (elModalTotal) elModalTotal.innerText = totalPrecio.toFixed(2);
+
+    const subtotalSpans = document.querySelectorAll('.cart-item span[style*="color: var(--rojo-acento)"]');
+    if (subtotalSpans[index]) {
+        subtotalSpans[index].innerText = `S/ ${calcularPrecioTotalItem(carrito[index]).toFixed(2)}`;
+    }
 }
 
 function toggleModalCarrito() {
@@ -781,7 +821,6 @@ function enviarPedidoWhatsApp() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Restaurar carrito guardado al recargar o cambiar de categoría
     actualizarCarritoUI();
 
     const urlParams = new URLSearchParams(window.location.search);

@@ -4,6 +4,9 @@
         "nombre": "Mesa Redonda Caral",
         "subcategoria": "mesas",
         "imagen": ["img/mesa-01.jpg"],
+        "textosPromo":[
+            "X6 unidades a S/300.00"
+        ],
         "opciones": [
             {"label": "Unidad", "precio": 57.00},
             {"label": "6 Unidades", "precio": 300.00}
@@ -14,6 +17,9 @@
         "nombre": "Mesa Cuadrada Kina",
         "subcategoria": "mesas",
         "imagen": ["img/mesa-02.jpg"],
+        "textosPromo":[
+            "X6 unidades a S/291.00"
+        ],
         "opciones": [
             {"label": "Unidad", "precio": 53.50},
             {"label": "6 Unidades", "precio": 291.00}
@@ -24,6 +30,9 @@
         "nombre": "Mesa Roble C/ Ratán 150 X 80",
         "subcategoria": "mesas",
         "imagen": ["img/mesa-03.jpg"],
+        "textosPromo":[
+            "X6 unidades a S/1012.00"
+        ],
         "opciones": [
             {"label": "Unidad", "precio": 200.00},
             {"label": "6 Unidades", "precio": 1012.00}
@@ -34,6 +43,9 @@
         "nombre": "Mesa Roble C/ Ratán 80 X 80",
         "subcategoria": "mesas",
         "imagen": ["img/mesa-04.jpg"],
+        "textosPromo":[
+            "X6 unidades a S/654.00"
+        ],
         "opciones": [
             {"label": "Unidad", "precio": 115.00},
             {"label": "6 Unidades", "precio": 654.00}

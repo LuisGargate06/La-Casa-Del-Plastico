@@ -1,9 +1,12 @@
 [
     {
-         "id": "porta-03",
-        "nombre": "Envudo Chico Con Colador",
+         "id": "embudo-01",
+        "nombre": "Embudo Chico Con Colador",
         "imagen": [
-            "img/porta-03.jpg"
+            "img/embudo-01.jpg"
+        ],
+        "textosPromo": [
+            "X12 unidades a S/8.40"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 2.00},
@@ -11,10 +14,13 @@
         ]
     },
     {
-         "id": "porta-03",
-        "nombre": "Envudo Mediando Con Colador",
+         "id": "embudo-02",
+        "nombre": "Embudo Mediano Con Colador",
         "imagen": [
-            "img/porta-03.jpg"
+            "img/embudo-02.jpg"
+        ],
+        "textosPromo":[
+            "X12 unidades a S/14.40"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 2.50},
@@ -22,10 +28,13 @@
         ]
     },
     {
-         "id": "porta-03",
-        "nombre": "Envudo Grande Con Colador",
+         "id": "embudo-03",
+        "nombre": "Embudo Grande Con Colador",
         "imagen": [
-            "img/porta-03.jpg"
+            "img/embudo-03.jpg"
+        ],
+        "textosPromo":[
+            "X12 unidades a S/20.40"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 3.50},
@@ -33,10 +42,13 @@
         ]
     },
     {
-         "id": "porta-03",
-        "nombre": "Envudo Industrial",
+         "id": "embudo-04",
+        "nombre": "Embudo Industrial",
         "imagen": [
-            "img/porta-03.jpg"
+            "img/embudo-04.jpg"
+        ],
+        "textosPromo":[
+            "X12 unidades a S/78.00"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 10.00},
@@ -44,10 +56,13 @@
         ]
     },
     {
-         "id": "porta-03",
-        "nombre": "Envudo Chico",
+         "id": "embudo-05",
+        "nombre": "Embudo Chico",
         "imagen": [
-            "img/porta-03.jpg"
+            "img/embudo-05.jpg"
+        ],
+        "textosPromo":[
+            "X12 unidades a S/9.60"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 2.00},

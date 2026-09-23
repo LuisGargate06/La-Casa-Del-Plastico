@@ -109,7 +109,7 @@
     "id": "silla-lombok",
     "nombre": "Silla Lombok",
     "subcategoria": "sillas",
-    "imagen": ["img/silla-08.jpg"],
+    "imagen": ["img/silla-09.jpg"],
     "textosPromo": [
       "¡X12 unidades a S/.492.00!",
       "¡X20 unidades a S/.784.00!"
@@ -124,7 +124,7 @@
     "id": "silla-aruba",
     "nombre": "Sillon Aruba",
     "subcategoria": "sillas",
-    "imagen": ["img/silla-08.jpg"],
+    "imagen": ["img/silla-10.jpg"],
     "textosPromo": [
       "¡X12 unidades a S/.600.00!",
       "¡X24 unidades a S/.1176.00!"

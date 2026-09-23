@@ -731,8 +731,8 @@
     </footer>
 
     <script>
-        // --- CARRITO PERSISTENTE ---
-        let carrito = JSON.parse(localStorage.getItem('carrito_plastico')) || [];
+        // --- CARRITO EN SESIÓN (Se borra al cerrar la página) ---
+        let carrito = JSON.parse(sessionStorage.getItem('carrito_plastico')) || [];
 
         function calcularPrecioTotalItem(item) {
             let cantidadRestante = item.cantidad;
@@ -831,33 +831,46 @@
             }
 
             lista.innerHTML = carrito.map((item, index) => `
-                <div class="cart-item">
+                <div class="cart-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; gap: 10px;">
                     <div style="flex: 1;">
                         <strong style="font-size: 0.85rem;">${item.nombre}</strong><br>
                         <span style="color: var(--rojo-acento); font-weight: 700; font-size: 0.8rem;">S/ ${calcularPrecioTotalItem(item).toFixed(2)}</span>
                     </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="cambiarCantidad(${index}, -1)">-</button>
-                        <span style="font-size: 0.85rem; font-weight: 700;">${item.cantidad}</span>
-                        <button class="qty-btn" onclick="cambiarCantidad(${index}, 1)">+</button>
+                    <div>
+                        <input type="number" min="1" value="${item.cantidad}" 
+                            onchange="actualizarCantidadInput(${index}, this.value)" 
+                            oninput="actualizarCantidadInput(${index}, this.value)"
+                            style="width: 60px; padding: 4px; text-align: center; border-radius: 6px; border: 1px solid #ccc; font-weight: 700; font-size: 0.85rem;">
                     </div>
                     <button class="btn-remove" onclick="eliminarDelCarrito(${index})"><i class="fa-solid fa-trash"></i></button>
                 </div>
             `).join('');
         }
 
-        function cambiarCantidad(index, delta) {
-            carrito[index].cantidad += delta;
-            if (carrito[index].cantidad <= 0) {
-                carrito.splice(index, 1);
+        function actualizarCantidadInput(index, nuevoValor) {
+            let cantidad = parseInt(nuevoValor);
+            if (isNaN(cantidad) || cantidad <= 0) {
+                cantidad = 1;
             }
-            localStorage.setItem('carrito_plastico', JSON.stringify(carrito));
-            actualizarCarritoUI();
+            carrito[index].cantidad = cantidad;
+            sessionStorage.setItem('carrito_plastico', JSON.stringify(carrito));
+            
+            // Actualizamos los subtotales y totales en tiempo real sin perder el foco del input
+            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
+            
+            const elTotalHeader = document.getElementById('cart-total-header');
+            const elCountHeader = document.getElementById('cart-count-header');
+            const elModalTotal = document.getElementById('modal-total');
+
+            if (elTotalHeader) elTotalHeader.innerText = totalPrecio.toFixed(2);
+            if (elCountHeader) elCountHeader.innerText = totalItems;
+            if (elModalTotal) elModalTotal.innerText = totalPrecio.toFixed(2);
         }
 
         function eliminarDelCarrito(index) {
             carrito.splice(index, 1);
-            localStorage.setItem('carrito_plastico', JSON.stringify(carrito));
+            sessionStorage.setItem('carrito_plastico', JSON.stringify(carrito));
             actualizarCarritoUI();
         }
 

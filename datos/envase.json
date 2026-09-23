@@ -5,6 +5,9 @@
         "imagen": [
             "img/envase-01.jpg"
         ],
+        "textosPromo": [
+            "X12 unidades a S/27.60"
+        ],
         "opciones": [
             {"label": "Unidad", "precio": 4.50},
             {"label": "Docena", "precio": 27.60}
@@ -15,6 +18,9 @@
         "nombre": "Envase Hermético 2L con Tapa Rosca",
         "imagen": [
             "img/envase-02.jpg"
+        ],
+        "textosPromo":[
+            "X12 unidades a S/32.40"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 5.50},
@@ -28,16 +34,22 @@
         "imagen": [
             "img/envase-03.jpg"
         ],
+        "textosPromo":[
+            "X12 unidades a S/25.20"
+        ],
         "opciones": [
             {"label": "Unidad", "precio": 4.00},
             {"label": "Docena", "precio": 25.20}
         ]
     },
     {
-        "id": "envase-03",
+        "id": "envase-04",
         "nombre": "Envase Hermético 1L con Tapa Rosca Ancha",
         "imagen": [
-            "img/envase-03.jpg"
+            "img/envase-04.jpg"
+        ],
+        "textosPromo": [
+            "X12 unidades a S/26.40"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 4.50},
@@ -45,10 +57,13 @@
         ]
     },
     {
-        "id": "envase-03",
+        "id": "envase-05",
         "nombre": "Envase Hermético 0.50L con Tapa Rosca",
         "imagen": [
-            "img/envase-03.jpg"
+            "img/envase-05.png"
+        ],
+        "textosPromo": [
+            "X12 unidades a S/21.60"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 3.50},
@@ -56,10 +71,13 @@
         ]
     },
     {
-        "id": "envase-03",
+        "id": "envase-06",
         "nombre": "Envase Hermético 0.75L con Tapa Rosca",
         "imagen": [
-            "img/envase-03.jpg"
+            "img/envase-06.jpg"
+        ],
+        "textosPromo":[
+            "X12 unidades a S/24.00"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 4.00},

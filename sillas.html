@@ -455,383 +455,418 @@
     <!-- Script con soporte para textPromo (texto único o múltiples en array) -->
     <script>
         // Recuperar el carrito guardado al recargar o cambiar de vista
-        let carrito = JSON.parse(localStorage.getItem('carrito_plastico')) || [];
-        let productosGlobal = [];
+let carrito = JSON.parse(sessionStorage.getItem('carrito_plastico')) || [];
+let productosGlobal = [];
 
-        // Ejecutar esta función apenas cargue la página
-        document.addEventListener('DOMContentLoaded', () => {
-            actualizarCarritoUI();
-            cargarSillas();
-        });
+// Ejecutar esta función apenas cargue la página
+document.addEventListener('DOMContentLoaded', () => {
+    actualizarCarritoUI();
+    cargarSillas();
+});
 
-        async function cargarSillas() {
-            const contenedor = document.getElementById('productos-container');
-            contenedor.innerHTML = '<p style="text-align: center; color: var(--texto-suave);">Cargando sillas...</p>';
+async function cargarSillas() {
+    const contenedor = document.getElementById('productos-container');
+    contenedor.innerHTML = '<p style="text-align: center; color: var(--texto-suave);">Cargando sillas...</p>';
 
-            try {
-                const respuesta = await fetch('datos/sillas.json');
-                if (!respuesta.ok) throw new Error('No se encontró el archivo de sillas');
+    try {
+        const respuesta = await fetch('datos/sillas.json');
+        if (!respuesta.ok) throw new Error('No se encontró el archivo de sillas');
 
-                productosGlobal = await respuesta.json();
-                renderizarSillas();
+        productosGlobal = await respuesta.json();
+        renderizarSillas();
 
-            } catch (error) {
-                console.error(error);
-                contenedor.innerHTML = '<p style="text-align: center; color: var(--rojo-acento);">Error al cargar las sillas. Asegúrate de tener el archivo sillas.json en la carpeta datos/.</p>';
-            }
-        }
+    } catch (error) {
+        console.error(error);
+        contenedor.innerHTML = '<p style="text-align: center; color: var(--rojo-acento);">Error al cargar las sillas. Asegúrate de tener el archivo sillas.json en la carpeta datos/.</p>';
+    }
+}
 
-        function renderizarSillas() {
-            const contenedor = document.getElementById('productos-container');
-            contenedor.innerHTML = '';
+function cambiarOpcionSilla(id, precio, label, medidas, btn) {
+    const tarjeta = btn.closest('.product-detail-card');
+    
+    // 1. Limpiar botones de opciones
+    tarjeta.querySelectorAll('.color-btn').forEach(b => {
+        b.classList.remove('active');
+        b.style.borderColor = 'var(--borde)';
+        b.style.background = '#fff';
+    });
 
-            if (productosGlobal.length === 0) {
-                contenedor.innerHTML = '<p style="text-align: center; color: var(--texto-suave);">No hay sillas disponibles.</p>';
-                return;
-            }
+    // 2. Activar el botón presionado
+    btn.classList.add('active');
+    btn.style.borderColor = 'var(--azul-rey)';
+    btn.style.background = '#f0f4ff';
 
-            productosGlobal.forEach((producto) => {
-                const tarjeta = document.createElement('div');
-                tarjeta.classList.add('product-detail-card');
-                
-                let precioBase = 0;
-                let medidasIniciales = { largo: '--', ancho: '--', alto: '--' };
-                let opcionesHTML = '';
-                let textoPromoHTML = '';
+    // Actualizar precio y medidas
+    document.getElementById(`precio-${id}`).innerText = precio.toFixed(2);
+    if (medidas && Object.keys(medidas).length > 0) {
+        if (medidas.largo) document.getElementById(`largo-${id}`).innerText = medidas.largo;
+        if (medidas.ancho) document.getElementById(`ancho-${id}`).innerText = medidas.ancho;
+        if (medidas.alto) document.getElementById(`alto-${id}`).innerText = medidas.alto;
+    }
 
-                if (producto.opciones && producto.opciones.length > 0) {
-                    let opcionesUnidad = producto.opciones.filter(opt => {
-                        let lbl = opt.label.toLowerCase();
-                        return lbl.includes('unidad') && !lbl.includes('x12') && !lbl.includes('x30') && !lbl.includes('docena');
-                    });
+    tarjeta.setAttribute('data-opcion-seleccionada', label);
+}
 
-                    if (opcionesUnidad.length === 0) {
-                        opcionesUnidad = [producto.opciones[0]];
-                    }
+function renderizarSillas() {
+    const contenedor = document.getElementById('productos-container');
+    contenedor.innerHTML = '';
 
-                    let opcionInicial = opcionesUnidad[0];
-                    precioBase = opcionInicial.precio;
-                    if (opcionInicial.medidas) medidasIniciales = opcionInicial.medidas;
+    if (productosGlobal.length === 0) {
+        contenedor.innerHTML = '<p style="text-align: center; color: var(--texto-suave);">No hay sillas disponibles.</p>';
+        return;
+    }
 
-                    opcionesHTML = `
-                        <div class="colores-section" style="margin-bottom: 16px;">
-                            <div class="colores-titulo" style="font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">Elige la opción</div>
-                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                ${opcionesUnidad.map((opt, oIdx) => `
-                                    <button type="button" class="color-btn ${oIdx === 0 ? 'active' : ''}" 
-                                           onclick='cambiarOpcionSilla("${producto.id}", ${opt.precio}, "${opt.label}", ${JSON.stringify(opt.medidas || {})}, this)'
-                                           style="border-radius: 8px; padding: 8px 14px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: 2px solid ${oIdx === 0 ? 'var(--azul-rey)' : 'var(--borde)'}; background:${oIdx === 0 ? '#f0f4ff' : '#fff'};">
-                                        ${opt.label} - S/ ${opt.precio.toFixed(2)}
-                                    </button>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                } else if (producto.precio) {
-                    precioBase = producto.precio;
-                    if (producto.medidas) medidasIniciales = producto.medidas;
-                }
+    productosGlobal.forEach((producto) => {
+        const tarjeta = document.createElement('div');
+        tarjeta.classList.add('product-detail-card');
+        
+        let precioBase = 0;
+        let medidasIniciales = { largo: '--', ancho: '--', alto: '--' };
+        let opcionesHTML = '';
+        let textoPromoHTML = '';
+        let opcionInicialLabel = 'Estándar';
 
-                if (producto.textosPromo && Array.isArray(producto.textosPromo)) {
-                    textoPromoHTML = producto.textosPromo.map(texto => `
-                        <div style="background: linear-gradient(135deg, #e63946, #d90429); color: #fff; padding: 12px 20px; border-radius: 50px; font-size: 0.98rem; font-weight: 700; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 14px rgba(217, 4, 41, 0.3);">
-                            <i class="fa-solid fa-tags" style="font-size: 1.2rem;"></i> 
-                            <span>${texto}</span>
-                        </div>
-                    `).join('');
-                }
-
-                let imagenesArray = producto.imagen || [];
-                let imagenPrincipal = imagenesArray.length > 0 ? imagenesArray[0] : '';
-                let subtituloTexto = producto.subtitulo || 'Silla Resistente';
-
-                let galeriaHTML = '';
-                if (imagenesArray.length > 1) {
-                    galeriaHTML = `
-                        <div style="display: flex; gap: 6px; margin-top: 10px; overflow-x: auto; padding-bottom: 6px; width: 100%; scrollbar-width: thin;">
-                            ${imagenesArray.map((imgSrc, imgIdx) => `
-                                <img src="${imgSrc}" alt="miniatura" 
-                                    onclick="cambiarImagenPrincipal('${producto.id}', '${imgSrc}', this)" 
-                                    style="width: 42px; height: 42px; object-fit: cover; border-radius: 6px; border: 2px solid ${imgIdx === 0 ? 'var(--azul-rey)' : 'var(--borde)'}; cursor: pointer; flex-shrink: 0;"
-                                    class="miniatura-img">
-                            `).join('')}
-                        </div>
-                    `;
-                }
-
-                tarjeta.innerHTML = `
-                    <div style="display: flex; flex-direction: column; width: 100%; max-width: 400px; margin: 0 auto;">
-                        <div class="product-image-container" style="width: 100%;">
-                            <img class="product-img" id="img-principal-${producto.id}" src="${imagenPrincipal}" alt="${producto.nombre}" style="width: 100%; height: auto; object-fit: contain;">
-                        </div>
-                        ${galeriaHTML}
-                    </div>
-                    <div class="product-info">
-                        <h2>${producto.nombre}</h2>
-                        <div class="product-subtitle" id="subtitulo-${producto.id}">${subtituloTexto}</div>
-                        
-                        <div class="contenedor-promo-${producto.id}">
-                            ${textoPromoHTML}
-                        </div>
-
-                        <p class="product-desc">${producto.descripcion || 'Diseño ergonómico y alta resistencia. Ideal para el hogar, oficinas o eventos.'}</p>
-                        ${opcionesHTML}
-
-                        <div class="medidas-titulo">Medidas Aproximadas</div>
-                        <div class="medidas-grid">
-                            <div class="medida-box">
-                                <i class="fa-solid fa-ruler-horizontal"></i>
-                                <div class="medida-label">Largo</div>
-                                <div class="medida-valor"><span id="largo-${producto.id}">${medidasIniciales.largo}</span> <span>cm</span></div>
-                            </div>
-                            <div class="medida-box">
-                                <i class="fa-solid fa-cube"></i>
-                                <div class="medida-label">Ancho</div>
-                                <div class="medida-valor"><span id="ancho-${producto.id}">${medidasIniciales.ancho}</span> <span>cm</span></div>
-                            </div>
-                            <div class="medida-box">
-                                <i class="fa-solid fa-ruler-vertical"></i>
-                                <div class="medida-label">Alto</div>
-                                <div class="medida-valor"><span id="alto-${producto.id}">${medidasIniciales.alto}</span> <span>cm</span></div>
-                            </div>
-                        </div>
-
-                        <div class="product-footer-action">
-                            <div class="product-price">S/ <span id="precio-${producto.id}">${precioBase.toFixed(2)}</span></div>
-                            <button class="btn-add" onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}')"><i class="fa-solid fa-cart-shopping"></i> Agregar al Carrito</button>
-                        </div>
-                    </div>
-                `;
-                contenedor.appendChild(tarjeta);
+        if (producto.opciones && producto.opciones.length > 0) {
+            let opcionesUnidad = producto.opciones.filter(opt => {
+                let lbl = opt.label.toLowerCase();
+                return lbl.includes('unidad') && !lbl.includes('x12') && !lbl.includes('x30') && !lbl.includes('docena');
             });
-        }
 
-        function cambiarImagenPrincipal(idProducto, nuevaRuta, elementoMiniatura) {
-            const imgGrande = document.getElementById(`img-principal-${idProducto}`);
-            if (imgGrande) imgGrande.src = nuevaRuta;
-
-            const contenedorMiniaturas = elementoMiniatura.parentElement;
-            contenedorMiniaturas.querySelectorAll('.miniatura-img').forEach(img => {
-                img.style.borderColor = 'var(--borde)';
-            });
-            elementoMiniatura.style.borderColor = 'var(--azul-rey)';
-        }
-
-        function calcularPrecioTotalItem(item) {
-            let cantidadRestante = item.cantidad;
-            let precioTotal = 0;
-
-            if (!item.opcionesDisponibles || item.opcionesDisponibles.length === 0) {
-                return (item.precioUnitario || item.precio || 0) * cantidadRestante;
+            if (opcionesUnidad.length === 0) {
+                opcionesUnidad = [producto.opciones[0]];
             }
 
-            let opcionesOrdenadas = [...item.opcionesDisponibles].map(op => {
-                let texto = (op.label || op.nombre || "").toLowerCase();
-                let match = texto.match(/\d+/);
-                let cantMinima = match ? parseInt(match[0]) : 1;
+            let opcionInicial = opcionesUnidad[0];
+            precioBase = opcionInicial.precio;
+            opcionInicialLabel = opcionInicial.label;
+            if (opcionInicial.medidas) medidasIniciales = opcionInicial.medidas;
 
-                if (texto.includes('docena')) {
-                    cantMinima = 12;
-                } else if (texto.includes('unidad')) {
-                    cantMinima = 1;
-                }
-
-                return { ...op, cantMinima, precio: op.precio || 0 };
-            }).sort((a, b) => b.cantMinima - a.cantMinima);
-
-            let opcionUnidad = opcionesOrdenadas.find(op => op.cantMinima === 1) || opcionesOrdenadas[opcionesOrdenadas.length - 1];
-            let precioUnitarioBase = opcionUnidad ? (opcionUnidad.precio / opcionUnidad.cantMinima) : (item.precioUnitario || 0);
-
-            for (let op of opcionesOrdenadas) {
-                if (op.cantMinima > 1 && cantidadRestante >= op.cantMinima) {
-                    let paquetes = Math.floor(cantidadRestante / op.cantMinima);
-                    precioTotal += paquetes * op.precio;
-                    cantidadRestante %= op.cantMinima;
-                }
-            }
-
-            if (cantidadRestante > 0) {
-                precioTotal += cantidadRestante * precioUnitarioBase;
-            }
-
-            return precioTotal;
-        }
-
-        function agregarAlCarrito(id, nombre) {
-            const producto = productosGlobal.find(p => p.id === id);
-            if (!producto) return;
-
-            let precioUnitario = 0;
-            let presentacion = "Estándar";
-
-            if (producto.opciones && producto.opciones.length > 0) {
-                precioUnitario = producto.opciones[0].precio;
-                presentacion = producto.opciones[0].nombre || producto.opciones[0].label || "Estándar";
-            } else if (producto.precio) {
-                precioUnitario = producto.precio;
-            }
-
-            const tarjeta = document.querySelector(`button[onclick*="${id}"]`)?.closest('.product-detail-card') || document.getElementById(`img-principal-${id}`)?.closest('.product-detail-card');
-            let colorSeleccionado = tarjeta ? tarjeta.getAttribute('data-color-seleccionado') || 'Único' : 'Único';
-
-            const index = carrito.findIndex(item => item.id === id && item.color === colorSeleccionado && item.presentacion === presentacion);
-
-            if (index !== -1) {
-                carrito[index].cantidad += 1;
-            } else {
-                carrito.push({
-                    id: id,
-                    nombre: producto.nombre,
-                    presentacion: presentacion,
-                    precioUnitario: Number(precioUnitario) || 0,
-                    opcionesDisponibles: producto.opciones || [],
-                    color: colorSeleccionado,
-                    cantidad: 1,
-                    imagen: producto.imagen ? producto.imagen[0] : ''
-                });
-            }
-
-            actualizarCarritoUI();
-            
-            // LLAMAMOS CORRECTAMENTE A LA FUNCIÓN TOAST CON TRANSICIÓN CSS
-            mostrarToast("¡Producto agregado al carrito!");
-        }
-
-        function cambiarCantidad(index, delta) {
-            carrito[index].cantidad += delta;
-            if (carrito[index].cantidad <= 0) {
-                carrito.splice(index, 1);
-            }
-            actualizarCarritoUI();
-        }
-
-        function eliminarDelCarrito(index) {
-            carrito.splice(index, 1);
-            actualizarCarritoUI();
-        }
-
-        let toastTimer; // Controla el tiempo del toast
-
-        function mostrarToast(mensaje) {
-            const toast = document.getElementById('toast-notification');
-            const mensajeSpan = document.getElementById('toast-message');
-            if (!toast) return;
-
-            mensajeSpan.innerText = mensaje;
-            
-            clearTimeout(toastTimer);
-
-            // Activa la clase que lee la transición del CSS
-            toast.classList.add('show');
-
-            toastTimer = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
-        }
-
-        function actualizarCarritoUI() {
-            localStorage.setItem('carrito_plastico', JSON.stringify(carrito));
-
-            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-            const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
-            
-            document.getElementById('cart-total-header').innerText = totalPrecio.toFixed(2);
-            document.getElementById('cart-count-header').innerText = totalItems;
-            document.getElementById('modal-total').innerText = totalPrecio.toFixed(2);
-
-            const lista = document.getElementById('lista-carrito');
-            if (carrito.length === 0) {
-                lista.innerHTML = '<p style="color: var(--texto-suave); font-size: 0.9rem;">Tu carrito está vacío.</p>';
-                return;
-            }
-
-            lista.innerHTML = carrito.map((item, index) => `
-                <div class="cart-item">
-                    <div style="flex: 1;">
-                        <strong style="font-size: 0.85rem;">${item.nombre}</strong><br>
-                        <span style="color: var(--rojo-acento); font-weight: 700; font-size: 0.8rem;">S/ ${calcularPrecioTotalItem(item).toFixed(2)}</span>
+            opcionesHTML = `
+                <div class="colores-section" style="margin-bottom: 16px;">
+                    <div class="colores-titulo" style="font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">Elige la opción</div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        ${opcionesUnidad.map((opt, oIdx) => `
+                            <button type="button" class="color-btn ${oIdx === 0 ? 'active' : ''}" 
+                                    onclick='cambiarOpcionSilla("${producto.id}", ${opt.precio}, "${opt.label}", ${JSON.stringify(opt.medidas || {})}, this)'
+                                    style="border-radius: 8px; padding: 8px 14px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: 2px solid ${oIdx === 0 ? 'var(--azul-rey)' : 'var(--borde)'}; background:${oIdx === 0 ? '#f0f4ff' : '#fff'};">
+                                ${opt.label} - S/ ${opt.precio.toFixed(2)}
+                            </button>
+                        `).join('')}
                     </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="cambiarCantidad(${index}, -1)">-</button>
-                        <span style="font-size: 0.85rem; font-weight: 700;">${item.cantidad}</span>
-                        <button class="qty-btn" onclick="cambiarCantidad(${index}, 1)">+</button>
-                    </div>
-                    <button class="btn-remove" onclick="eliminarDelCarrito(${index})"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `;
+        } else if (producto.precio) {
+            precioBase = producto.precio;
+            if (producto.medidas) medidasIniciales = producto.medidas;
+        }
+
+        tarjeta.setAttribute('data-opcion-seleccionada', opcionInicialLabel);
+
+        if (producto.textosPromo && Array.isArray(producto.textosPromo)) {
+            textoPromoHTML = producto.textosPromo.map(texto => `
+                <div style="background: linear-gradient(135deg, #e63946, #d90429); color: #fff; padding: 12px 20px; border-radius: 50px; font-size: 0.98rem; font-weight: 700; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 14px rgba(217, 4, 41, 0.3);">
+                    <i class="fa-solid fa-tags" style="font-size: 1.2rem;"></i> 
+                    <span>${texto}</span>
                 </div>
             `).join('');
         }
 
-        function toggleModalCarrito() {
-            const modal = document.getElementById('modal-carrito');
-            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        let imagenesArray = producto.imagen || [];
+        let imagenPrincipal = imagenesArray.length > 0 ? imagenesArray[0] : '';
+        let subtituloTexto = producto.subtitulo || 'Silla Resistente';
+
+        let galeriaHTML = '';
+        if (imagenesArray.length > 1) {
+            galeriaHTML = `
+                <div style="display: flex; gap: 6px; margin-top: 10px; overflow-x: auto; padding-bottom: 6px; width: 100%; scrollbar-width: thin;">
+                    ${imagenesArray.map((imgSrc, imgIdx) => `
+                        <img src="${imgSrc}" alt="miniatura" 
+                            onclick="cambiarImagenPrincipal('${producto.id}', '${imgSrc}', this)" 
+                            style="width: 42px; height: 42px; object-fit: cover; border-radius: 6px; border: 2px solid ${imgIdx === 0 ? 'var(--azul-rey)' : 'var(--borde)'}; cursor: pointer; flex-shrink: 0;"
+                            class="miniatura-img">
+                    `).join('')}
+                </div>
+            `;
         }
 
-        function enviarPedidoWhatsApp() {
-            if (carrito.length === 0) {
-                alert("Tu carrito está vacío.");
-                return;
-            }
+        tarjeta.innerHTML = `
+            <div style="display: flex; flex-direction: column; width: 100%; max-width: 400px; margin: 0 auto;">
+                <div class="product-image-container" style="width: 100%;">
+                    <img class="product-img" id="img-principal-${producto.id}" src="${imagenPrincipal}" alt="${producto.nombre}" style="width: 100%; height: auto; object-fit: contain;">
+                </div>
+                ${galeriaHTML}
+            </div>
+            <div class="product-info">
+                <h2>${producto.nombre}</h2>
+                <div class="product-subtitle" id="subtitulo-${producto.id}">${subtituloTexto}</div>
+                
+                <div class="contenedor-promo-${producto.id}">
+                    ${textoPromoHTML}
+                </div>
 
-            const nombres = document.getElementById('input-nombres').value.trim();
-            const apellidos = document.getElementById('input-apellidos').value.trim();
-            const dni = document.getElementById('input-dni').value.trim();
-            const celular = document.getElementById('input-celular').value.trim();
-            const provincia = document.getElementById('input-provincia').value.trim();
-            const distrito = document.getElementById('input-distrito').value.trim();
+                <p class="product-desc">${producto.descripcion || 'Diseño ergonómico y alta resistencia. Ideal para el hogar, oficinas o eventos.'}</p>
+                ${opcionesHTML}
 
-            if (!nombres || !apellidos || !dni || !celular || !provincia || !distrito) {
-                alert("Por favor, completa todos tus datos personales y de ubicación para el pedido.");
-                return;
-            }
+                <div class="medidas-titulo">Medidas Aproximadas</div>
+                <div class="medidas-grid">
+                    <div class="medida-box">
+                        <i class="fa-solid fa-ruler-horizontal"></i>
+                        <div class="medida-label">Largo</div>
+                        <div class="medida-valor"><span id="largo-${producto.id}">${medidasIniciales.largo}</span> <span>cm</span></div>
+                    </div>
+                    <div class="medida-box">
+                        <i class="fa-solid fa-cube"></i>
+                        <div class="medida-label">Ancho</div>
+                        <div class="medida-valor"><span id="ancho-${producto.id}">${medidasIniciales.ancho}</span> <span>cm</span></div>
+                    </div>
+                    <div class="medida-box">
+                        <i class="fa-solid fa-ruler-vertical"></i>
+                        <div class="medida-label">Alto</div>
+                        <div class="medida-valor"><span id="alto-${producto.id}">${medidasIniciales.alto}</span> <span>cm</span></div>
+                    </div>
+                </div>
 
-            // === 1. REGISTRO AUTOMÁTICO PARA EL PANEL ADMIN ===
-            const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
-            
-            let nuevoPedidoAdmin = {
-                id: Date.now(),
-                nombres: nombres,
-                apellidos: apellidos,
-                dni: dni,
-                celular: celular,
-                provincia: provincia,
-                distrito: distrito,
-                items: carrito.map(item => ({ 
-                    nombre: item.nombre, 
-                    cantidad: item.cantidad, 
-                    subtotal: calcularPrecioTotalItem(item) 
-                })),
-                total: totalPrecio,
-                fecha: new Date().toLocaleString(),
-                estado: "pendiente"
-            };
+                <div class="product-footer-action">
+                    <div class="product-price">S/ <span id="precio-${producto.id}">${precioBase.toFixed(2)}</span></div>
+                    <button class="btn-add" onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}')"><i class="fa-solid fa-cart-shopping"></i> Agregar al Carrito</button>
+                </div>
+            </div>
+        `;
+        contenedor.appendChild(tarjeta);
+    });
+}
 
-            let listaAdmin = JSON.parse(localStorage.getItem('admin_pedidos')) || [];
-            listaAdmin.unshift(nuevoPedidoAdmin); // Lo coloca al principio de la lista
-            localStorage.setItem('admin_pedidos', JSON.stringify(listaAdmin));
-            // ================================================
+function cambiarImagenPrincipal(idProducto, nuevaRuta, elementoMiniatura) {
+    const imgGrande = document.getElementById(`img-principal-${idProducto}`);
+    if (imgGrande) imgGrande.src = nuevaRuta;
 
-            let mensaje = `*¡Nuevo Pedido - La Casa del Plástico (Sillas)!*%0A%0A`;
-            mensaje += `*DATOS DEL CLIENTE:*%0A`;
-            mensaje += `- Nombre: ${nombres} ${apellidos}%0A`;
-            mensaje += `- DNI: ${dni}%0A`;
-            mensaje += `- Celular: ${celular}%0A`;
-            mensaje += `- Provincia: ${provincia}%0A`;
-            mensaje += `- Distrito: ${distrito}%0A%0A`;
-            
-            mensaje += `*DETALLE DEL PEDIDO:*%0A`;
-            carrito.forEach(item => {
-                let totalItem = calcularPrecioTotalItem(item);
-                mensaje += `▪ Silla: ${item.nombre} | Cant: ${item.cantidad} | S/ ${totalItem.toFixed(2)}%0A`;
-            });
-            
-            mensaje += `%0A*TOTAL A PAGAR: S/ ${totalPrecio.toFixed(2)}*`;
+    const contenedorMiniaturas = elementoMiniatura.parentElement;
+    contenedorMiniaturas.querySelectorAll('.miniatura-img').forEach(img => {
+        img.style.borderColor = 'var(--borde)';
+    });
+    elementoMiniatura.style.borderColor = 'var(--azul-rey)';
+}
 
-            window.open(`https://wa.me/51994299351?text=${mensaje}`, '_blank');
+function calcularPrecioTotalItem(item) {
+    let cantidadRestante = item.cantidad;
+    let precioTotal = 0;
+
+    if (!item.opcionesDisponibles || item.opcionesDisponibles.length === 0) {
+        return (item.precioUnitario || item.precio || 0) * cantidadRestante;
+    }
+
+    let opcionesOrdenadas = [...item.opcionesDisponibles].map(op => {
+        let texto = (op.label || op.nombre || "").toLowerCase();
+        let match = texto.match(/\d+/);
+        let cantMinima = match ? parseInt(match[0]) : 1;
+
+        if (texto.includes('docena')) {
+            cantMinima = 12;
+        } else if (texto.includes('unidad')) {
+            cantMinima = 1;
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            cargarSillas();
+        return { ...op, cantMinima, precio: op.precio || 0 };
+    }).sort((a, b) => b.cantMinima - a.cantMinima);
+
+    let opcionUnidad = opcionesOrdenadas.find(op => op.cantMinima === 1) || opcionesOrdenadas[opcionesOrdenadas.length - 1];
+    let precioUnitarioBase = opcionUnidad ? (opcionUnidad.precio / opcionUnidad.cantMinima) : (item.precioUnitario || 0);
+
+    for (let op of opcionesOrdenadas) {
+        if (op.cantMinima > 1 && cantidadRestante >= op.cantMinima) {
+            let paquetes = Math.floor(cantidadRestante / op.cantMinima);
+            precioTotal += paquetes * op.precio;
+            cantidadRestante %= op.cantMinima;
+        }
+    }
+
+    if (cantidadRestante > 0) {
+        precioTotal += cantidadRestante * precioUnitarioBase;
+    }
+
+    return precioTotal;
+}
+
+function agregarAlCarrito(id, nombre) {
+    const precioEl = document.getElementById(`precio-${id}`);
+    const precioUnitario = parseFloat(precioEl.innerText);
+    
+    const tarjeta = precioEl.closest('.product-detail-card');
+    const colorSeleccionado = tarjeta.getAttribute('data-color-seleccionado') || 'Único';
+    const opcionSeleccionada = tarjeta.getAttribute('data-opcion-seleccionada') || 'Estándar';
+    
+    let detalleExtra = `${opcionSeleccionada} - Color: ${colorSeleccionado}`;
+    let nombreCompleto = `${nombre} (${detalleExtra})`;
+
+    const producto = productosGlobal.find(p => p.id === id);
+
+    const existente = carrito.find(item => item.id === id && item.nombre === nombreCompleto);
+    if (existente) {
+        existente.cantidad += 1;
+    } else {
+        carrito.push({
+            id: id,
+            nombre: nombreCompleto,
+            precioUnitario: precioUnitario,
+            opcionesDisponibles: producto ? producto.opciones : [],
+            cantidad: 1
         });
+    }
+
+    sessionStorage.setItem('carrito_plastico', JSON.stringify(carrito));
+    actualizarCarritoUI();
+    mostrarToast("¡Producto agregado al carrito!");
+}
+
+function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
+    sessionStorage.setItem('carrito_plastico', JSON.stringify(carrito));
+    actualizarCarritoUI();
+}
+
+let toastTimer;
+
+function mostrarToast(mensaje) {
+    const toast = document.getElementById('toast-notification');
+    const mensajeSpan = document.getElementById('toast-message');
+    if (!toast) return;
+
+    mensajeSpan.innerText = mensaje;
+    clearTimeout(toastTimer);
+    toast.classList.add('show');
+
+    toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2500);
+}
+
+function actualizarCarritoUI() {
+    const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+    const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
+    
+    const elTotalHeader = document.getElementById('cart-total-header');
+    const elCountHeader = document.getElementById('cart-count-header');
+    const elModalTotal = document.getElementById('modal-total');
+
+    if (elTotalHeader) elTotalHeader.innerText = totalPrecio.toFixed(2);
+    if (elCountHeader) elCountHeader.innerText = totalItems;
+    if (elModalTotal) elModalTotal.innerText = totalPrecio.toFixed(2);
+
+    const lista = document.getElementById('lista-carrito');
+    if (!lista) return;
+
+    if (carrito.length === 0) {
+        lista.innerHTML = '<p style="color: var(--texto-suave); font-size: 0.9rem;">Tu carrito está vacío.</p>';
+        return;
+    }
+
+    lista.innerHTML = carrito.map((item, index) => `
+        <div class="cart-item">
+            <div style="flex: 1;">
+                <strong style="font-size: 0.85rem;">${item.nombre}</strong><br>
+                <span style="color: var(--rojo-acento); font-weight: 700; font-size: 0.8rem;">S/ ${calcularPrecioTotalItem(item).toFixed(2)}</span>
+            </div>
+            <div class="qty-controls">
+                <input type="number" min="1" value="${item.cantidad}" 
+                    onchange="actualizarCantidadInput(${index}, this.value)" 
+                    oninput="actualizarCantidadInput(${index}, this.value)"
+                    style="width: 55px; padding: 2px 4px; text-align: center; border-radius: 4px; border: 1px solid #ccc; font-weight: 700; font-size: 0.85rem;">
+            </div>
+            <button class="btn-remove" onclick="eliminarDelCarrito(${index})"><i class="fa-solid fa-trash"></i></button>
+        </div>
+    `).join('');
+}
+
+function actualizarCantidadInput(index, nuevoValor) {
+    let cantidad = parseInt(nuevoValor);
+    if (isNaN(cantidad) || cantidad <= 0) {
+        cantidad = 1;
+    }
+    carrito[index].cantidad = cantidad;
+    sessionStorage.setItem('carrito_plastico', JSON.stringify(carrito));
+    
+    const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+    const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
+    
+    const elTotalHeader = document.getElementById('cart-total-header');
+    const elCountHeader = document.getElementById('cart-count-header');
+    const elModalTotal = document.getElementById('modal-total');
+
+    if (elTotalHeader) elTotalHeader.innerText = totalPrecio.toFixed(2);
+    if (elCountHeader) elCountHeader.innerText = totalItems;
+    if (elModalTotal) elModalTotal.innerText = totalPrecio.toFixed(2);
+
+    const subtotalSpans = document.querySelectorAll('.cart-item span[style*="color: var(--rojo-acento)"]');
+    if (subtotalSpans[index]) {
+        subtotalSpans[index].innerText = `S/ ${calcularPrecioTotalItem(carrito[index]).toFixed(2)}`;
+    }
+}
+
+function toggleModalCarrito() {
+    const modal = document.getElementById('modal-carrito');
+    modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+}
+
+function enviarPedidoWhatsApp() {
+    if (carrito.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+
+    const nombres = document.getElementById('input-nombres').value.trim();
+    const apellidos = document.getElementById('input-apellidos').value.trim();
+    const dni = document.getElementById('input-dni').value.trim();
+    const celular = document.getElementById('input-celular').value.trim();
+    const provincia = document.getElementById('input-provincia').value.trim();
+    const distrito = document.getElementById('input-distrito').value.trim();
+
+    if (!nombres || !apellidos || !dni || !celular || !provincia || !distrito) {
+        alert("Por favor, completa todos tus datos personales y de ubicación para el pedido.");
+        return;
+    }
+
+    const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
+    
+    let nuevoPedidoAdmin = {
+        id: Date.now(),
+        nombres: nombres,
+        apellidos: apellidos,
+        dni: dni,
+        celular: celular,
+        provincia: provincia,
+        distrito: distrito,
+        items: carrito.map(item => ({ 
+            nombre: item.nombre, 
+            cantidad: item.cantidad, 
+            subtotal: calcularPrecioTotalItem(item) 
+        })),
+        total: totalPrecio,
+        fecha: new Date().toLocaleString(),
+        estado: "pendiente"
+    };
+
+    let listaAdmin = JSON.parse(sessionStorage.getItem('admin_pedidos')) || [];
+    listaAdmin.unshift(nuevoPedidoAdmin);
+    sessionStorage.setItem('admin_pedidos', JSON.stringify(listaAdmin));
+
+    let mensaje = `*¡Nuevo Pedido - La Casa del Plástico (Sillas)!*%0A%0A`;
+    mensaje += `*DATOS DEL CLIENTE:*%0A`;
+    mensaje += `- Nombre: ${nombres} ${apellidos}%0A`;
+    mensaje += `- DNI: ${dni}%0A`;
+    mensaje += `- Celular: ${celular}%0A`;
+    mensaje += `- Provincia: ${provincia}%0A`;
+    mensaje += `- Distrito: ${distrito}%0A%0A`;
+    
+    mensaje += `*DETALLE DEL PEDIDO:*%0A`;
+    carrito.forEach(item => {
+        let totalItem = calcularPrecioTotalItem(item);
+        mensaje += `▪ Silla: ${item.nombre} | Cant: ${item.cantidad} | S/ ${totalItem.toFixed(2)}%0A`;
+    });
+    
+    mensaje += `%0A*TOTAL A PAGAR: S/ ${totalPrecio.toFixed(2)}*`;
+
+    window.open(`https://wa.me/51994299351?text=${mensaje}`, '_blank');
+}
     </script>
 </body>
 </html>

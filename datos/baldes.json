@@ -5,6 +5,9 @@
         "imagen": [
             "img/balde-01.jpg"
         ],
+        "textosPromo": [
+            "¡X12 unidades a S/103.20!"
+        ],
         "opciones": [
             {"label": "Unidad", "precio": 12.00},
             { "label": "Docena", "precio": 103.20}
@@ -16,6 +19,9 @@
         "imagen": [
             "img/balde-02.jpg"
         ],
+        "textosPromo": [
+            "X12 unidades a S/123.60"
+        ],
         "opciones": [
             {"label": "Unidad", "precio": 14.00},
             { "label": "Docena", "precio": 123.60}
@@ -26,6 +32,9 @@
         "nombre": "Balde Rey Forte 11L",
         "imagen": [
             "img/balde-03.jpg"
+        ],
+        "textosPromo":[
+            "X12 unidades a S/92.40"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 11.00},

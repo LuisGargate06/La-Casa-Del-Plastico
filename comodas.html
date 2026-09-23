@@ -452,7 +452,7 @@
     </footer>
 
     <script>
-        let carrito = JSON.parse(localStorage.getItem('carrito_plastico')) || [];
+        let carrito = JSON.parse(sessionStorage.getItem('carrito_plastico')) || [];
         let productosGlobal = [];
 
         async function cargarComodas() {
@@ -615,7 +615,7 @@ function renderizarComodas() {
                         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                             ${opcionesPisos.map((opt, oIdx) => `
                                 <button type="button" class="color-btn ${oIdx === 0 ? 'active' : ''}" 
-                                         onclick='cambiarPiso("${producto.id}", ${opt.precio}, "${opt.label}", ${JSON.stringify(opt.medidas || {})}, ${JSON.stringify(opt.textoPromo || [])}, this)'
+                                        onclick='cambiarPiso("${producto.id}", ${opt.precio}, "${opt.label}", ${JSON.stringify(opt.medidas || {})}, ${JSON.stringify(opt.textoPromo || [])}, this)'
                                         style="border-radius: 8px; padding: 8px 14px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: 2px solid ${oIdx === 0 ? 'var(--azul-rey)' : 'var(--borde)'}; background:${oIdx === 0 ? '#f0f4ff' : '#fff'};">
                                     ${opt.label} - S/ ${opt.precio.toFixed(2)}
                                 </button>
@@ -806,13 +806,6 @@ function renderizarComodas() {
             mostrarToast("¡Producto agregado al carrito!");
         }
 
-        function cambiarCantidad(index, delta) {
-            carrito[index].cantidad += delta;
-            if (carrito[index].cantidad <= 0) {
-                carrito.splice(index, 1);
-            }
-            actualizarCarritoUI();
-        }
 
         function eliminarDelCarrito(index) {
             carrito.splice(index, 1);
@@ -827,37 +820,68 @@ function renderizarComodas() {
         }
 
         function actualizarCarritoUI() {
-    // Sincronizar y guardar en el almacenamiento local del navegador
-    localStorage.setItem('carrito_plastico', JSON.stringify(carrito));
+            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
+            
+            const elTotalHeader = document.getElementById('cart-total-header');
+            const elCountHeader = document.getElementById('cart-count-header');
+            const elModalTotal = document.getElementById('modal-total');
 
-    const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-    const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
-    
-    document.getElementById('cart-total-header').innerText = totalPrecio.toFixed(2);
-    document.getElementById('cart-count-header').innerText = totalItems;
-    document.getElementById('modal-total').innerText = totalPrecio.toFixed(2);
+            if (elTotalHeader) elTotalHeader.innerText = totalPrecio.toFixed(2);
+            if (elCountHeader) elCountHeader.innerText = totalItems;
+            if (elModalTotal) elModalTotal.innerText = totalPrecio.toFixed(2);
 
-    const lista = document.getElementById('lista-carrito');
-    if (carrito.length === 0) {
-        lista.innerHTML = '<p style="color: var(--texto-suave); font-size: 0.9rem;">Tu carrito está vacío.</p>';
-        return;
-    }
+            const lista = document.getElementById('lista-carrito');
+            if (!lista) return;
 
-    lista.innerHTML = carrito.map((item, index) => `
-        <div class="cart-item">
-            <div style="flex: 1;">
-                <strong style="font-size: 0.85rem;">${item.nombre}</strong><br>
-                <span style="color: var(--rojo-acento); font-weight: 700; font-size: 0.8rem;">S/ ${calcularPrecioTotalItem(item).toFixed(2)}</span>
-            </div>
-            <div class="qty-controls">
-                <button class="qty-btn" onclick="cambiarCantidad(${index}, -1)">-</button>
-                <span style="font-size: 0.85rem; font-weight: 700;">${item.cantidad}</span>
-                <button class="qty-btn" onclick="cambiarCantidad(${index}, 1)">+</button>
-            </div>
-            <button class="btn-remove" onclick="eliminarDelCarrito(${index})"><i class="fa-solid fa-trash"></i></button>
-        </div>
-    `).join('');
-}
+            if (carrito.length === 0) {
+                lista.innerHTML = '<p style="color: var(--texto-suave); font-size: 0.9rem;">Tu carrito está vacío.</p>';
+                return;
+            }
+
+            lista.innerHTML = carrito.map((item, index) => `
+                <div class="cart-item">
+                    <div style="flex: 1;">
+                        <strong style="font-size: 0.85rem;">${item.nombre}</strong><br>
+                        <span style="color: var(--rojo-acento); font-weight: 700; font-size: 0.8rem;">S/ ${calcularPrecioTotalItem(item).toFixed(2)}</span>
+                    </div>
+                    <div class="qty-controls">
+                        <input type="number" min="1" value="${item.cantidad}" 
+                            onchange="actualizarCantidadInput(${index}, this.value)" 
+                            oninput="actualizarCantidadInput(${index}, this.value)"
+                            style="width: 55px; padding: 2px 4px; text-align: center; border-radius: 4px; border: 1px solid #ccc; font-weight: 700; font-size: 0.85rem;">
+                    </div>
+                    <button class="btn-remove" onclick="eliminarDelCarrito(${index})"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function actualizarCantidadInput(index, nuevoValor) {
+            let cantidad = parseInt(nuevoValor);
+            if (isNaN(cantidad) || cantidad <= 0) {
+                cantidad = 1;
+            }
+            carrito[index].cantidad = cantidad;
+            sessionStorage.setItem('carrito_plastico', JSON.stringify(carrito));
+            
+            // Recalculamos totales en tiempo real sin volver a renderizar todo el HTML para no perder el foco de escritura
+            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            const totalPrecio = carrito.reduce((sum, item) => sum + calcularPrecioTotalItem(item), 0);
+            
+            const elTotalHeader = document.getElementById('cart-total-header');
+            const elCountHeader = document.getElementById('cart-count-header');
+            const elModalTotal = document.getElementById('modal-total');
+
+            if (elTotalHeader) elTotalHeader.innerText = totalPrecio.toFixed(2);
+            if (elCountHeader) elCountHeader.innerText = totalItems;
+            if (elModalTotal) elModalTotal.innerText = totalPrecio.toFixed(2);
+
+            // Actualizamos solo el texto del subtotal específico del producto afectado
+            const subtotalSpans = document.querySelectorAll('.cart-item span[style*="color: var(--rojo-acento)"]');
+            if (subtotalSpans[index]) {
+                subtotalSpans[index].innerText = `S/ ${calcularPrecioTotalItem(carrito[index]).toFixed(2)}`;
+            }
+        }
 
         function toggleModalCarrito() {
             const modal = document.getElementById('modal-carrito');
@@ -903,9 +927,9 @@ function renderizarComodas() {
                 estado: "pendiente"
             };
 
-            let listaAdmin = JSON.parse(localStorage.getItem('admin_pedidos')) || [];
+            let listaAdmin = JSON.parse(sessionStorage.getItem('admin_pedidos')) || [];
             listaAdmin.unshift(nuevoPedidoAdmin); // Lo coloca al principio de la lista
-            localStorage.setItem('admin_pedidos', JSON.stringify(listaAdmin));
+            sessionStorage.setItem('admin_pedidos', JSON.stringify(listaAdmin));
             // ================================================
 
             let mensaje = `*¡Nuevo Pedido - La Casa del Plástico (Cómodas)!*%0A%0A`;

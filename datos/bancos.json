@@ -5,6 +5,9 @@
         "imagen": [
             "img/banco-01.jpg"
         ],
+        "textosPromo": [
+            "X12 unidades a S/126.00"
+        ],
         "opciones": [
             {"label": "Unidad", "precio": 14.00},
             { "label": "Docena", "precio": 126.00}
@@ -15,6 +18,10 @@
         "nombre": "Banco Ratan Yofupsa",
         "imagen": [
             "img/banco-02.jpg"
+        ],
+        "textosPromo": [
+            "X12 unidades a S/78.00",
+            "X40 unidades a S/232.00"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 8.00},
@@ -27,6 +34,9 @@
         "nombre": "Banco Tavarua Ratan Grande",
         "imagen": [
             "img/banco-04.jpg"
+        ],
+        "textosPromo": [
+            "X12 unidades a S/138.00"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 15.00},

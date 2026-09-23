@@ -5,6 +5,9 @@
         "imagen": [
             "img/porta-02.jpg"
         ],
+        "textosPromo": [
+            "X12 unidades a S/57.60"
+        ],
         "opciones": [
             {"label": "Unidad", "precio": 7.00},
             {"label": "Docena", "precio": 57.60}
@@ -12,9 +15,12 @@
     },
     {
          "id": "porta-03",
-        "nombre": "Portauti Gigante 3 pzas Margarito",
+        "nombre": "Portautil Gigante 3 pzas Margarito",
         "imagen": [
             "img/porta-03.jpg"
+        ],
+        "textosPromo":[
+            "X12 unidades a S/126.00"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 13.50},
@@ -22,10 +28,13 @@
         ]
     },
     {
-         "id": "porta-03",
-        "nombre": "Portauti Universal",
+         "id": "porta-04",
+        "nombre": "Portautil Universal",
         "imagen": [
-            "img/porta-03.jpg"
+            "img/porta-04.jpg"
+        ],
+        "textosPromo":[
+            "X12 unidades a S/55.20"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 7.50},
@@ -33,10 +42,13 @@
         ]
     },
     {
-         "id": "porta-03",
+         "id": "porta-05",
         "nombre": "Organizador De Cubiertos Fat Cover",
         "imagen": [
-            "img/porta-03.jpg"
+            "img/porta-05.jpeg"
+        ],
+        "textosPromo":[
+            "X12 unidades a S/115.20"
         ],
         "opciones": [
             {"label": "Unidad", "precio": 13.50},
